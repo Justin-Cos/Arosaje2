@@ -1,0 +1,37 @@
+<%- include("_header") -%>
+
+<h1>Liste des utilisateurs</h1>
+
+<div class="row">
+  <% for (const user of model) { %>
+    <div class="col-md-3 mb-4 mt-3">
+      <div class="card h-100 d-flex flex-column shadow mx-1" style="border-radius: 7%; cursor: pointer;" onclick="redirectToDetails('<%= user.UserID %>')">
+        <div class="card-body">
+          <h5 class="card-title"><%= user.FirstName %></h5>
+          <h6 class="card-subtitle mb-3 text-muted"><%= user.LastName %></h6>
+          <p>Plantes possédées :<br> <%= user.ownedPlants || "Aucune plante" %></p>
+        </div>
+        <div class="text-center m-3">
+          <a href="/user/edit/<%= user.UserID %>" class="btn btn-warning mr-2">Modifier</a>   
+          <a href="/user/delete/<%= user.UserID %>" class="btn btn-danger ml-2">Effacer</a>
+        </div>
+      </div>
+    </div>
+  <% } %>
+
+  <div class="col-md-3 mb-4 mt-3">
+    <div class="card h-100 d-flex flex-column shadow mx-1" style="border-radius: 7%; cursor: pointer;">
+      <div class="card-body d-flex flex-column align-items-center justify-content-center">
+        <a href="/user/create" class="btn btn-success px-5 py-3">Ajouter</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include("_footer") -%>
+
+<script>
+  function redirectToDetails(UserID) {
+    window.location.href = "/user/details/" + UserID;
+  }
+</script>
