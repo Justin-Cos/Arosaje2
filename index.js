@@ -11,7 +11,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: false }));
 
-// Connexion à la base de donnée SQlite
+// Connexion à la base de données SQLite
 const db_name = path.join(__dirname, "data", "apptest.db");
 const db = new sqlite3.Database(db_name, err => {
   if (err) {
@@ -19,18 +19,6 @@ const db = new sqlite3.Database(db_name, err => {
   }
   console.log("Connexion réussie à la base de données 'apptest.db'");
 });
-// Utilisation des routes
-const userRoutes = require("./routes/userRoutes");
-const plantRoutes = require("./routes/plantRoutes");
-const loginRoutes = require("./routes/loginRoutes"); // Ajout de l'import pour les routes de connexion
-const loginController = require('./controllers/loginController');
-
-app.use("/", userRoutes);
-app.use("/", plantRoutes);
-app.use("/", loginRoutes);
-
-app.get('/login', loginController.loginPage); // Déplacement de cette ligne après l'import du contrôleur
-app.get('/register', loginController.registerPage);
 
 app.get("/", (req, res) => {
   // Logique pour récupérer les données des utilisateurs depuis la base de données
@@ -52,6 +40,15 @@ app.get("/", (req, res) => {
     });
   });
 });
+
+// Utilisation des routes
+const userRoutes = require("./routes/userRoutes");
+const plantRoutes = require("./routes/plantRoutes");
+const loginRoutes = require("./routes/loginRoutes");
+
+app.use("/", userRoutes);
+app.use("/", plantRoutes);
+app.use("/", loginRoutes);
 
 // Démarrage du serveur
 app.listen(3000, () => {

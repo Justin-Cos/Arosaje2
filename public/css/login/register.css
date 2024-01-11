@@ -1,0 +1,102 @@
+@font-face {
+    font-family: inter;
+    src: url(/font/inter);
+}
+
+
+body {
+    margin: 0px;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    width: 100vw;
+}
+
+.capture {
+    display: flex;
+    width: 35%;
+    height: 100%;
+    background-image: url('/assets/picture/biere.avif');
+}
+
+.form {
+    display: flex;
+    width: 65%;
+    height: 100%;
+    background-color: #5DB075;
+}
+
+.title {
+    display: flex;
+    margin: 10px auto 10px auto;
+    color: white;
+    font-size: 30px;
+    font-family: inter;
+}
+
+.test {
+    display: flex;
+    flex-direction: column;
+    margin: 50px auto 0px auto;
+    height: 50%;
+    width: 30%;
+}
+
+.inscription {
+    display: flex;
+    flex-direction: column;
+}
+
+.ligne {
+    display: flex;
+    margin: auto;
+    padding: 20px;
+    font-size: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.box {
+    width: 25px;
+}
+
+.nobottom {
+    margin-bottom: 0px;
+}
+
+.checkbox {
+    display: flex;
+    flex-direction: row;
+    font-size: 20px;
+    color: white;
+}
+
+.submit {
+    display: flex;
+    margin: auto;
+}
+
+.button {
+    color: white;
+    font-size: 25px;
+    padding: 20px 60px;
+    background-color: #4A4A4A;
+    border-radius: 20px;
+    border-color: transparent;
+    cursor: pointer;
+    font-family: inter;
+}
+
+.lien-register {
+    display: flex;
+    margin: 10px auto 0px auto;
+    font-size: 25px;
+}
+
+.lien {
+    color: white;
+}

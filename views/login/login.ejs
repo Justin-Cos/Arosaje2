@@ -1,0 +1,49 @@
+<!-- views/accueil.ejs -->
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../css/login/login.css" rel="stylesheet">
+    <title>Login</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="capture">
+
+
+        </div>
+        <div class="form">
+            <div class="test">
+                <div class="title">
+                    <h1>Se connecter</h1>
+                </div>
+                <form class="inscription">
+                    <label for="nom"></label>
+                    <input class="ligne" type="text" name="pseudo" id="pseudo" value="Email" onfocus="this.value='';"
+                        onblur="if(this.value=='')this.value='Email';" />
+
+                    <label for="email"></label>
+                    <input class="ligne nobottom" type="text" name="pseudo" id="pseudo" value="Mot de passe"
+                        onfocus="this.value='';" onblur="if(this.value=='')this.value='Mot de passe';" />
+
+                    <div class="checkbox">
+                        <input type="checkbox" class="box">
+                        <p>Rester connecté(e) ?</p>
+                    </div>
+
+                    <div class="submit">
+                        <button class="button"> Se connecter</button>
+                    </div>
+                    <div class="lien-register">
+                        <a href="/register" class="lien"> Pas de compte ? S'inscrire </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
