@@ -1,0 +1,13 @@
+@use "sass:map";
+$primaryColor:#FFFFFF;
+$secondaryColor:#5DB075;
+$thirdColor:#4A4A4A;
+.color-prim{
+  background-color:$primaryColor;
+}
+.color-sec{
+  background-color: $secondaryColor;
+}
+.color-third{
+  background-color: $thirdColor;
+}
