@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const plantController = require("../backend/controllers/plantController");
+const plantController = require("../controllers/plantController");
 
 router.get("/plante", plantController.getPlants);
 router.get("/plante/create", plantController.getCreate);

@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const sqlite3 = require("sqlite3").verbose();
+const conf = require("./config.json");
 
 // Création du serveur Express
 const app = express();
@@ -12,12 +13,12 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: false }));
 
 // Connexion à la base de données SQLite
-const db_name = path.join(__dirname, "data", "apptest.db");
+const db_name = path.join(__dirname, "database", conf.database_url);
 const db = new sqlite3.Database(db_name, err => {
   if (err) {
     return console.error(err.message);
   }
-  console.log("Connexion réussie à la base de données 'apptest.db'");
+  console.log(`Connexion réussie à la base de données ${conf.database_url}`);
 });
 
 // Utilisation des routes

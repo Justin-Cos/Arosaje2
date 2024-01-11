@@ -1,15 +1,20 @@
 version: '3'
 
 services:
+
   sqlite-db:
-    build:
-      context: .
-      dockerfile: data/Dockerfile
+    image: alpine:latest
+    command: sh -c "apk add --no-cache sqlite && sqlite3 /app/mydatabase.db < /app/init-db.sql && sqlite3 /app/mydatabase.db"
     ports:
       - "5432:5432"
+    volumes:
+      - ./database/init-db.sql:/app/init-db.sql
   api-back:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: node:20
     ports:
       - "3000:3000"
+    volumes:
+      - ./backend:/usr/src/app
+      - ./database:/usr/src/app/database
+    working_dir: /usr/src/app
+    command: sh -c "npm install && npm start"
