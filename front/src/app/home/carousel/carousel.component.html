@@ -1,5 +1,26 @@
-<div class="owl-carousel owl-theme">
-  <div class="item"><img src="assets/picture/biere.avif" alt="Image 1"></div>
-  <div class="item"><img src="assets/picture/biere.avif" alt="Image 2"></div>
-  <div class="item"><img src="assets/picture/biere.avif" alt="Image 3"></div>
+<section class="game-section">
+<div class="owl-carousel custom-carousel owl-theme">
+  <ngx-slick-carousel class="carousel"
+                      #slickModal="slick-carousel"
+                      [config]="slideConfig"
+                      (beforeChange)="addSlide()">>
+      <div ngxSlickItem class="slide" *ngFor="let slide of slides; let i = index">
+        <div class="item"
+             [style.backgroundImage]="'url(' + slide.img + ')'"
+             (mouseenter)="hoveredItemIndex = i"
+             (mouseleave)="hoveredItemIndex = null"
+             [ngClass]="{'active': hoveredItemIndex === i}">
+          >
+          <div class="item-desc">
+            <h3>{{ slide.nom }}</h3>
+            <p>{{ slide.bio }}</p>
+          </div>
+        </div>
+      </div>
+
+  </ngx-slick-carousel>
 </div>
+<button (click)="addSlide()">Add</button>
+<button (click)="removeSlide()">Remove</button>
+<button (click)="slickModal.slickGoTo(2)">slickGoto 2</button>
+</section>

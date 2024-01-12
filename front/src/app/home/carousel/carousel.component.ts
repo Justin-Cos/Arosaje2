@@ -1,38 +1,72 @@
-// Importez les modules nécessaires
-import { Component, OnInit } from '@angular/core';
-
-// Déclarez la bibliothèque OwlCarousel
-declare var $: any;
+import { Component } from '@angular/core';
+import {SlickCarouselModule} from "ngx-slick-carousel";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-carousel',
+  standalone: true,
+  imports: [SlickCarouselModule,CommonModule],
   templateUrl: './carousel.component.html',
-  styleUrls: ['./carousel.component.css']
+  styleUrl: './carousel.component.css'
 })
-export class CarouselComponent implements OnInit {
+export class CarouselComponent {
+  slides = [
+    {
+      img: "http://placehold.it/350x150/000000",
+      nom:"dih",
+      bio:"dzd"
+    },
+    {
+      img: "http://placehold.it/350x150/111111" ,
+      nom:"dih",
+      bio:"dzd"
+    },
+    {
+      img: "http://placehold.it/350x150/333333",
+      nom:"dih",
+      bio:"dzd"
+    },
+    {
+      img: "http://placehold.it/350x150/666666",
+      nom:"dih",
+      bio:"dzd"
+    },
+    {
+      img: "assets/picture/profile_pic/th.jpg",
+      nom:"dih",
+      bio:"dzd"
+    },
+    {
+      img: "assets/picture/profile_pic/th1.jpg",
+      nom:"dih",
+      bio:"dzd"
+    },
+    {
+      img: "assets/picture/profile_pic/th2.jpg",
+      nom:"dih",
+      bio:"dzd"
+    },
+    {
+      img: "assets/picture/profile_pic/th3.jpg",
+      nom:"dih",
+      bio:"dzd"
+    },
+  ];
+  slideConfig = {"slidesToShow": 7, "slidesToScroll": 1};
+  hoveredItemIndex: any;
 
-  constructor() { }
-
-  ngOnInit(): void {
-    // Initialisez le carousel une fois que la vue est prête
-    $(document).ready(() => {
-      $('.owl-carousel').owlCarousel({
-        items: 3, // Nombre d'éléments affichés à la fois
-        loop: false, // Boucler le carousel
-        margin: 10, // Marge entre les éléments
-        nav: true, // Afficher les boutons de navigation
-        responsive: {
-          0: {
-            items: 1
-          },
-          600: {
-            items: 3
-          },
-          1000: {
-            items: 5
-          }
-        }
-      });
-    });
+  addSlide() {
+    this.slides.push({
+      img: "assets/picture/profile_pic/th3.jpg",
+      nom:"dih",
+      bio:"dzd"
+    })
   }
+
+  removeSlide() {
+    this.slides.length = this.slides.length - 1;
+  }
+
+  protected readonly console = console;
 }
+
