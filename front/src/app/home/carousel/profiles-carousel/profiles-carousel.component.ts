@@ -11,6 +11,7 @@ import {CarouselComponent} from "../carousel.component";
   styleUrl: './profiles-carousel.component.css'
 })
 export class ProfilesCarouselComponent {
+  title = "Botanistes"
   slides = [
     {
       img: "assets/uploads/users_profile_pictures/th.jpg",

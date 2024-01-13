@@ -1,8 +1,23 @@
+
 const express = require("express");
 const path = require("path");
 const sqlite3 = require("sqlite3").verbose();
 const conf = require("./config.json");
 
+const sequelize = require('./sequelize.js');  // Use require instead of import
+
+const AddressModel = require('./models/Address');  // Use require instead of import
+const UserModel = require('./models/User');
+const PlantsTypeModel = require('./models/PlantType');
+const PlantsModel = require('./models/Plant');
+const CareSessionsModel = require('./models/CareSession');
+const CommentsModel = require('./models/Comment');
+// Synchronize Sequelize models with the database
+sequelize.sync().then(() => {
+  console.log('Sequelize models synchronized with the database');
+}).catch((error) => {
+  console.error('Error synchronizing Sequelize models:', error);
+});
 // Création du serveur Express
 const app = express();
 
@@ -34,10 +49,11 @@ app.use("/", loginRoutes);
 app.get('/login', loginController.loginPage); // Déplacement de cette ligne après l'import du contrôleur
 app.get('/register', loginController.registerPage);
 
+/*
 app.get("/", (req, res) => {
   // Logique pour récupérer les données des utilisateurs depuis la base de données
-  const userModel = require("./models/userModel");
-  userModel.getAllUserPlant((err, userRows) => {
+  const User = require("./controllers/userController");
+  User.getAllUserPlant((err, userRows) => {
     if (err) {
       console.error(err.message);
       return res.status(500).send("Erreur serveur");
@@ -54,7 +70,7 @@ app.get("/", (req, res) => {
     });
   });
 });
-
+*/
 // Démarrage du serveur
 app.listen(3000, () => {
   console.log("Serveur démarré (http://localhost:3000/) !");

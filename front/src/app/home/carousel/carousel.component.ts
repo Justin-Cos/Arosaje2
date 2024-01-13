@@ -12,9 +12,10 @@ import {CommonModule} from "@angular/common";
 export class CarouselComponent {
 
   @Input() slides: any[] = [];
+  @Input() title: string ="";
 
 
-  slideConfig = {"slidesToShow": 7, "slidesToScroll": 4};
+  slideConfig = {"slidesToShow": 4, "slidesToScroll": 4};
   hoveredItemIndex: any;
 
   addSlide() {

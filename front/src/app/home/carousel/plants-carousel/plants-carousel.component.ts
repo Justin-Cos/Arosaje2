@@ -9,6 +9,7 @@ import {CarouselComponent} from "../carousel.component";
   styleUrl: './plants-carousel.component.css'
 })
 export class PlantsCarouselComponent {
+  title: string = "Plantes à garder près de chez vous";
   slides = [
     {
       img: "assets/uploads/users_plants_pictures/1.jpg",

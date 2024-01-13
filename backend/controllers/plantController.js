@@ -1,84 +1,122 @@
-const plantModel = require("../models/plantModel");
+const Plant = require('../models/Plant');
+const PlantType = require('../models/PlantType');
+const User = require('../models/User');
+const Address = require("../models/Address")
 
-exports.getPlants = (req, res) => {
-  plantModel.getAllPlants((err, rows) => {
-    if (err) {
-      console.error(err.message);
-      return res.status(500).send("Erreur serveur");
-    }
-    res.render("plante/plantes", { model: rows });
-  });
+
+exports.getPlants = async (req, res) => {
+  try {
+    const plants = await Plant.findAll();
+    res.render("plante/plantes", { model: plants });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Erreur serveur");
+  }
 };
 
-exports.getCreate = (req, res) => {
-  res.render("plante/create", { model: {} });
-};
 
-exports.postCreate = (req, res) => {
+exports.postCreate = async (req, res) => {
   const { plantName, famille, location } = req.body;
-  const plante = [plantName, famille, location];
-  plantModel.createPlant(plante, (err) => {
-    if (err) {
-      console.error(err.message);
-      return res.status(500).send("Erreur serveur");
-    }
+  try {
+    await Plant.create({ plantName, famille, location });
     res.redirect("/");
-  });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Erreur serveur");
+  }
 };
 
-exports.getEdit = (req, res) => {
+exports.getCreate = async (req, res) => {
+  try {
+    const users = await User.findAll();
+    const plantTypes = await PlantType.findAll();
+
+    res.render('plante/create', { users, plantTypes });
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
+exports.getEdit = async (req, res) => {
   const id = req.params.id;
-  plantModel.getPlantById(id, (err, row) => {
-    if (err) {
-      console.error(err.message);
-      return res.status(500).send("Erreur serveur");
-    }
-    res.render("plante/edit", { model: row });
-  });
+  try {
+    const plant = await Plant.findByPk(id);
+    res.render("plante/edit", { model: plant });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Erreur serveur");
+  }
 };
 
-exports.postEdit = (req, res) => {
+exports.postEdit = async (req, res) => {
   const id = req.params.id;
   const { plantName, famille, location } = req.body;
-  const plante = [plantName, famille, location, id];
-  plantModel.updatePlant(plante, (err) => {
-    if (err) {
-      console.error(err.message);
-      return res.status(500).send("Erreur serveur");
-    }
+  try {
+    await Plant.update({ plantName, famille, location }, { where: { plant_id: id } });
     res.redirect("/");
-  });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Erreur serveur");
+  }
 };
 
-exports.getDelete = (req, res) => {
+exports.getDelete = async (req, res) => {
   const id = req.params.id;
-  plantModel.getPlantById(id, (err, row) => {
-    if (err) {
-      console.error(err.message);
-      return res.status(500).send("Erreur serveur");
-    }
-    res.render("plante/delete", { model: row });
-  });
+  try {
+    const plant = await Plant.findByPk(id);
+    res.render("plante/delete", { model: plant });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Erreur serveur");
+  }
 };
 
-exports.postDelete = (req, res) => {
+exports.postDelete = async (req, res) => {
   const id = req.params.id;
-  plantModel.deletePlant(id, (err) => {
-    if (err) {
-      console.error(err.message);
-      return res.status(500).send("Erreur serveur");
-    }
+  try {
+    await Plant.destroy({ where: { plant_id: id } });
     res.redirect("/");
-  });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Erreur serveur");
+  }
 };
 
-exports.getDetails = (req, res) => {
+
+
+exports.getDetails = async (req, res) => {
   const id = req.params.id;
-  plantModel.getPlantByIdALL(id, (err, row) => {
-    if (err) {
-      console.error(err.message);
-      return res.status(500).send("Erreur serveur");
-    }
-    res.render("plante/detail", { model: row });
-  });
+  try {
+    const plant = await Plant.findByPk(id);
+    res.render("plante/detail", { model: plant });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Erreur serveur");
+  }
+
+};
+exports.getAllPlants = async (req, res) => {
+  try {
+    const plants = await Plant.findAll({
+      attributes: ['plant_id', 'plantName', 'famille', 'location', 'image'],
+      include: [
+        {
+          model: User,
+          attributes: ['user_id', 'username'],
+          include: [
+            {
+              model: Address,
+              attributes: ['country'],
+            },
+          ],
+        },
+      ],
+      order: [['plant_id', 'ASC']],
+    });
+
+    res.render('plante/plants', { model: plants });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Erreur serveur');
+  }
 };

@@ -4,11 +4,10 @@ services:
 
   sqlite-db:
     image: alpine:latest
-    command: sh -c "apk add --no-cache sqlite && sqlite3 /app/mydatabase.db < /app/init-db.sql && sqlite3 /app/mydatabase.db"
-    ports:
-      - "5432:5432"
+    command: sh -c "apk add --no-cache sqlite && sqlite3 /usr/src/app/database/arosaje.db .schema > /usr/src/app/database/arosaje_schema.sql"
     volumes:
-      - ./database/init-db.sql:/app/init-db.sql
+      - ./database:/usr/src/app/database
+
   api-back:
     image: node:20
     ports:
