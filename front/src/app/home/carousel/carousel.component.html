@@ -1,26 +1,20 @@
 <section class="game-section">
-<div class="owl-carousel custom-carousel owl-theme">
-  <ngx-slick-carousel class="carousel"
-                      #slickModal="slick-carousel"
-                      [config]="slideConfig"
-                      (beforeChange)="addSlide()">>
-      <div ngxSlickItem class="slide" *ngFor="let slide of slides; let i = index">
-        <div class="item"
-             [style.backgroundImage]="'url(' + slide.img + ')'"
-             (mouseenter)="hoveredItemIndex = i"
-             (mouseleave)="hoveredItemIndex = null"
-             [ngClass]="{'active': hoveredItemIndex === i}">
-          >
-          <div class="item-desc">
-            <h3>{{ slide.nom }}</h3>
-            <p>{{ slide.bio }}</p>
+  <div class="owl-carousel custom-carousel owl-theme">
+    <ngx-slick-carousel class="carousel"
+                        #slickModal="slick-carousel"
+                        [config]="slideConfig">
+        <div ngxSlickItem class="slide" *ngFor="let slide of slides; let i = index">
+          <div class="item"
+               [style.backgroundImage]="'url(' + slide.img + ')'"
+               (mouseenter)="hoveredItemIndex = i"
+               (mouseleave)="hoveredItemIndex = null"
+               [ngClass]="{'active': hoveredItemIndex === i}">
+            <div class="item-desc">
+              <h3>{{ slide.nom }}</h3>
+              <p>{{ slide.bio }}</p>
+            </div>
           </div>
         </div>
-      </div>
-
-  </ngx-slick-carousel>
-</div>
-<button (click)="addSlide()">Add</button>
-<button (click)="removeSlide()">Remove</button>
-<button (click)="slickModal.slickGoTo(2)">slickGoto 2</button>
+    </ngx-slick-carousel>
+  </div>
 </section>
