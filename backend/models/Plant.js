@@ -1,5 +1,5 @@
-const { DataTypes } = require('sequelize');
-const sequelize  = require('../sequelize.js');
+const {DataTypes} = require('sequelize');
+const sequelize = require('../sequelize.js');
 const UserModel = require('./User');
 const PlantsTypeModel = require('./PlantType.js');
 
@@ -36,8 +36,8 @@ const Plant = sequelize.define('Plants', {
     timestamps: false,
 });
 
-UserModel.hasMany(Plant, { foreignKey: 'owner', as: 'plants' });
-Plant.belongsTo(UserModel, { foreignKey: 'owner' });
-Plant.belongsTo(PlantsTypeModel, { foreignKey: 'plant_type' });
+UserModel.hasMany(Plant, {foreignKey: 'owner', as: 'plants'});
+Plant.belongsTo(UserModel, {foreignKey: 'owner'});
+Plant.belongsTo(PlantsTypeModel, {foreignKey: 'plant_type'});
 
 module.exports = Plant;

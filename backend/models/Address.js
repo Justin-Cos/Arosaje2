@@ -1,8 +1,6 @@
-
-const { DataTypes } = require('sequelize');
-const sequelize  = require('../sequelize.js');
+const {DataTypes} = require('sequelize');
+const sequelize = require('../sequelize.js');
 const UserModel = require('../models/User.js');
-console.log(sequelize.getDialect())
 const Address = sequelize.define('Address', {
     adress_id: {
         type: DataTypes.INTEGER,
@@ -44,6 +42,7 @@ const Address = sequelize.define('Address', {
 }, {
     timestamps: false,
 });
-Address.belongsTo(UserModel, { foreignKey: 'owner' });
+UserModel.hasMany(Address, {foreignKey: 'owner', as: 'adresses'})
+Address.belongsTo(UserModel, {foreignKey: 'owner'});
 
 module.exports = Address;

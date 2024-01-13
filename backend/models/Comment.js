@@ -1,8 +1,7 @@
-const { DataTypes } = require('sequelize');
-const sequelize  = require('../sequelize.js');
+const {DataTypes} = require('sequelize');
+const sequelize = require('../sequelize.js');
 const UserModel = require('./User');
 const CareSession = require('./CareSession');
-
 
 const Comments = sequelize.define('Comments', {
     id_comment: {
@@ -14,7 +13,7 @@ const Comments = sequelize.define('Comments', {
         type: DataTypes.INTEGER,
         references: {
             model: CareSession,
-            key: 'care_session',
+            key: 'session_id',
         },
     },
     author: {
@@ -42,8 +41,7 @@ const Comments = sequelize.define('Comments', {
     timestamps: false,
 });
 
-Comments.belongsTo(UserModel, { foreignKey: 'author' });
-Comments.belongsTo(CareSession, { foreignKey: 'care_session' });
-
+Comments.belongsTo(UserModel, {foreignKey: 'author'});
+Comments.belongsTo(CareSession, {foreignKey: 'care_session'});
 
 module.exports = Comments;

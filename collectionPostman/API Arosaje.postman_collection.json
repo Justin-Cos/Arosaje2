@@ -1,0 +1,788 @@
+{
+	"info": {
+		"_postman_id": "89060b82-5c23-47d1-93d8-9546ea133f45",
+		"name": "API Arosaje",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27240810"
+	},
+	"item": [
+		{
+			"name": "plant",
+			"item": [
+				{
+					"name": "Get All Plants",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/plant",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"plant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Plant by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/plant/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"plant",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Plant",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"plant_type\": 1, \"owner\": 1, \"name\": \"SamplePlant\", \"image\": \"plant.jpg\"}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/plant",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"plant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Plant",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"plant_type\": 1, \"owner\": 1, \"name\": \"UpdatedPlant\", \"image\": \"updated_plant.jpg\"}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/plant/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"plant",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Plant",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/plant/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"plant",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\": \"SampleUser\", \"email\": \"sample@example.com\", \"password\": \"samplepassword\", \"role\": \"user\"}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\": \"UpdatedUser\", \"email\": \"updated@example.com\", \"password\": \"updatedpassword\", \"role\": \"admin\"}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "address",
+			"item": [
+				{
+					"name": "Get All Addresses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/address",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Address by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/address/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"address",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Address",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"owner\": 1, \"longitude\": 45.123, \"latitude\": 12.345, \"country\": \"Sample Country\", \"city\": \"Sample City\", \"address\": \"Sample Address\", \"zip_code\": 12345}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/address",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Address",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"owner\": 1, \"longitude\": 45.123, \"latitude\": 12.345, \"country\": \"Updated Country\", \"city\": \"Updated City\", \"address\": \"Updated Address\", \"zip_code\": 54321}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/address/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"address",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Address",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/address/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"address",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "careSession",
+			"item": [
+				{
+					"name": "Get All CareSessions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/care-session",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"care-session"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get CareSession by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/care-session/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"care-session",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create CareSession",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"plant\": 1, \"caretaker\": 1, \"location\": 1, \"date_start\": 1642448400, \"date_end\": 1642452000}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/care-session",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"care-session"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update CareSession",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"plant\": 2, \"caretaker\": 1, \"location\": 2, \"date_start\": 1642448400, \"date_end\": 1643452000}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/care-session/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"care-session",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete CareSession",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/care-session/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"care-session",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "comment",
+			"item": [
+				{
+					"name": "Get All Comments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/comment",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Comment by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/comment/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"comment",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Comment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"care_session\":1,\r\n    \"author\": 1,\r\n    \"author_role\": \"Owner\",\r\n    \"date\": 1642448400,\r\n    \"content\": \"New Comment\",\r\n    \"image\": \"example.jpg\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/comment",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Comment",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"care_session\": 1, \"author\": 1, \"author_role\": \"User\", \"date\": 1642448400, \"content\": \"Updated Comment\"}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/comment/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"comment",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Comment",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/comment/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"comment",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "plantType",
+			"item": [
+				{
+					"name": "Get All PlantTypes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/plant-type",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"plant-type"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get PlantType by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/plant-type/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"plant-type",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								},
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create PlantType",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\": \"New PlantType\"}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/plant-type",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"plant-type"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update PlantType",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\": \"Updated PlantType\"}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/plant-type/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"plant-type",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete PlantType",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/plant-type/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"plant-type",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

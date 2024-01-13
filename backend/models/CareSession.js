@@ -1,10 +1,11 @@
-const { DataTypes } = require('sequelize');
-const sequelize  = require('../sequelize.js');
+const {DataTypes} = require('sequelize');
+const sequelize = require('../sequelize.js');
 const UserModel = require('./User');
 const PlantsModel = require('./Plant');
 const AddressModel = require('./Address');
 
-const CareSessions = sequelize.define('CareSessions', {
+
+const CareSession = sequelize.define('CareSessions', {
     session_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -46,8 +47,8 @@ const CareSessions = sequelize.define('CareSessions', {
     timestamps: false,
 });
 
-CareSessions.belongsTo(UserModel, { foreignKey: 'caretaker' });
-CareSessions.belongsTo(PlantsModel, { foreignKey: 'plant' });
-CareSessions.belongsTo(AddressModel, { foreignKey: 'location' });
+CareSession.belongsTo(UserModel, {foreignKey: 'caretaker'});
+CareSession.belongsTo(PlantsModel, {foreignKey: 'plant'});
+CareSession.belongsTo(AddressModel, {foreignKey: 'location'});
 
-module.exports = CareSessions;
+module.exports = CareSession;
