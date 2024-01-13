@@ -42,6 +42,8 @@ const CareSessions = sequelize.define('CareSessions', {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
+}, {
+    timestamps: false,
 });
 
 CareSessions.belongsTo(UserModel, { foreignKey: 'caretaker' });

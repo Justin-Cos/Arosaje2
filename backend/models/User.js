@@ -25,6 +25,8 @@ const User = sequelize.define('User', {
         type: DataTypes.TEXT,
         allowNull: false,
     },
+}, {
+    timestamps: false,
 });
 
 module.exports = User;

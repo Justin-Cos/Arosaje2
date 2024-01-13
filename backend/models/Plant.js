@@ -32,6 +32,8 @@ const Plant = sequelize.define('Plants', {
     image: {
         type: DataTypes.TEXT,
     },
+}, {
+    timestamps: false,
 });
 
 UserModel.hasMany(Plant, { foreignKey: 'owner', as: 'plants' });

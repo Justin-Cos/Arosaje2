@@ -38,6 +38,8 @@ const Comments = sequelize.define('Comments', {
     image: {
         type: DataTypes.TEXT,
     },
+}, {
+    timestamps: false,
 });
 
 Comments.belongsTo(UserModel, { foreignKey: 'author' });

@@ -41,6 +41,8 @@ const Address = sequelize.define('Address', {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
+}, {
+    timestamps: false,
 });
 Address.belongsTo(UserModel, { foreignKey: 'owner' });
 
