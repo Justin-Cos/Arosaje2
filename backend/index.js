@@ -23,7 +23,8 @@ sequelize.sync().then(() => {
     console.error('Error synchronizing Sequelize models:', error);
 });
 
-require('./seeders/20240129170544-seed').up(sequelize.getQueryInterface())
+//permet d'initialiser les données
+//require('./seeders/20240129170544-seed').up(sequelize.getQueryInterface())
 
 // Connexion à la base de données SQLite
 const db_name = path.join(__dirname, "database", conf.database_url);

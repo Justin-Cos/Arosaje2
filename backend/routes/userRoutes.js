@@ -4,6 +4,7 @@ const userController = require("../controllers/userController");
 
 //API
 router.get('/', userController.getAllUsers);
+router.get('/botanist', userController.getAllBotanists);
 router.get('/:id', userController.getUserById);
 router.post('/', userController.createUser);
 router.put('/:id', userController.updateUserById);

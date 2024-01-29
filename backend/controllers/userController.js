@@ -107,6 +107,20 @@ exports.getAllUsers = async (req, res) => {
     }
 };
 
+exports.getAllBotanists = async (req, res) => {
+    try {
+        const botanists = await User.findAll({
+            where: {
+                role: 'botanist',
+            },
+        });
+        res.json(botanists);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Erreur serveur');
+    }
+};
+
 exports.getUserById = async (req, res) => {
     const userId = req.params.id;
     try {

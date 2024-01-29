@@ -18,13 +18,6 @@ export class CarouselComponent {
   slideConfig = {"slidesToShow": 4, "slidesToScroll": 4};
   hoveredItemIndex: any;
 
-  addSlide() {
-    this.slides.push({
-      img: "assets/picture/profile_pic/john_doeeva.jpg",
-      nom:"dih",
-      bio:"dzd"
-    })
-  }
 
   removeSlide() {
     this.slides.length = this.slides.length - 1;
