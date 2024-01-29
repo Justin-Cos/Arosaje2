@@ -1,14 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {CarouselComponent} from "../carousel.component";
 import {UserService} from "../../../services/user.service";
-import {Observable} from "rxjs";
 import {UserModel} from "../../../models/user.model";
 
 @Component({
   selector: 'app-profiles-carousel',
   standalone: true,
   imports: [
-    CarouselComponent
+    CarouselComponent,
   ],
   templateUrl: './profiles-carousel.component.html',
   styleUrl: './profiles-carousel.component.css'
@@ -29,9 +28,9 @@ export class ProfilesCarouselComponent implements OnInit {
 
       this.slides = this.botanists.map(botanist => {
         return {
-          img: botanist.profile_picture,
+          img: 'assets/uploads/users_profile_pictures/' + botanist.profile_picture,
           nom: botanist.username,
-          bio: botanist.bio
+          bio: botanist.bio,
         };
       });
     });

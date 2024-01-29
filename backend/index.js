@@ -24,7 +24,7 @@ sequelize.sync().then(() => {
 });
 
 //permet d'initialiser les données
-//require('./seeders/20240129170544-seed').up(sequelize.getQueryInterface())
+require('./seeders/20240129170544-seed').up(sequelize.getQueryInterface())
 
 // Connexion à la base de données SQLite
 const db_name = path.join(__dirname, "database", conf.database_url);
@@ -45,7 +45,12 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
 
-
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+});
 
 const userRoutes = require("./routes/userRoutes");
 const plantRoutes = require("./routes/plantRoutes");

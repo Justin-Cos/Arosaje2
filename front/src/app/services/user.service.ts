@@ -1,19 +1,16 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {map, Observable} from 'rxjs';
-import { ApiService } from './api.service';
-import {UserModel} from "../models/user.model";
+import {UserModel, UserRole} from "../models/user.model";
+
+import {ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  private endpoint = 'users';
+  private endpoint = 'user';
 
   constructor(private apiService: ApiService) {}
-
-  getUsers(): Observable<any> {
-    return this.apiService.get<any>(this.endpoint);
-  }
 
   getBotanists(): Observable<UserModel[]> {
     return this.apiService.get<UserModel[]>(this.endpoint + '/botanist').pipe(
@@ -22,7 +19,9 @@ export class UserService {
       })
     );
   }
-  getUserById(userId: number): Observable<any> {
-    return this.apiService.get<any>(`${this.endpoint}/${userId}`);
-  }
+
+   /*
+  getBotanists(): UserModel[] {
+    return [new UserModel("a", "a", "david.jpg", "a", UserRole.botanist)]//.fromJson({"user_id":2,"username":"john_doe","email":"john@example.com","password":"hashed_password","profile_picture":"john_doe.jpg","bio":null,"role":"botanist"})
+}*/
 }

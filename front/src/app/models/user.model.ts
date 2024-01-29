@@ -1,7 +1,3 @@
-import {Injectable} from "@angular/core";
-@Injectable({
-  providedIn: 'root',
-})
 export class UserModel{
   private _username: string;
   private _email: string;
@@ -61,12 +57,18 @@ export class UserModel{
     this._role = value;
   }
   static fromJson(json: any) {
-    const { username, email, profile_picture, role, bio } = json;
-    return new UserModel(username, email, profile_picture, role, bio);
+    const { username, email, profile_picture, bio, role } = json;
+console.log(json)
+    // Assurez-vous que toutes les propriétés requises sont présentes dans le JSON
+    if (!username || !email || !profile_picture) {
+      throw new Error('Le JSON ne contient pas toutes les propriétés requises.');
+    }
+
+    return new UserModel(username, email, profile_picture, bio, role);
   }
 }
 
-enum UserRole {
-  admin,
-  botanist,
+export enum UserRole {
+  admin="admin",
+  botanist="botanist",
 }
