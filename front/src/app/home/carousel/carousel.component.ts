@@ -20,7 +20,7 @@ export class CarouselComponent {
 
   addSlide() {
     this.slides.push({
-      img: "assets/picture/profile_pic/th3.jpg",
+      img: "assets/picture/profile_pic/john_doeeva.jpg",
       nom:"dih",
       bio:"dzd"
     })

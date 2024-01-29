@@ -8,12 +8,12 @@ const User = sequelize.define('User', {
         autoIncrement: true,
     },
     username: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING,
         allowNull: false,
         unique: true,
     },
     email: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING,
         allowNull: false,
         unique: true,
     },
@@ -21,9 +21,19 @@ const User = sequelize.define('User', {
         type: DataTypes.TEXT,
         allowNull: false,
     },
-    role: {
+    profile_picture: {
         type: DataTypes.TEXT,
         allowNull: false,
+        unique: true,
+    },
+    bio: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+        unique: false,
+    },
+    role: {
+        type: DataTypes.ENUM('admin','botanist'),
+        allowNull: true,
     },
 }, {
     timestamps: false,

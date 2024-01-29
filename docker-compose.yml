@@ -9,11 +9,12 @@ services:
       - ./database:/usr/src/app/database
 
   api-back:
-    image: node:20
     ports:
       - "3000:3000"
-    volumes:
-      - ./backend:/usr/src/app
-      - ./database:/usr/src/app/database
     working_dir: /usr/src/app
     command: sh -c "npm install && npm start"
+    volumes:
+      - ./database:/usr/src/app/database
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
