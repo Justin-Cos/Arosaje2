@@ -2,12 +2,6 @@ version: '3'
 
 services:
 
-  sqlite-db:
-    image: alpine:latest
-    command: sh -c "apk add --no-cache sqlite && sqlite3 /usr/src/app/database/arosaje.db .schema > /usr/src/app/database/arosaje_schema.sql"
-    volumes:
-      - ./database:/usr/src/app/database
-
   api-back:
     ports:
       - "3000:3000"

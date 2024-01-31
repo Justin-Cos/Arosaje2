@@ -23,8 +23,7 @@ sequelize.sync().then(() => {
     console.error('Error synchronizing Sequelize models:', error);
 });
 
-//permet d'initialiser les données
-require('./seeders/20240129170544-seed').up(sequelize.getQueryInterface())
+
 
 // Connexion à la base de données SQLite
 const db_name = path.join(__dirname, "database", conf.database_url);
@@ -34,6 +33,9 @@ const db = new sqlite3.Database(db_name, err => {
     }
     console.log(`Connexion réussie à la base de données ${conf.database_url}`);
 });
+
+//permet d'initialiser les données
+require('./seeders/20240129170544-seed').up(sequelize.getQueryInterface())
 // Création du serveur Express
 const app = express();
 
