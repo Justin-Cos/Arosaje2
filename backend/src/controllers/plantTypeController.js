@@ -1,4 +1,4 @@
-const PlantsType = require('../models/PlantType'); // Adjust the path based on your project structure
+const PlantsType = require('../models/PlantType');
 
 exports.getAllPlantTypes = async (req, res) => {
     try {

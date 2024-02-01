@@ -39,7 +39,7 @@ exports.getPlantById = async (req, res) => {
 };
 
 exports.createPlant = async (req, res) => {
-    const {plant_type,owner_id,name,indoor} = req.body;
+    const {plant_type, owner_id, name, indoor} = req.body;
     console.log(req.body);
     let image_name;
     let owner;

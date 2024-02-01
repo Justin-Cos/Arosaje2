@@ -1,7 +1,6 @@
 const express = require("express");
 const path = require("path");
 const sqlite3 = require("sqlite3").verbose();
-const conf = require("./config.json");
 const sequelize = require('./sequelize.js');
 const userRoutes = require("./routes/userRoutes");
 const plantRoutes = require("./routes/plantRoutes");
@@ -17,23 +16,15 @@ const CareSession = require('./models/CareSession');
 const Comment = require('./models/Comment');
 
 
-
 // Synchronize Sequelize models with the database and add seed data if necessary
-sequelize.sync().then(() => {
+sequelize.sync().then(async () => {
     console.log('Sequelize models synchronized with the database');
     // Connexion à la base de données SQLite
-    const db_name = path.join(__dirname, "database", conf.database_url);
-    const db = new sqlite3.Database(db_name, async err => {
-        if (err) {
-            return console.error(err.message);
-        }
-        console.log(`Connexion réussie à la base de données ${conf.database_url}`);
-        const usersCount = await User.count();
-        if (usersCount === 0) {
-            await require('./seeders/20240129170544-seed').down(sequelize.getQueryInterface())
-            require('./seeders/20240129170544-seed').up(sequelize.getQueryInterface());
-        }
-    });
+    let usersCount = await User.count();
+    if (usersCount === 0) {
+        await require('./seeders/20240129170544-seed').down(sequelize.getQueryInterface())
+        await require('./seeders/20240129170544-seed').up(sequelize.getQueryInterface());
+    }
 }).catch((error) => {
     console.error('Error synchronizing Sequelize models:', error);
 });
@@ -62,9 +53,6 @@ app.use("/care-session", careSessionRoutes);
 app.use("/comment", commentRoutes);
 app.use("/plant-type", plantTypeRoutes);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-
-
-
 
 
 // Démarrage du serveur

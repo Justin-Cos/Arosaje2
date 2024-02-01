@@ -1,6 +1,6 @@
 const {DataTypes} = require('sequelize');
 const sequelize = require('../sequelize.js');
-const UserModel = require('../models/User.js');
+const UserModel = require('./User.js');
 const Address = sequelize.define('Address', {
     adress_id: {
         type: DataTypes.INTEGER,

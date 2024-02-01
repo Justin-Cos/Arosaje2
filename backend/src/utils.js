@@ -1,8 +1,8 @@
 module.exports = {
-     convertToSnakeCase(name) {
+    convertToSnakeCase(name) {
         return name.replace(/\s+/g, '_').toLowerCase();
     },
-     randomBoolean() {
+    randomBoolean() {
         return Math.random() >= 0.5;
     },
     getRandomIndex(max) {
