@@ -3,7 +3,7 @@ const Address = require('../models/Address');
 
 exports.getAllAddresses = async (req, res) => {
     try {
-        const addresses = await Address.findAll();
+        const addresses = await Address.findAll({include: [{model: User}]});
         res.json(addresses);
     } catch (error) {
         console.error(error.message);

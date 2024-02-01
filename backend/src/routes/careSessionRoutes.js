@@ -5,6 +5,9 @@ const router = express.Router();
 
 // Routes
 router.get('/', careSessionController.getAllCareSessions);
+router.get('/previous', careSessionController.getPreviousCareSessions);
+router.get('/active', careSessionController.getActiveCareSessions);
+router.get('/next', careSessionController.getNextCareSessions);
 router.get('/:id', careSessionController.getCareSessionById);
 router.post('/', careSessionController.createCareSession);
 router.put('/:id', careSessionController.updateCareSessionById);

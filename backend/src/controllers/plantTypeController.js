@@ -1,8 +1,9 @@
 const PlantsType = require('../models/PlantType');
+const Plant = require("../models/Plant");
 
 exports.getAllPlantTypes = async (req, res) => {
     try {
-        const plantTypes = await PlantsType.findAll();
+        const plantTypes = await PlantsType.findAll({include: [{model: Plant}]});
         res.json(plantTypes);
     } catch (error) {
         console.error(error.message);
@@ -13,7 +14,7 @@ exports.getAllPlantTypes = async (req, res) => {
 exports.getPlantTypeById = async (req, res) => {
     const plantTypeId = req.params.id;
     try {
-        const plantType = await PlantsType.findByPk(plantTypeId);
+        const plantType = await PlantsType.findByPk(plantTypeId,{include: [{model: Plant}]});
         if (!plantType) {
             return res.status(404).json({error: 'Plant type not found'});
         }

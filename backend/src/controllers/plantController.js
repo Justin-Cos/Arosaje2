@@ -9,8 +9,8 @@ exports.getAllPlants = async (req, res) => {
     try {
         const plants = await Plant.findAll({
             include: [
-                {model: User, attributes: ['username']},
-                {model: PlantType, attributes: ['name']},
+                {model: User},
+                {model: PlantType},
             ],
             attributes: {exclude: ['createdAt', 'updatedAt']},
             order: [['plant_id', 'ASC']],

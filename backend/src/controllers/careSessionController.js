@@ -3,6 +3,7 @@ const CareSessions = require('../models/CareSession'); // Adjust the path based 
 const Plant = require('../models/Plant');
 const User = require('../models/User');
 const Address = require('../models/Address');
+const {Op} = require("sequelize");
 
 
 // Controller methods
@@ -18,6 +19,63 @@ exports.getAllCareSessions = async (req, res) => {
     }
 };
 
+exports.getNextCareSessions = async (req, res) => {
+    try {
+        const careSessions = await CareSessions.findAll({
+            include: [{model: User}, {model: Plant}, {model: Address}],
+            where: {
+                date_end: {
+                    [Op.gt]: new Date(),
+                },
+                date_start: {
+                    [Op.gt]: new Date(),
+                }
+            }
+        });
+        res.json(careSessions);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Erreur serveur');
+    }
+};
+exports.getPreviousCareSessions = async (req, res) => {
+    try {
+        const careSessions = await CareSessions.findAll({
+            include: [{model: User}, {model: Plant}, {model: Address}],
+            where: {
+                date_end: {
+                    [Op.lt]: new Date(),
+                },
+                date_start: {
+                    [Op.lt]: new Date(),
+                }
+            }
+        });
+        res.json(careSessions);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Erreur serveur');
+    }
+}
+exports.getActiveCareSessions = async (req, res) => {
+    try {
+        const careSessions = await CareSessions.findAll({
+            include: [{model: User}, {model: Plant}, {model: Address}],
+            where : {
+                date_end: {
+                    [Op.gt]: new Date(),
+                },
+                date_start: {
+                    [Op.lt]: new Date(),
+                }
+            }
+        });
+        res.json(careSessions);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Erreur serveur');
+    }
+};
 exports.getCareSessionById = async (req, res) => {
     const sessionId = req.params.id;
     try {

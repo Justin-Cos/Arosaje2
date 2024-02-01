@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {map, Observable} from 'rxjs';
-import {UserModel, UserRole} from "../models/user.model";
+import {UserModel, UserRole} from "../../models/user.model";
 
-import {ApiService } from './api.service';
+import {ApiService } from '../api.service';
 
 @Injectable({
   providedIn: 'root',

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CarouselComponent} from "../carousel.component";
-import {UserService} from "../../../services/user.service";
+import {UserService} from "../../../services/ressources/user.service";
 import {UserModel} from "../../../models/user.model";
 import {ApiService} from "../../../services/api.service";
 
@@ -11,7 +11,6 @@ import {ApiService} from "../../../services/api.service";
     CarouselComponent,
   ],
   templateUrl: './profiles-carousel.component.html',
-  styleUrl: './profiles-carousel.component.css'
 })
 export class ProfilesCarouselComponent implements OnInit {
   private userService: UserService;

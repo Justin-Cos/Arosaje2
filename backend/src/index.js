@@ -52,7 +52,7 @@ app.use("/address", addressRoutes);
 app.use("/care-session", careSessionRoutes);
 app.use("/comment", commentRoutes);
 app.use("/plant-type", plantTypeRoutes);
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
 
 // Démarrage du serveur

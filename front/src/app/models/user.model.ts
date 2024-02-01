@@ -1,22 +1,33 @@
 export class UserModel{
+  private _user_id: number;
   private _username: string;
   private _email: string;
   private _profile_picture: string;
   private _bio: string;
   private _role: UserRole | undefined;
   constructor(
+    user_id: number,
     username: string,
     email: string,
     profile_picture: string,
     bio: string,
     role?: UserRole
   ) {
+    this._user_id = user_id;
     this._username = username;
     this._email = email;
     this._profile_picture = profile_picture;
     this._bio = bio;
     this._role = role;
   }
+  get user_id(): number {
+    return this._user_id;
+  }
+
+  set user_id(value: number) {
+    this._user_id = value;
+  }
+
   get username(): string {
     return this._username;
   }
@@ -57,14 +68,12 @@ export class UserModel{
     this._role = value;
   }
   static fromJson(json: any) {
-    const { username, email, profile_picture, bio, role } = json;
-console.log(json)
-    // Assurez-vous que toutes les propriétés requises sont présentes dans le JSON
+    const { user_id, username, email, profile_picture, bio, role } = json;
     if (!username || !email || !profile_picture) {
       throw new Error('Le JSON ne contient pas toutes les propriétés requises.');
     }
 
-    return new UserModel(username, email, profile_picture, bio, role);
+    return new UserModel(user_id, username, email, profile_picture, bio, role);
   }
 }
 

@@ -7,8 +7,6 @@ exports.getAllUserPlant = async (req, res) => {
         const users = await User.findAll({
             include: [{
                 model: Plant,
-                as: 'plants',
-                attributes: ['name'],
             }],
         });
         res.json(users);

@@ -134,10 +134,29 @@ module.exports = {
                 plant: createdPlants[i].plant_id,
                 caretaker: randomUser.user_id,
                 location: createdAdresses.find(address => address.owner === randomUser.user_id).adress_id,
-                date_start: new Date().setDate(new Date().getDate() - Math.floor(Math.random() * 10)),
-                date_end: new Date().setDate(new Date().getDate() + Math.floor(Math.random() * 10)),
+                date_start: new Date().setDate(new Date().getDate() - Math.floor(Math.random() * 10) + 11),
+                date_end: new Date().setDate(new Date().getDate() + Math.floor(Math.random() * 10) + 11),
             }));
         }
+
+        // session terminée
+        createdCareSessions.push(await CareSession.create({
+            plant: createdPlants[getRandomIndex(createdPlants.length)].plant_id,
+            caretaker: randomUser.user_id,
+            location: createdAdresses.find(address => address.owner === randomUser.user_id).adress_id,
+            date_start: new Date().setDate(new Date().getDate() - Math.floor(Math.random() * 10) - 11),
+            date_end: new Date().setDate(new Date().getDate() + Math.floor(Math.random() * 10) - 11),
+        }));
+
+        //session en cours
+        createdCareSessions.push(await CareSession.create({
+            plant: createdPlants[getRandomIndex(createdPlants.length)].plant_id,
+            caretaker: randomUser.user_id,
+            location: createdAdresses.find(address => address.owner === randomUser.user_id).adress_id,
+            date_start: new Date().setDate(new Date().getDate() - Math.floor(Math.random() * 10)),
+            date_end: new Date().setDate(new Date().getDate() + Math.floor(Math.random() * 10)),
+        }));
+
         const commentsData = [
             {
                 care_session: createdCareSessions[0].session_id,
