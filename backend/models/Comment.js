@@ -24,7 +24,7 @@ const Comments = sequelize.define('Comments', {
         },
     },
     author_role: {
-        type: DataTypes.TEXT,
+        type: DataTypes.ENUM('owner', 'caretaker', 'botanist', 'admin'),
         allowNull: false,
     },
     date: {
@@ -33,9 +33,11 @@ const Comments = sequelize.define('Comments', {
     },
     content: {
         type: DataTypes.TEXT,
+        allowNull: true,
     },
     image: {
         type: DataTypes.TEXT,
+        allowNull: true,
     },
 }, {
     timestamps: false,

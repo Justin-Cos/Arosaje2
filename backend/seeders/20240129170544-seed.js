@@ -5,6 +5,7 @@ const Plant = require('../models/Plant');
 const CareSession = require('../models/CareSession');
 const Comment = require('../models/Comment');
 const utils = require ('../utils.js');
+const {getRandomIndex} = require("../utils");
 module.exports = {
   up: async (queryInterface, Sequelize) => {
 
@@ -71,29 +72,40 @@ module.exports = {
         bio: 'Believes in the healing power of plants.',
         role: 'botanist',
       },
+      {
+        username: 'Admin',
+        email: 'Admin@Admin.com',
+        password: 'Admin',
+        profile_picture: 'demo_data/Admin.jpg',
+        bio: 'Admin',
+        role: 'admin',
+      },
     ];
     const plantTypesData = [
-      { name: 'Aloe Vera'},
-      { name: 'Cactus'},
-      { name: 'Orchidée'},
-      { name: 'Palmier'},
-      { name: 'Bananier'},
-      { name: 'Bambou'},
-      { name: 'Bégonia'},
-      { name: 'Broméliacée'},
-      { name: 'Cactus'},
-      { name: 'Cactus de Noël'},
-      { name: 'Hortensia'},
-      { name: 'Spathiphyllum'},
-      { name: 'Bougainvillier'},
+      {name: 'Aloe Vera'},
+      {name: 'Cactus'},
+      {name: 'Orchidée'},
+      {name: 'Palmier'},
+      {name: 'Bananier'},
+      {name: 'Bambou'},
+      {name: 'Bégonia'},
+      {name: 'Broméliacée'},
+      {name: 'Cactus'},
+      {name: 'Cactus de Noël'},
+      {name: 'Hortensia'},
+      {name: 'Spathiphyllum'},
+      {name: 'Bougainvillier'},
     ];
 
 
-    const createdUsers = await User.bulkCreate(usersData, { returning: true });
-    const createdPlantTypes = await PlantType.bulkCreate(plantTypesData, { returning: true });
+    const createdUsers = await User.bulkCreate(usersData, {returning: true});
+    const createdPlantTypes = await PlantType.bulkCreate(plantTypesData, {returning: true});
+    const createdPlants = [];
+    const createdCareSessions = [];
+    const createdAdresses = [];
 
     for (const user of createdUsers) {
-      await Address.create({
+      createdAdresses.push(await Address.create({
         owner: user.user_id,
         longitude: Math.random() * (180 - (-180)) + (-180),
         latitude: Math.random() * (90 - (-90)) + (-90),
@@ -101,22 +113,113 @@ module.exports = {
         city: 'Saint-Grégoire',
         address: `Chez ${user.username}`,
         zip_code: 35760,
-      });
+      }));
     }
 
     let randomUser;
-    let randomPlantType ;
+    let randomPlantType;
+    let randomPlant;
+
     for (let i = 0; i < 10; i++) {
-      randomPlantType = createdPlantTypes[Math.floor(Math.random() * createdPlantTypes.length)];
-      randomUser = createdUsers[Math.floor(Math.random() * createdUsers.length)];
-      await Plant.create(      {
+      randomPlantType = createdPlantTypes[getRandomIndex(createdPlantTypes.length)];
+      randomUser = createdUsers[getRandomIndex(createdUsers.length)];
+      createdPlants.push(await Plant.create({
         owner: randomUser.user_id,
         plant_type: randomPlantType.plant_type_id,
         name: `${randomPlantType.name} de ${randomUser.username}`,
         image: `demo_data/${i}.jpg`,
         indoor: utils.randomBoolean(),
-      });
+      }));
+      createdCareSessions.push(await CareSession.create({
+        plant: createdPlants[i].plant_id,
+        caretaker: randomUser.user_id,
+        location: createdAdresses.find(address => address.owner === randomUser.user_id).adress_id,
+        date_start: new Date().setDate(new Date().getDate() - Math.floor(Math.random() * 10)),
+        date_end: new Date().setDate(new Date().getDate() + Math.floor(Math.random() * 10)),
+      }));
     }
+    const commentsData = [
+      {
+        care_session: createdCareSessions[0].session_id,
+        author: createdCareSessions[0].caretaker,
+        author_role: 'caretaker',
+        date: new Date(),
+        content: 'J\'ai bien arrosé la plante aujourd\'hui.',
+      },
+      {
+        care_session: createdCareSessions[getRandomIndex(createdCareSessions.length)].session_id,
+        author: createdUsers[getRandomIndex(createdUsers.length)].user_id,
+        author_role: 'botanist',
+        date: new Date(),
+        content: 'Arrêtez de l\'arroser, elle a déjà assez d\'eau !',
+      },
+      {
+        care_session: createdCareSessions[3].session_id,
+        author: createdCareSessions[3].caretaker,
+        author_role: 'caretaker',
+        date: new Date(),
+        content: 'Je l\'ai mise au soleil aujourd\'hui.',
+        },
+      {
+        care_session: createdCareSessions[getRandomIndex(createdCareSessions.length)].session_id,
+        author: createdUsers[getRandomIndex(createdUsers.length)].user_id,
+        author_role: 'botanist',
+        date: new Date(),
+        content: 'Elle a besoin de plus de lumière.',
+      },
+      {
+        care_session: createdCareSessions[3].session_id,
+        author: (await Plant.findByPk(createdCareSessions[3].plant)).get('owner'),
+        author_role: 'owner',
+        date: new Date(),
+        content: 'Merci pour votre travail !',
+      },
+      {
+        care_session: createdCareSessions[getRandomIndex(createdCareSessions.length)].session_id,
+        author: createdUsers[8].user_id,
+        author_role: 'admin',
+        date: new Date(),
+        content: 'Je vous ai envoyé un message privé.',
+
+      },
+      {
+        care_session: createdCareSessions[2].session_id,
+        author: createdCareSessions[2].caretaker,
+        author_role: 'caretaker',
+        date: new Date(),
+        content: 'pas de soucis, je m\'en occupe !',
+      },
+      {
+        care_session: createdCareSessions[getRandomIndex(createdCareSessions.length)].session_id,
+        author: createdUsers[getRandomIndex(createdUsers.length)].user_id,
+        author_role: 'botanist',
+        date: new Date(),
+        content: 'tu fais n\'importe quoi, elle a déjà assez d\'eau !',
+      },
+      {
+        care_session: createdCareSessions[1].session_id,
+        author: createdCareSessions[1].caretaker,
+        author_role: 'caretaker',
+        date: new Date(),
+        content: 'un peu d\'engrais aujourd\'hui.',
+        image: 'demo_data/engrais.jpg',
+      },
+      {
+        care_session: createdCareSessions[getRandomIndex(createdCareSessions.length)].session_id,
+        author: createdUsers[getRandomIndex(createdUsers.length)].user_id,
+        author_role: 'botanist',
+        date: new Date(),
+        content: 'c\'est trop tôt pour l\'engrais, attendez encore un peu.',
+      },
+      {
+        care_session: createdCareSessions[0].session_id,
+        author: (await Plant.findByPk(createdCareSessions[0].plant)).get('owner'),
+        author_role: 'owner',
+        date: new Date(),
+        image: 'demo_data/merci.jpg',
+      },
+    ];
+    await Comment.bulkCreate(commentsData, {returning: true});
   },
 
   down: async (queryInterface, Sequelize) => {
