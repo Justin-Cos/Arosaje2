@@ -38,6 +38,25 @@ exports.getNextCareSessions = async (req, res) => {
         res.status(500).send('Erreur serveur');
     }
 };
+exports.getAvailableSessions = async (req, res) => {
+    try {
+        const careSessions = await CareSessions.findAll({
+            include: [{model: User}, {model: Plant}, {model: Address}],
+            where: {
+                caretaker: null,
+                date_end: {
+                    [Op.gt]: new Date(),
+                },
+            }
+        });
+        res.json(careSessions);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Erreur serveur');
+    }
+};
+
+
 exports.getPreviousCareSessions = async (req, res) => {
     try {
         const careSessions = await CareSessions.findAll({

@@ -5,7 +5,7 @@ const Plant = require('../models/Plant');
 const CareSession = require('../models/CareSession');
 const Comment = require('../models/Comment');
 const utils = require('../utils.js');
-const {getRandomIndex} = require("../utils");
+const {getRandomIndex, randomBoolean} = require("../utils");
 module.exports = {
     up: async (queryInterface, Sequelize) => {
 
@@ -132,7 +132,7 @@ module.exports = {
             }));
             createdCareSessions.push(await CareSession.create({
                 plant: createdPlants[i].plant_id,
-                caretaker: randomUser.user_id,
+                caretaker: randomBoolean() ? randomUser.user_id : null, // 50% de chance d'avoir un caretaker
                 location: createdAdresses.find(address => address.owner === randomUser.user_id).adress_id,
                 date_start: new Date().setDate(new Date().getDate() - Math.floor(Math.random() * 10) + 11),
                 date_end: new Date().setDate(new Date().getDate() + Math.floor(Math.random() * 10) + 11),

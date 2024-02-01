@@ -24,7 +24,7 @@ export class NextCareSessionsCarouselComponent implements OnInit {
 
 
   ngOnInit() {
-    this.CareSessionService.getNextCareSessions().subscribe((nextCareSessions: CareSessionModel[]) => {
+    this.CareSessionService.getAvailableCareSessions().subscribe((nextCareSessions: CareSessionModel[]) => {
       this.nextCareSessions = nextCareSessions;
 
       const observables = this.nextCareSessions.map(nextCareSession =>

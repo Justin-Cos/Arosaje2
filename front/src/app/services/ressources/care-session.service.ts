@@ -25,4 +25,11 @@ export class CareSessionService {
       })
     );
   }
+  getAvailableCareSessions(): Observable<CareSessionModel[]> {
+    return this.apiService.get<CareSessionModel[]>(this.endpoint + '/available').pipe(
+      map((jsonArray: any[]) => {
+        return jsonArray.map((json: any) => CareSessionModel.fromJson(json));
+      })
+    );
+  }
 }

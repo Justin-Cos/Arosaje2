@@ -8,7 +8,7 @@ import {AddressService} from "../services/ressources/address.service";
 export class CareSessionModel {
   private _session_id: number;
   private _plant: number;
-  private _caretaker: number;
+  private _caretaker: number | null;
   private _location: number;
   private _date_start: Date;
   private _date_end: Date;
@@ -16,7 +16,7 @@ export class CareSessionModel {
   constructor(
     session_id: number,
     plant: number,
-    caretaker: number,
+    caretaker: number | null,
     location: number,
     date_start: Date,
     date_end: Date
@@ -45,7 +45,7 @@ export class CareSessionModel {
     this._plant = value;
   }
 
-  get caretaker(): number {
+  get caretaker(): number | null {
     return this._caretaker;
   }
 
@@ -93,7 +93,7 @@ export class CareSessionModel {
 
   static fromJson(json: any): CareSessionModel {
     const { session_id, plant, caretaker, location, date_start, date_end } = json;
-    if (!session_id || !plant || !caretaker || !location || !date_start || !date_end) {
+    if (!session_id || !plant || !location || !date_start || !date_end) {
       throw new Error('Le JSON ne contient pas toutes les propriétés requises.');
     }
 
