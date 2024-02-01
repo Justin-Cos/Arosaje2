@@ -41,6 +41,3 @@ testem.log
 .DS_Store
 Thumbs.db
 
-#uploads
-src/assets/uploads/users_plants_pictures/*
-src/assets/uploads/users_profile_pictures/*

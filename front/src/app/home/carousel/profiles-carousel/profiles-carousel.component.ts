@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CarouselComponent} from "../carousel.component";
 import {UserService} from "../../../services/user.service";
 import {UserModel} from "../../../models/user.model";
+import {ApiService} from "../../../services/api.service";
 
 @Component({
   selector: 'app-profiles-carousel',
@@ -28,7 +29,7 @@ export class ProfilesCarouselComponent implements OnInit {
 
       this.slides = this.botanists.map(botanist => {
         return {
-          img: 'assets/uploads/users_profile_pictures/' + botanist.profile_picture,
+          img: `${ApiService.baseUrl}/uploads/users_profile_pictures/${botanist.profile_picture}`,
           nom: botanist.username,
           bio: botanist.bio,
         };

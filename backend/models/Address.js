@@ -18,10 +18,13 @@ const Address = sequelize.define('Address', {
     longitude: {
         type: DataTypes.DECIMAL,
         allowNull: false,
+        unique: false,
+
     },
     latitude: {
         type: DataTypes.DECIMAL,
         allowNull: false,
+        unique: false,
     },
     country: {
         type: DataTypes.TEXT,

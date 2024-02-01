@@ -32,6 +32,10 @@ const Plant = sequelize.define('Plants', {
     image: {
         type: DataTypes.TEXT,
     },
+    indoor: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+    },
 }, {
     timestamps: false,
 });

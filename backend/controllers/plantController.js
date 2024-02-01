@@ -2,99 +2,9 @@ const Plant = require('../models/Plant');
 const PlantType = require('../models/PlantType');
 const User = require('../models/User');
 const Address = require("../models/Address")
-
-
-exports.getPlants = async (req, res) => {
-    try {
-        const plants = await Plant.findAll();
-        res.render("plante/plantes", {model: plants});
-    } catch (error) {
-        console.error(error.message);
-        res.status(500).send("Erreur serveur");
-    }
-};
-
-
-exports.postCreate = async (req, res) => {
-    const {plantName, famille, location} = req.body;
-    try {
-        await Plant.create({plantName, famille, location});
-        res.redirect("/");
-    } catch (error) {
-        console.error(error.message);
-        res.status(500).send("Erreur serveur");
-    }
-};
-
-exports.getCreate = async (req, res) => {
-    try {
-        const users = await User.findAll();
-        const plantTypes = await PlantType.findAll();
-
-        res.render('plante/create', {users, plantTypes});
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        res.status(500).send('Internal Server Error');
-    }
-};
-exports.getEdit = async (req, res) => {
-    const id = req.params.id;
-    try {
-        const plant = await Plant.findByPk(id);
-        res.render("plante/edit", {model: plant});
-    } catch (error) {
-        console.error(error.message);
-        res.status(500).send("Erreur serveur");
-    }
-};
-
-exports.postEdit = async (req, res) => {
-    const id = req.params.id;
-    const {plantName, famille, location} = req.body;
-    try {
-        await Plant.update({plantName, famille, location}, {where: {plant_id: id}});
-        res.redirect("/");
-    } catch (error) {
-        console.error(error.message);
-        res.status(500).send("Erreur serveur");
-    }
-};
-
-exports.getDelete = async (req, res) => {
-    const id = req.params.id;
-    try {
-        const plant = await Plant.findByPk(id);
-        res.render("plante/delete", {model: plant});
-    } catch (error) {
-        console.error(error.message);
-        res.status(500).send("Erreur serveur");
-    }
-};
-
-exports.postDelete = async (req, res) => {
-    const id = req.params.id;
-    try {
-        await Plant.destroy({where: {plant_id: id}});
-        res.redirect("/");
-    } catch (error) {
-        console.error(error.message);
-        res.status(500).send("Erreur serveur");
-    }
-};
-
-
-exports.getDetails = async (req, res) => {
-    const id = req.params.id;
-    try {
-        const plant = await Plant.findByPk(id);
-        res.render("plante/detail", {model: plant});
-    } catch (error) {
-        console.error(error.message);
-        res.status(500).send("Erreur serveur");
-    }
-};
-
-
+const PlantTypeController = require("./plantTypeController");
+const {convertToSnakeCase} = require("../utils");
+const fs = require("fs");
 exports.getAllPlants = async (req, res) => {
     try {
         const plants = await Plant.findAll({
@@ -129,12 +39,30 @@ exports.getPlantById = async (req, res) => {
 };
 
 exports.createPlant = async (req, res) => {
-    const {plant_type, owner, name, image} = req.body;
+    const {plant_type,owner_id,name,indoor} = req.body;
+    console.log(req.body);
+    let image_name;
+    let owner;
+    console.log(await req.file.path);
     try {
-        const newPlant = await Plant.create({plant_type, owner, name, image});
-        res.json(newPlant);
+        owner = await User.findByPk(owner_id);
+        image_name = convertToSnakeCase(`${name}_${owner.user_id}_${Date.now()}`) + '.jpg';
+        await Plant.create({
+            plant_type: plant_type,
+            owner: owner_id,
+            name: name,
+            image: image_name,
+            indoor: indoor,
+        });
+        await fs.renameSync(req.file.path, `./uploads/users_plants_pictures/${image_name}`);
+        res.status(201).json({message: 'Plant created successfully'});
     } catch (error) {
         console.error(error.message);
+        fs.unlink(req.file.path, (err) => {
+            if (err) {
+                console.error(err);
+            }
+        });
         res.status(500).send("Erreur serveur");
     }
 };

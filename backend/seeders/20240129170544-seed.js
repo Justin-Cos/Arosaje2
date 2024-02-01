@@ -1,20 +1,26 @@
 const Address = require('../models/Address');
 const User = require('../models/User');
+const PlantType = require('../models/PlantType');
+const Plant = require('../models/Plant');
+const CareSession = require('../models/CareSession');
+const Comment = require('../models/Comment');
+const utils = require ('../utils.js');
 module.exports = {
   up: async (queryInterface, Sequelize) => {
+
     const usersData = [
       {
         username: 'Alice',
         email: 'alice@example.com',
         password: 'hashed_password_1',
-        profile_picture: 'alice.jpg',
+        profile_picture: 'demo_data/alice.jpg',
         bio: 'Passionate about plants and nature.',
       },
       {
         username: 'Bob',
         email: 'bob@example.com',
         password: 'hashed_password_2',
-        profile_picture: 'bob.jpg',
+        profile_picture: 'demo_data/bob.jpg',
         bio: 'Aspiring botanist with a green thumb.',
         role: 'botanist',
       },
@@ -22,14 +28,14 @@ module.exports = {
         username: 'Charlie',
         email: 'charlie@example.com',
         password: 'hashed_password_3',
-        profile_picture: 'charlie.jpg',
+        profile_picture: 'demo_data/charlie.jpg',
         bio: 'Loves lazy Sundays and potted plants.',
       },
       {
         username: 'David',
         email: 'david@example.com',
         password: 'hashed_password_4',
-        profile_picture: 'david.jpg',
+        profile_picture: 'demo_data/david.jpg',
         bio: 'Botanist by day, gamer by night.',
         role: 'botanist',
       },
@@ -37,7 +43,7 @@ module.exports = {
         username: 'Eva',
         email: 'eva@example.com',
         password: 'hashed_password_5',
-        profile_picture: 'eva.jpg',
+        profile_picture: 'demo_data/eva.jpg',
         bio: 'Dreaming of a garden filled with roses.',
         role: 'botanist',
       },
@@ -45,7 +51,7 @@ module.exports = {
         username: 'Frank',
         email: 'frank@example.com',
         password: 'hashed_password_6',
-        profile_picture: 'frank.jpg',
+        profile_picture: 'demo_data/frank.jpg',
         bio: 'Enjoys nature walks and herbal tea.',
         role: 'botanist',
       },
@@ -53,7 +59,7 @@ module.exports = {
         username: 'Grace',
         email: 'grace@example.com',
         password: 'hashed_password_7',
-        profile_picture: 'grace.jpg',
+        profile_picture: 'demo_data/grace.jpg',
         bio: 'Loves growing succulents on the windowsill.',
         role: 'botanist',
       },
@@ -61,13 +67,30 @@ module.exports = {
         username: 'Henry',
         email: 'henry@example.com',
         password: 'hashed_password_8',
-        profile_picture: 'henry.jpg',
+        profile_picture: 'demo_data/henry.jpg',
         bio: 'Believes in the healing power of plants.',
         role: 'botanist',
       },
     ];
+    const plantTypesData = [
+      { name: 'Aloe Vera'},
+      { name: 'Cactus'},
+      { name: 'Orchidée'},
+      { name: 'Palmier'},
+      { name: 'Bananier'},
+      { name: 'Bambou'},
+      { name: 'Bégonia'},
+      { name: 'Broméliacée'},
+      { name: 'Cactus'},
+      { name: 'Cactus de Noël'},
+      { name: 'Hortensia'},
+      { name: 'Spathiphyllum'},
+      { name: 'Bougainvillier'},
+    ];
+
 
     const createdUsers = await User.bulkCreate(usersData, { returning: true });
+    const createdPlantTypes = await PlantType.bulkCreate(plantTypesData, { returning: true });
 
     for (const user of createdUsers) {
       await Address.create({
@@ -80,11 +103,28 @@ module.exports = {
         zip_code: 35760,
       });
     }
+
+    let randomUser;
+    let randomPlantType ;
+    for (let i = 0; i < 10; i++) {
+      randomPlantType = createdPlantTypes[Math.floor(Math.random() * createdPlantTypes.length)];
+      randomUser = createdUsers[Math.floor(Math.random() * createdUsers.length)];
+      await Plant.create(      {
+        owner: randomUser.user_id,
+        plant_type: randomPlantType.plant_type_id,
+        name: `${randomPlantType.name} de ${randomUser.username}`,
+        image: `demo_data/${i}.jpg`,
+        indoor: utils.randomBoolean(),
+      });
+    }
   },
 
   down: async (queryInterface, Sequelize) => {
-    // Suppression de toutes les adresses et de tous les utilisateurs créés
     await Address.destroy({ where: {} });
     await User.destroy({ where: {} });
+    await PlantType.destroy({ where: {} });
+    await Plant.destroy({ where: {} });
+    await CareSession.destroy({ where: {} });
+    await Comment.destroy({ where: {} });
   },
 };
