@@ -54,7 +54,7 @@ exports.createPlant = async (req, res) => {
             image: image_name,
             indoor: indoor,
         });
-        await fs.renameSync(req.file.path, `./uploads/users_plants_pictures/${image_name}`);
+        await fs.renameSync(req.file.path, `./uploads/plants/${image_name}`);
         res.status(201).json({message: 'Plant created successfully'});
     } catch (error) {
         console.error(error.message);

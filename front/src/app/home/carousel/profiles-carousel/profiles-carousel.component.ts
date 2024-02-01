@@ -29,7 +29,7 @@ export class ProfilesCarouselComponent implements OnInit {
 
       this.slides = this.botanists.map(botanist => {
         return {
-          img: `${ApiService.baseUrl}/uploads/users_profile_pictures/${botanist.profile_picture}`,
+          img: `${ApiService.baseUrl}/uploads/profile_pictures/${botanist.profile_picture}`,
           nom: botanist.username,
           bio: botanist.bio,
         };

@@ -3,7 +3,7 @@ const router = express.Router();
 const plantController = require("../controllers/plantController");
 const multer = require("multer");
 const storage = multer.diskStorage({
-    destination: '../uploads/users_plants_pictures',
+    destination: './uploads/plants',
 });
 
 const upload = multer({ storage });
