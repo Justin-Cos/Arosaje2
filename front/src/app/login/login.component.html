@@ -3,26 +3,27 @@
   <div class="w-65 color-sec h-100 align">
     <div class="grid">
 
-      <form action="https://httpbin.org/post" method="POST" class="form login">
+      <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm" method="POST" class="form login">
 
         <div class="form__field">
           <label for="login__username"><svg class="icon">
             <use xlink:href="#icon-user"></use>
           </svg><span class="hidden">Username</span></label>
-          <input autocomplete="username" id="login__username" type="text" name="username" class="form__input" placeholder="Username" required>
+          <input autocomplete="username" id="login__username" type="text" [(ngModel)]="username" name="username" class="form__input" placeholder="Nom d'utilisateur" required>
         </div>
 
         <div class="form__field">
           <label for="login__password"><svg class="icon">
             <use xlink:href="#icon-lock"></use>
           </svg><span class="hidden">Password</span></label>
-          <input id="login__password" type="password" name="password" class="form__input" placeholder="Password" required>
+          <input id="login__password" type="password" [(ngModel)]="password" name="password" class="form__input" placeholder="Mot de passe" required>
         </div>
         <div class="form__field">
           <input type="submit" value="Sign In">
         </div>
-
       </form>
+
+      <p-message *ngIf="error_message.length > 0" severity="error" [text]=error_message></p-message>
 
       <p class="text--center">Pas de compte ? <a routerLink="/register">Se créer un compte</a> <svg class="icon">
         <use xlink:href="#icon-arrow-right"></use>

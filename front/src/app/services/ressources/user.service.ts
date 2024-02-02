@@ -22,6 +22,9 @@ export class UserService {
   register(formData: FormData): Observable<any> {
     return this.apiService.post(this.endpoint + '/register', formData);
   }
+  login(formData: FormData): Observable<any> {
+    return this.apiService.post(this.endpoint + '/login', formData, {headers: { 'Content-Type': 'application/x-www-form-urlencoded' }});
+  }
    /*
   getBotanists(): UserModel[] {
     return [new UserModel("a", "a", "david.jpg", "a", UserRole.botanist)]//.fromJson({"user_id":2,"username":"john_doe","email":"john@example.com","password":"hashed_password","profile_picture":"john_doe.jpg","bio":null,"role":"botanist"})

@@ -11,6 +11,7 @@ router.get('/', userController.getAllUsers);
 router.get('/botanist', userController.getAllBotanists);
 router.get('/:id', userController.getUserById);
 router.post('/register',upload.single('image_file'), userController.registerUser);
+router.post('/login', userController.loginUser);
 router.put('/:id', userController.updateUserById);
 router.delete('/:id', userController.deleteUserById);
 

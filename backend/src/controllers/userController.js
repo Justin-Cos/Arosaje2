@@ -2,6 +2,7 @@ const User = require('../models/User');
 const Plant = require("../models/Plant");
 const {convertToSnakeCase, hashPassword} = require("../utils");
 const fs = require("fs");
+const {sign, verify} = require("jsonwebtoken");
 // Controller methods
 exports.getAllUserPlant = async (req, res) => {
     try {
@@ -56,9 +57,8 @@ exports.getUserById = async (req, res) => {
 };
 exports.registerUser = async (req, res) => {
     const {username, email,bio, password, role} = req.body;
-    let image_name;
     try {
-        image_name = convertToSnakeCase(`${username}_${Date.now()}`) + '.jpg';
+        const image_name = convertToSnakeCase(`${username}_${Date.now()}`) + '.jpg';
         await User.create({
             username: username,
             email: email,
@@ -68,10 +68,53 @@ exports.registerUser = async (req, res) => {
             profile_picture: image_name,
         });
         await fs.renameSync(req.file.path, `./uploads/profile_pictures/${image_name}`);
+        res.body = {username: username, password: password};
+        res.header('Content-Type', 'application/json');
         res.status(201).json({message: 'User created successfully'});
+        return res.redirect('/login');
     } catch (error) {
-
-        res.status(500).send("Erreur serveur");
+        if (error.name === 'SequelizeUniqueConstraintError') {
+            res.status(400).json({ message: 'Username or email already exists' });
+        } else if (error.name === 'ValidationError') {
+            res.status(400).json({ message: 'Username or email already exists', errors: error.errors });
+        } else {
+            // Logguer l'erreur pour le débogage
+            console.error(error);
+            // Répondre avec un statut 500 pour les autres erreurs
+            res.status(500).json({ message: 'Internal Server Error' });
+        }    }
+}
+exports.loginUser = async (req, res) => {
+    const {username, password} = req.body;
+    console.log(req.body,'h ' ,req.headers);
+    try {
+        const user = await User.findOne({
+            where: {
+                username: username,
+            },
+        });
+        if (!user) {
+            return res.status(401).json({error: 'Invalid  or password'});
+        } else if (user.password !== hashPassword(password)) {
+            console.log("d: ",user.password, hashPassword(password))
+            return res.status(401).json({error: 'Invalid username or password'});
+        } else {
+            sign({
+                username: user.username,
+                role: user.role,
+            }, process.env.JWT_SECRET, {expiresIn: '1h'}, (err, token) => {
+                if (err) {
+                    console.error(err);
+                    res.status(500).json({message: 'Internal Server Error'});
+                } else {
+                    res.json({token: token});
+                }
+            });
+        }
+    }
+    catch (error) {
+        console.error(error.message);
+        res.status(500).send(error.message);
     }
 }
 

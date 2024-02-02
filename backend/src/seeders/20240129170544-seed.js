@@ -5,7 +5,7 @@ const Plant = require('../models/Plant');
 const CareSession = require('../models/CareSession');
 const Comment = require('../models/Comment');
 const utils = require('../utils.js');
-const {getRandomIndex, randomBoolean} = require("../utils");
+const {getRandomIndex, randomBoolean, hashPassword} = require("../utils");
 module.exports = {
     up: async (queryInterface, Sequelize) => {
 
@@ -13,14 +13,14 @@ module.exports = {
             {
                 username: 'Alice',
                 email: 'alice@example.com',
-                password: 'hashed_password_1',
+                password: hashPassword('hashed_password'),
                 profile_picture: 'demo_data/alice.jpg',
                 bio: 'Passionate about plants and nature.',
             },
             {
                 username: 'Bob',
                 email: 'bob@example.com',
-                password: 'hashed_password_2',
+                password: hashPassword('hashed_password'),
                 profile_picture: 'demo_data/bob.jpg',
                 bio: 'Aspiring botanist with a green thumb.',
                 role: 'botanist',
@@ -28,14 +28,14 @@ module.exports = {
             {
                 username: 'Charlie',
                 email: 'charlie@example.com',
-                password: 'hashed_password_3',
+                password: hashPassword('hashed_password'),
                 profile_picture: 'demo_data/charlie.jpg',
                 bio: 'Loves lazy Sundays and potted plants.',
             },
             {
                 username: 'David',
                 email: 'david@example.com',
-                password: 'hashed_password_4',
+                password: hashPassword('hashed_password'),
                 profile_picture: 'demo_data/david.jpg',
                 bio: 'Botanist by day, gamer by night.',
                 role: 'botanist',
@@ -43,7 +43,7 @@ module.exports = {
             {
                 username: 'Eva',
                 email: 'eva@example.com',
-                password: 'hashed_password_5',
+                password: hashPassword('hashed_password'),
                 profile_picture: 'demo_data/eva.jpg',
                 bio: 'Dreaming of a garden filled with roses.',
                 role: 'botanist',
@@ -51,7 +51,7 @@ module.exports = {
             {
                 username: 'Frank',
                 email: 'frank@example.com',
-                password: 'hashed_password_6',
+                password: hashPassword('hashed_password'),
                 profile_picture: 'demo_data/frank.jpg',
                 bio: 'Enjoys nature walks and herbal tea.',
                 role: 'botanist',
@@ -59,7 +59,7 @@ module.exports = {
             {
                 username: 'Grace',
                 email: 'grace@example.com',
-                password: 'hashed_password_7',
+                password: hashPassword('hashed_password'),
                 profile_picture: 'demo_data/grace.jpg',
                 bio: 'Loves growing succulents on the windowsill.',
                 role: 'botanist',
@@ -67,7 +67,7 @@ module.exports = {
             {
                 username: 'Henry',
                 email: 'henry@example.com',
-                password: 'hashed_password_8',
+                password: hashPassword('hashed_password'),
                 profile_picture: 'demo_data/henry.jpg',
                 bio: 'Believes in the healing power of plants.',
                 role: 'botanist',
@@ -75,7 +75,7 @@ module.exports = {
             {
                 username: 'Admin',
                 email: 'Admin@Admin.com',
-                password: 'Admin',
+                password: hashPassword('Admin'),
                 profile_picture: 'demo_data/Admin.jpg',
                 bio: 'Admin',
                 role: 'admin',

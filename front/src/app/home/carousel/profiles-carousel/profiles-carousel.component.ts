@@ -31,7 +31,7 @@ export class ProfilesCarouselComponent implements OnInit {
         return {
           img: `${ApiService.baseUrl}/uploads/profile_pictures/${botanist.profile_picture}`,
           nom: botanist.username,
-          bio: botanist.bio,
+          bio: botanist.bio !== 'undefined' ? botanist.bio : "J'aime les plantes !",
         };
       });
     });

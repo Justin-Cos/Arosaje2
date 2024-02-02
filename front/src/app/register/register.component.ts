@@ -34,6 +34,7 @@ export class RegisterComponent {
   error_email: boolean = false;
   error_password: boolean = false;
   error_file: boolean = false;
+  error_message: string = "";
 
   constructor(private userService: UserService) {
 }
@@ -66,7 +67,7 @@ export class RegisterComponent {
           console.log(response);
         },
         (error) => {
-          console.log(error);
+          this.error_message = error.error.message;
         }
       );
     }

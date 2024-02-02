@@ -15,9 +15,9 @@ export class ApiService {
     return this.http.get<T>(url);
   }
 
-  post<T>(endpoint: string, data: any): Observable<T> {
+  post<T>(endpoint: string, data: any , options?:{}): Observable<T> {
     const url = `${ApiService.baseUrl}/${endpoint}`;
-    return this.http.post<T>(url, data);
+    return this.http.post<T>(url, data, options);
   }
 
   delete<T>(endpoint: string, data: any): Observable<HttpEvent<T>> {
