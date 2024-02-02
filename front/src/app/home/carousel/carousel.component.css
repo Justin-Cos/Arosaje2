@@ -1,5 +1,4 @@
 
-
 * {
   margin: 0px;
   padding: 0px;
@@ -33,21 +32,17 @@ a:hover {
   color: #e73700;
 }
 h2 {
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
   font-size: 2.2em;
   line-height: 28px;
-  font-weight: 700;
+  font-weight: 500;
   position: relative;
 }
 
 button {
   outline: none !important;
 }
-/******* Common Element CSS End *********/
 
-
-/******* Middle section CSS Start ******/
-/* -------- Landing page ------- */
 .game-section {
   padding: 60px 50px;
 }
@@ -65,7 +60,7 @@ button {
   align-items: flex-end;
   -webkit-align-items: flex-end;
   background: #343434 no-repeat center center / cover;
-  border-radius: 16px;
+  border-radius: 15px;
   overflow: hidden;
   position: relative;
   transition: all 0.4s ease-in-out;
@@ -73,9 +68,10 @@ button {
   cursor: pointer;
 }
 .game-section .item.active {
-  box-shadow: 12px 40px 40px rgba(0, 0, 0, 0.25);
-  -webkit-box-shadow: 12px 40px 40px rgba(0, 0, 0, 0.25);
+  box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.2);
 }
+
 .game-section .item:after {
   content: "";
   display: block;
@@ -97,6 +93,9 @@ button {
   transition: all 0.4s ease-in-out;
   -webkit-transition: all 0.4s ease-in-out;
 }
+.game-section h3 {
+  font-size: 1.8em;
+}
 .game-section .item.active .item-desc {
   transform: none;
   -webkit-transform: none;
@@ -105,7 +104,6 @@ button {
   opacity: 0;
   -webkit-transform: translateY(32px);
   transform: translateY(32px);
-  padding: 0.5em 0;
   transition: all 0.4s ease-in-out 0.2s;
   -webkit-transition: all 0.4s ease-in-out 0.2s;
 }
@@ -119,36 +117,12 @@ button {
   position: relative;
   z-index: 5;
 }
-.line_title {
-  position: relative;
+
+.divider{
+  color: #5DB075;
+  border-width: 4px;
+  border-radius: 25px ;
+  margin-bottom:1.5em;
+  margin-top: 0.5em;
+
 }
-
-.line_title::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 1px; /* Adjust the thickness of the line as needed */
-  background-color: #000; /* Adjust the color of the line as needed */
-  margin-top: 1em; /* Adjust the spacing between the title and the line */
-}
-
-h2 span.line_title {
-  width: 330px;
-  position: relative;
-}
-
-h2 span.line_title::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 1px; /* Adjust the thickness of the line as needed */
-  background-color: #000; /* Adjust the color of the line as needed */
-  margin-top: 1em; /* Adjust the spacing between the title and the line */
-}
-
-
-/******** Middle section CSS End *******/

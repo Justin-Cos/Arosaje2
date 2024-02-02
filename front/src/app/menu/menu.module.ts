@@ -3,7 +3,13 @@ import { CommonModule } from '@angular/common';
 import {MenuComponent} from "./menu.component";
 import {RouterLink} from "@angular/router";
 
-
+// Import PrimeNG modules
+import { ToolbarModule } from 'primeng/toolbar';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { SplitButtonModule } from 'primeng/splitbutton';
+import {AvatarModule} from "primeng/avatar";
+import {ImageModule} from "primeng/image";
 
 @NgModule({
   declarations: [MenuComponent],
@@ -12,7 +18,13 @@ import {RouterLink} from "@angular/router";
   ],
   imports: [
     CommonModule,
-    RouterLink
+    RouterLink,
+    ToolbarModule,
+    ButtonModule,
+    InputTextModule,
+    SplitButtonModule,
+    AvatarModule,
+    ImageModule
   ]
 })
 export class MenuModule { }

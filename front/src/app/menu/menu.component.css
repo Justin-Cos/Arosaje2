@@ -15,7 +15,7 @@
 }
 
 .menu-lateral {
-  z-index: 2;
+  z-index: 2000;
 }
 
 .options-menu-lateral {
@@ -27,9 +27,59 @@
 .liens-menu-lateral {
   color: inherit;
   display: block;
-  font-size: 0.8em;
-  letter-spacing: 0.225em;
+  font-size: 2em;
+  letter-spacing: 0.15em;
+  margin: 1.5em 0;
 }
 ul li:first-child {
   border-top: 0;
 }
+
+.title_nav{
+  margin-left: 1.5em;
+  font-size: 2.5em;
+}
+
+img_nav{
+  margin-left: 7%;
+  font-size: 2.5em;
+}
+
+.icone_nav{
+  color: #5DB075;
+  margin-left: 0.7em;
+  margin-right: 1.5em;
+  font-size: 2.5em;
+  border: none !important;
+  background-color: white;
+}
+
+.text_nav{
+  font-size: 1.3em;
+  color: black;
+  margin-left : 1em;
+}
+
+.search_txt{
+  width: 40em;
+  font-size: 1.2em;
+}
+.search_size{
+  font-size: 1.2em;
+}
+
+.search_menu{
+  margin-top: 4em;
+  margin-bottom: 3em;
+}
+
+.fixe{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+
+
