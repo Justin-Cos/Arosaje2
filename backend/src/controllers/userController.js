@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const Plant = require("../models/Plant");
-
+const {convertToSnakeCase, hashPassword} = require("../utils");
+const fs = require("fs");
 // Controller methods
 exports.getAllUserPlant = async (req, res) => {
     try {
@@ -53,17 +54,27 @@ exports.getUserById = async (req, res) => {
         res.status(500).send('Erreur serveur');
     }
 };
-
-exports.createUser = async (req, res) => {
-    const {username, email, password, role} = req.body;
+exports.registerUser = async (req, res) => {
+    const {username, email,bio, password, role} = req.body;
+    let image_name;
     try {
-        const newUser = await User.create({username, email, password, role});
-        res.status(201).json(newUser);
+        image_name = convertToSnakeCase(`${username}_${Date.now()}`) + '.jpg';
+        await User.create({
+            username: username,
+            email: email,
+            bio: bio,
+            password: hashPassword(password),
+            role: role,
+            profile_picture: image_name,
+        });
+        await fs.renameSync(req.file.path, `./uploads/profile_pictures/${image_name}`);
+        res.status(201).json({message: 'User created successfully'});
     } catch (error) {
-        console.error(error.message);
-        res.status(500).send('Erreur serveur');
+
+        res.status(500).send("Erreur serveur");
     }
-};
+}
+
 
 exports.updateUserById = async (req, res) => {
     const userId = req.params.id;

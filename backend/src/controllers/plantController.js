@@ -1,8 +1,6 @@
 const Plant = require('../models/Plant');
 const PlantType = require('../models/PlantType');
 const User = require('../models/User');
-const Address = require("../models/Address")
-const PlantTypeController = require("./plantTypeController");
 const {convertToSnakeCase} = require("../utils");
 const fs = require("fs");
 exports.getAllPlants = async (req, res) => {
@@ -40,10 +38,8 @@ exports.getPlantById = async (req, res) => {
 
 exports.createPlant = async (req, res) => {
     const {plant_type, owner_id, name, indoor} = req.body;
-    console.log(req.body);
     let image_name;
     let owner;
-    console.log(await req.file.path);
     try {
         owner = await User.findByPk(owner_id);
         image_name = convertToSnakeCase(`${name}_${owner.user_id}_${Date.now()}`) + '.jpg';

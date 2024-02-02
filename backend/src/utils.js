@@ -7,5 +7,9 @@ module.exports = {
     },
     getRandomIndex(max) {
         return Math.floor(Math.random() * max);
+    },
+    hashPassword(password) {
+        const salt = bcrypt.genSaltSync(10);
+         return bcrypt.hashSync(password, salt);
     }
 }

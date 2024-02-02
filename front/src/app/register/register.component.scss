@@ -126,6 +126,7 @@ input[type="submit"] {
 }
 
 .form input[type="password"],
+.form input[type="email"],
 .form input[type="text"],
 .form input[type="submit"] {
   inline-size: 100%;
@@ -148,6 +149,7 @@ input[type="submit"] {
 
 .register label,
 .register input[type="text"],
+.form input[type="email"],
 .register input[type="password"],
 .register input[type="submit"] {
   padding: 1rem;
@@ -159,6 +161,7 @@ input[type="submit"] {
 }
 
 .register input[type="password"],
+.form input[type="email"],
 .register input[type="text"] {
   background-color: var(--registerInputBackgroundColor);
 }

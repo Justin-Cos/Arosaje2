@@ -3,40 +3,50 @@
   <div class="w-65 color-sec h-100 align">
     <div class="grid">
 
-      <form action="https://httpbin.org/post" method="POST" class="form register">
+      <form (ngSubmit)="onSubmit(registerForm)" #registerForm="ngForm" enctype="multipart/form-data" method="POST" class="form register">
 
         <div class="form__field">
-          <label for="register__username">
-            <span class="hidden">Username</span></label>
-          <input autocomplete="username" id="register__username" type="text" name="username" class="form__input" placeholder="Username" required>
+          <input autocomplete="username" id="register__username" type="text" [(ngModel)]="username" name="username" class="form__input" placeholder="Username" required>
         </div>
-        <div class="form__field">
-          <label for="register__email">
-            <span class="hidden">Email</span></label>
-          <input id="register__email" type="email" name="email" class="form__input" placeholder="Email" required>
-        </div>
-        <div class="form__field">
-          <label for="register__bio">
-            <span class="hidden">Description</span></label>
-          <input autocomplete="username" id="register__bio" type="text" name="bio" class="form__input" placeholder="bio">
-        </div>
+        <p-message *ngIf="error_username" severity="error" text="Le nom d'utilisateur ne doit contenir que des lettres, chiffres, tirets et underscores."></p-message>
 
         <div class="form__field">
-          <label for="register__password">
-            <span class="hidden">Password</span></label>
-          <input id="register__password" type="password" name="password" class="form__input" placeholder="Password" required>
+          <input autocomplete="email" id="register__email" type="email" [(ngModel)]="email" name="email" class="form__input" placeholder="Email" required>
         </div>
-        <div class="form__field">
-          <label for="register__pp">
-            <span class="hidden">Image</span></label>
-          <input id="register__pp" type="file" name="profile-picture" class="form__input">
-        </div>
+        <p-message *ngIf="error_email" severity="error" text="Veuillez fournir une adresse email valide."></p-message>
 
         <div class="form__field">
-          <input type="submit" value="Sign In">
+          <input autocomplete="description" id="register__bio" type="text" [(ngModel)]="bio" name="bio" class="form__input" placeholder="Bio">
         </div>
+        <div class="form__field">
+          <input
+            autocomplete="current-password"
+            id="register__password"
+            type="password"
+            [(ngModel)]="password"
+            name="password"
+            class="form__input"
+            placeholder="Password"
+            required>
+        </div>
+        <p-message *ngIf="error_password" severity="error" text="Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule et un chiffre."></p-message>
 
+        <p-fileUpload #fileUpload
+          mode="basic"
+          name="image_file"
+          chooseLabel="Choose"
+          accept="image/*"
+          [auto]="true"
+          [maxFileSize]="10000000">
+        </p-fileUpload>
+        <p-message *ngIf="error_file" severity="error" text="Veuillez télécharger un avatar"></p-message>
+
+        <div class="form__field">
+          <input type="submit" value="Sign Up">
+        </div>
       </form>
+      <p-message *ngIf="registerForm.invalid && tried_once" severity="error" text="Formulaire invalide remplissez les champs pseudo, email, mot de passe et un avatar"></p-message>
+
 
       <p class="text--center">Déjà un compte? <a routerLink="/login">Se connecter</a> <svg class="icon">
         <use xlink:href="#icon-arrow-right"></use>
