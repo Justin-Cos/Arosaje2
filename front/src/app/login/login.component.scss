@@ -114,7 +114,6 @@ input {
   outline: 0;
   padding: 0;
   transition: background-color 0.3s;
-  Background-color: $primaryColor;
 }
 
 input[type="submit"] {
@@ -151,29 +150,17 @@ input[type="submit"] {
 .login input[type="text"],
 .login input[type="password"],
 .login input[type="submit"] {
-  border-radius: var(--loginBorderRadus);
   padding: 1rem;
 }
 
 .login label {
   background-color: var(--loginLabelBackgroundColor);
-  border-bottom-right-radius: 0;
-  border-top-right-radius: 0;
   padding-inline: 1.25rem;
 }
 
 .login input[type="password"],
 .login input[type="text"] {
   background-color: var(--loginInputBackgroundColor);
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
-}
-
-.login input[type="password"]:focus,
-.login input[type="password"]:hover,
-.login input[type="text"]:focus,
-.login input[type="text"]:hover {
-  background-color: $primaryColor;
 }
 
 .login input[type="submit"] {
