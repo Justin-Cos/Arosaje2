@@ -4,6 +4,7 @@ import {UserService} from "../../../services/ressources/user.service";
 import {UserModel} from "../../../models/user.model";
 import {ApiService} from "../../../services/api.service";
 
+
 @Component({
   selector: 'app-profiles-carousel',
   standalone: true,
@@ -14,7 +15,7 @@ import {ApiService} from "../../../services/api.service";
 })
 export class ProfilesCarouselComponent implements OnInit {
   private userService: UserService;
-  title = "Botanistes";
+  title = "Botanistes récommandés";
   botanists: UserModel[] = [];
   slides: { img: string; nom: string; bio: string; }[] = [];
 

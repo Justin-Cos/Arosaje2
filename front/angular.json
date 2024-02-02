@@ -25,6 +25,7 @@
               "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles/styles.scss",
               "src/styles/helpers.scss",
               "node_modules/slick-carousel/slick/slick.scss",
@@ -97,6 +98,7 @@
               "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles/styles.scss",
               "src/styles/helpers.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css"

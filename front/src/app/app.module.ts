@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {HttpClient, provideHttpClient} from "@angular/common/http";
-
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 
 @NgModule({
@@ -10,7 +10,9 @@ import {HttpClient, provideHttpClient} from "@angular/common/http";
       provideHttpClient(),HttpClient
       ],
   imports: [
-    CommonModule
+    CommonModule,
+    MatSlideToggleModule,
   ]
 })
 export class AppModule { }
+

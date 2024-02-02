@@ -1,10 +1,8 @@
+
+
 * {
   margin: 0px;
   padding: 0px;
-}
-body {
-  font-family: "Roboto", sans-serif;
-  font-size: 16px;
 }
 .clear {
   clear: both;
@@ -35,13 +33,11 @@ a:hover {
   color: #e73700;
 }
 h2 {
-  margin-bottom: 48px;
-  padding-bottom: 16px;
-  font-size: 20px;
+  margin-bottom: 1em;
+  font-size: 2.2em;
   line-height: 28px;
   font-weight: 700;
   position: relative;
-  text-transform: capitalize;
 }
 
 button {
@@ -61,7 +57,7 @@ button {
   display: -webkit-flex;
 }
 .game-section .item {
-  margin: 0 15px 60px;
+  margin: 0 0.2em 2em;
   width: 320px;
   height: 400px;
   display: flex;
@@ -91,7 +87,7 @@ button {
   background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
 }
 .game-section .item-desc {
-  padding: 0 24px 12px;
+  padding: 0 1em;
   color: #fff;
   position: relative;
   z-index: 1;
@@ -109,6 +105,7 @@ button {
   opacity: 0;
   -webkit-transform: translateY(32px);
   transform: translateY(32px);
+  padding: 0.5em 0;
   transition: all 0.4s ease-in-out 0.2s;
   -webkit-transition: all 0.4s ease-in-out 0.2s;
 }
@@ -122,102 +119,36 @@ button {
   position: relative;
   z-index: 5;
 }
+.line_title {
+  position: relative;
+}
+
+.line_title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px; /* Adjust the thickness of the line as needed */
+  background-color: #000; /* Adjust the color of the line as needed */
+  margin-top: 1em; /* Adjust the spacing between the title and the line */
+}
+
+h2 span.line_title {
+  width: 330px;
+  position: relative;
+}
+
+h2 span.line_title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px; /* Adjust the thickness of the line as needed */
+  background-color: #000; /* Adjust the color of the line as needed */
+  margin-top: 1em; /* Adjust the spacing between the title and the line */
+}
+
+
 /******** Middle section CSS End *******/
-
-/***** responsive css Start ******/
-
-@media (min-width: 992px) and (max-width: 1199px) {
-  h2 {
-    margin-bottom: 32px;
-  }
-  h3 {
-    margin: 0 0 8px;
-    font-size: 24px;
-    line-height: 32px;
-  }
-
-  /* -------- Landing page ------- */
-  .game-section {
-    padding: 50px 30px;
-  }
-  .game-section .item {
-    margin: 0 12px 60px;
-    width: 260px;
-    height: 360px;
-  }
-  .game-section .item.active {
-    width: 400px;
-  }
-  .game-section .item-desc {
-    transform: translateY(calc(100% - 46px));
-    -webkit-transform: translateY(calc(100% - 46px));
-  }
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  h2 {
-    margin-bottom: 32px;
-  }
-  h3 {
-    margin: 0 0 8px;
-    font-size: 24px;
-    line-height: 32px;
-  }
-  .line-title {
-    width: 330px;
-  }
-
-  /* -------- Landing page ------- */
-  .game-section {
-    padding: 50px 30px 40px;
-  }
-  .game-section .item {
-    margin: 0 12px 60px;
-    width: 240px;
-    height: 330px;
-  }
-  .game-section .item.active {
-    width: 360px;
-  }
-  .game-section .item-desc {
-    transform: translateY(calc(100% - 42px));
-    -webkit-transform: translateY(calc(100% - 42px));
-  }
-}
-
-@media (max-width: 767px) {
-  body {
-    font-size: 14px;
-  }
-  h2 {
-    margin-bottom: 20px;
-  }
-  h3 {
-    margin: 0 0 8px;
-    font-size: 19px;
-    line-height: 24px;
-  }
-  .line-title {
-    width: 250px;
-  }
-
-  /* -------- Landing page ------- */
-  .game-section {
-    padding: 30px 15px 20px;
-  }
-  .game-section .item {
-    margin: 0 10px 40px;
-    width: 200px;
-    height: 280px;
-  }
-  .game-section .item.active {
-    width: 270px;
-    box-shadow: 6px 10px 10px rgba(0, 0, 0, 0.25);
-    -webkit-box-shadow: 6px 10px 10px rgba(0, 0, 0, 0.25);
-  }
-  .game-section .item-desc {
-    padding: 0 14px 5px;
-    transform: translateY(calc(100% - 42px));
-    -webkit-transform: translateY(calc(100% - 42px));
-  }
-}
