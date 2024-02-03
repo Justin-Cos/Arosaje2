@@ -7,9 +7,9 @@
     <span class="title_nav">Arosaje</span>
   </div>
 
-  <div class="p-toolbar-group-end d-flex align-items-center">
-      <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" shape="circle" size="xlarge" />
-      <span class="text_nav">Nom de Test</span>
+  <div  class="p-toolbar-group-end d-flex align-items-center">
+      <p-avatar *ngIf="authService.isLoggedIn()" image="{{ApiService.baseUrl}}/uploads/profile_pictures/{{authService.getProfilePic()}}" shape="circle" size="xlarge" />
+      <span *ngIf="authService.isLoggedIn()" class="text_nav">{{ authService.getUsername()}}</span>
   </div>
 
 

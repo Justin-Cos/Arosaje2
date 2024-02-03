@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {FileUpload, FileUploadEvent, FileUploadModule} from 'primeng/fileupload';
 import {FormsModule, NgForm, ReactiveFormsModule} from "@angular/forms";
 import {UserService} from "../services/ressources/user.service";
@@ -7,6 +7,8 @@ import {ToastModule} from "primeng/toast";
 import {NgIf} from "@angular/common";
 import {Message} from "primeng/api";
 import {MessageModule} from "primeng/message";
+import {AuthService} from "../services/auth.service";
+import {response} from "express";
 
 @Component({
   selector: 'app-register',
@@ -36,8 +38,8 @@ export class RegisterComponent {
   error_file: boolean = false;
   error_message: string = "";
 
-  constructor(private userService: UserService) {
-}
+  constructor(private userService: UserService, private authService: AuthService, private router: Router) {
+  }
 
   onSubmit(registerForm: NgForm) {
     this.tried_once = true;
@@ -48,7 +50,8 @@ export class RegisterComponent {
       this.error_username = !usernameRegex.test(this.username);
       this.error_email = !emailRegex.test(this.email);
       this.error_password = !passwordRegex.test(this.password);
-      this.error_file = this.fileUpload?.files == undefined;
+      this.error_file = this.fileUpload?.files.length === 0;
+      console.log(this.fileUpload?.files, this.error_file);
 
       if (this.error_username || this.error_email || this.error_password || this.error_file) {
         return;
@@ -63,8 +66,10 @@ export class RegisterComponent {
         formData.append('image_file', this.fileUpload.files[0]);
       }
       this.userService.register(formData).subscribe(
-        (response) => {
-          console.log(response);
+        (res) => {
+          console.log(res);
+          this.authService.saveToken(res.token);
+          this.router.navigate(['/home']);
         },
         (error) => {
           this.error_message = error.error.message;

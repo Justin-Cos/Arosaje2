@@ -1,4 +1,6 @@
 import { Component, OnInit, Renderer2, ElementRef } from '@angular/core';
+import {AuthService} from "../services/auth.service";
+import {ApiService} from "../services/api.service";
 
 @Component({
   selector: 'app-menu',
@@ -6,6 +8,8 @@ import { Component, OnInit, Renderer2, ElementRef } from '@angular/core';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent {
+  constructor(protected authService: AuthService) {
+  }
   items: any[] = []; // Define your items array
 
   menuVertical() {
@@ -25,4 +29,6 @@ export class MenuComponent {
       fixe.classList.remove('brightness-60');
     });
   }
+
+  protected readonly ApiService = ApiService;
 }

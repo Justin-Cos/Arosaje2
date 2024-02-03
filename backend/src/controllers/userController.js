@@ -68,21 +68,29 @@ exports.registerUser = async (req, res) => {
             profile_picture: image_name,
         });
         await fs.renameSync(req.file.path, `./uploads/profile_pictures/${image_name}`);
-        res.body = {username: username, password: password};
-        res.header('Content-Type', 'application/json');
-        res.status(201).json({message: 'User created successfully'});
-        return res.redirect('/login');
+        sign({
+            username: username,
+            role: role,
+            profile_picture: image_name,
+        }, process.env.JWT_SECRET, {expiresIn: '1h'}, (err, token) => {
+            if (err) {
+                console.error(err);
+                res.status(500).json({message: 'Internal Server Error'});
+            } else {
+                console.log(token);
+                res.status(201).json({token: token});
+            }
+        });
     } catch (error) {
         if (error.name === 'SequelizeUniqueConstraintError') {
             res.status(400).json({ message: 'Username or email already exists' });
         } else if (error.name === 'ValidationError') {
             res.status(400).json({ message: 'Username or email already exists', errors: error.errors });
         } else {
-            // Logguer l'erreur pour le débogage
             console.error(error);
-            // Répondre avec un statut 500 pour les autres erreurs
             res.status(500).json({ message: 'Internal Server Error' });
-        }    }
+        }
+    }
 }
 exports.loginUser = async (req, res) => {
     const {username, password} = req.body;
@@ -102,6 +110,7 @@ exports.loginUser = async (req, res) => {
             sign({
                 username: user.username,
                 role: user.role,
+                profile_picture: user.profile_picture,
             }, process.env.JWT_SECRET, {expiresIn: '1h'}, (err, token) => {
                 if (err) {
                     console.error(err);

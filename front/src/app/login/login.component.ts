@@ -4,6 +4,9 @@ import {FormsModule, NgForm} from "@angular/forms";
 import {UserService} from "../services/ressources/user.service";
 import {MessageModule} from "primeng/message";
 import {NgIf} from "@angular/common";
+import {HttpHeaders} from "@angular/common/http";
+import { Router } from '@angular/router';
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'app-login',
@@ -20,19 +23,17 @@ export class LoginComponent {
   error_message: string = ""
   username: any;
   password: string | undefined;
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router, private authService: AuthService) {
   }
 
 
   onSubmit(loginForm: NgForm) {
     if (loginForm.valid) {
-      const formData = new FormData();
-      formData.append('username', this.username ?? '');
-      formData.append('password', this.password ?? '');
-      console.log("a: ",formData.get('username'), formData.get('password'));
-      this.userService.login(formData).subscribe(
+      const jsonData = {  username: this.username, password: this.password };
+      this.userService.login(jsonData).subscribe(
         (res: any) => {
-          localStorage.setItem('token', res.token);
+          this.authService.saveToken(res.token);
+          this.router.navigate(['/home']);
         },
         (error: any) => {
           console.log(error);

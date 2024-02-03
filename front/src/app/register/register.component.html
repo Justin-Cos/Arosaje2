@@ -32,12 +32,12 @@
         <p-message *ngIf="error_password" severity="error" text="Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule et un chiffre."></p-message>
 
         <p-fileUpload #fileUpload
-          mode="basic"
-          name="image_file"
-          chooseLabel="Choose"
-          accept="image/*"
-          [auto]="true"
-          [maxFileSize]="10000000">
+                      mode="basic" name="demo[]"
+                      cancelIcon="pi pi-times"
+                      cancelLabel="téléchargement annulé"
+                      chooseLabel="Choose"
+                      accept="image/*"
+                      [maxFileSize]="10000000">
         </p-fileUpload>
         <p-message *ngIf="error_file" severity="error" text="Veuillez télécharger un avatar"></p-message>
 

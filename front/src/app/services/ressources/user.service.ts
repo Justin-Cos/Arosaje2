@@ -22,8 +22,9 @@ export class UserService {
   register(formData: FormData): Observable<any> {
     return this.apiService.post(this.endpoint + '/register', formData);
   }
-  login(formData: FormData): Observable<any> {
-    return this.apiService.post(this.endpoint + '/login', formData, {headers: { 'Content-Type': 'application/x-www-form-urlencoded' }});
+
+  login(formData: { password: string | undefined; username: any }): Observable<any> {
+    return this.apiService.post(this.endpoint + '/login', formData, {headers: {  'Content-Type': 'application/json' }});
   }
    /*
   getBotanists(): UserModel[] {
