@@ -7,9 +7,9 @@
     <span class="title_nav">Arosaje</span>
   </div>
 
-  <div  class="p-toolbar-group-end d-flex align-items-center">
-      <p-avatar *ngIf="authService.isLoggedIn()" image="{{ApiService.baseUrl}}/uploads/profile_pictures/{{authService.getProfilePic()}}" shape="circle" size="xlarge" />
-      <span *ngIf="authService.isLoggedIn()" class="text_nav">{{ authService.getUsername()}}</span>
+  <div *ngIf="authService.isLoggedIn()" class="p-toolbar-group-end d-flex align-items-center">
+      <p-avatar image="{{ApiService.baseUrl}}/uploads/profile_pictures/{{authService.getProfilePic()}}" shape="circle" size="xlarge" />
+      <span class="text_nav">{{ authService.getUsername()}}</span>
   </div>
 
 
@@ -28,11 +28,11 @@
       </span>
   </div>
 
-  <li class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/home">Home</a></li>
-  <li class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/login">Login</a></li>
-  <li class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/register">Register</a></li>
-  <li class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/profile">Profile</a></li>
-  <li class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/map">Map</a></li>
+  <li *ngIf="authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/home">Home</a></li>
+  <li *ngIf="!authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/login">Login</a></li>
+  <li *ngIf="!authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/register">Register</a></li>
+  <li *ngIf="authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/profile">Profile</a></li>
+  <li *ngIf="authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/map">Map</a></li>
 </ul>
 </div>
 

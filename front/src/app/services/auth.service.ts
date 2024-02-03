@@ -7,11 +7,8 @@ export class AuthService {
 
   constructor() { }
   isLoggedIn() {
-    if (localStorage === undefined) {
-      return false;
-    }else {
-      return localStorage?.getItem('token') !== null;
-    }
+    const token = localStorage.getItem('token');
+    return !(token === null || token.length === 0);
   }
   saveToken(token: string) {
     localStorage.setItem('token', token);
