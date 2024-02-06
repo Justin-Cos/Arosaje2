@@ -1,6 +1,9 @@
 import { Component, OnInit, Renderer2, ElementRef } from '@angular/core';
 import {AuthService} from "../services/auth.service";
 import {ApiService} from "../services/api.service";
+import {UserService} from "../services/ressources/user.service";
+import {FormBuilder} from "@angular/forms";
+import {UserModel} from "../models/user.model";
 
 @Component({
   selector: 'app-menu',
@@ -8,10 +11,15 @@ import {ApiService} from "../services/api.service";
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent {
-  constructor(protected authService: AuthService) {
+  constructor(protected authService: AuthService,private  userService: UserService, private fb: FormBuilder) {
   }
-  items: any[] = []; // Define your items array
-
+  dropdownOpen: boolean = false;
+  searchValue: string = '';
+  users: UserModel[] = [];
+  searchForm = this.fb.nonNullable.group({
+    search: ''
+  });
+  protected readonly ApiService = ApiService;
   menuVertical() {
     const navbar = document.getElementById('navbar-laterale')!;
     const fixe = document.getElementById('fixe')!;
@@ -29,6 +37,15 @@ export class MenuComponent {
       fixe.classList.remove('brightness-60');
     });
   }
+  fetchUsers(searchValue: string){
+    this.userService.getUsers(searchValue).subscribe((users: any) => {
+      this.users = users;
+    });
+    this.dropdownOpen = true;
+  }
+  onSearchSubmit() {
+    this.searchValue = this.searchForm.value.search ?? '';
+    this.fetchUsers(this.searchValue);
+  }
 
-  protected readonly ApiService = ApiService;
 }

@@ -9,6 +9,7 @@ const upload = multer({storage});
 //API
 router.get('/', userController.getAllUsers);
 router.get('/botanist', userController.getAllBotanists);
+router.get('/search', userController.getUsersNameLike);
 router.get('/:id', userController.getUserById);
 router.post('/register',upload.single('image_file'), userController.registerUser);
 router.post('/login', userController.loginUser);

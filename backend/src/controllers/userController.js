@@ -3,6 +3,7 @@ const Plant = require("../models/Plant");
 const {convertToSnakeCase, hashPassword} = require("../utils");
 const fs = require("fs");
 const {sign, verify} = require("jsonwebtoken");
+const {Op} = require("sequelize");
 // Controller methods
 exports.getAllUserPlant = async (req, res) => {
     try {
@@ -55,6 +56,24 @@ exports.getUserById = async (req, res) => {
         res.status(500).send('Erreur serveur');
     }
 };
+exports.getUsersNameLike = async (req, res) => {
+    const name = req.query.name;
+    try {
+        console.log(name);
+        const users = await User.findAll({
+            where: {
+                username: {
+                    [Op.like]: `%${name}%`,
+                },
+            },
+            limit: 10,
+        });
+        res.json(users);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Erreur serveur');
+    }
+}
 exports.registerUser = async (req, res) => {
     const {username, email,bio, password, role} = req.body;
     try {

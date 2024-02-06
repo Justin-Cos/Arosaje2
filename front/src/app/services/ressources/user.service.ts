@@ -26,6 +26,13 @@ export class UserService {
   login(formData: { password: string | undefined; username: any }): Observable<any> {
     return this.apiService.post(this.endpoint + '/login', formData, {headers: {  'Content-Type': 'application/json' }});
   }
+  getUsers(searchValue : string): Observable<UserModel[]> {
+    return this.apiService.get<UserModel[]>(`${this.endpoint}/search?name=${searchValue}`).pipe(
+      map((jsonArray: any[]) => {
+        return jsonArray.map((json: any) => UserModel.fromJson(json));
+      })
+    );
+  }
    /*
   getBotanists(): UserModel[] {
     return [new UserModel("a", "a", "david.jpg", "a", UserRole.botanist)]//.fromJson({"user_id":2,"username":"john_doe","email":"john@example.com","password":"hashed_password","profile_picture":"john_doe.jpg","bio":null,"role":"botanist"})

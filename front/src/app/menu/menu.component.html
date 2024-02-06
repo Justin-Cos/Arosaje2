@@ -24,7 +24,12 @@
       <!--<p-image src="\..\assets\images\logo_arosage.png" alt="Image" width="200" class="img_menu"></p-image> -->
     <span class="p-input-icon-left search_size">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <input pInputText type="text" class="p-inputtext-lg search_txt" placeholder="Recherche utilisateur" />
+        <form [formGroup]="searchForm" (ngSubmit)="onSearchSubmit()">
+          <input pInputText type="text" class="p-inputtext-lg search_txt" placeholder="Recherche utilisateur" formControlName="search"/>
+        </form>
+        <div class="dropdown" *ngIf="dropdownOpen" aria-labelledby="dropdownMenuButton">
+            <a *ngFor="let user of users" class="dropdown-item" routerLink="/profile/{{user.user_id}}">{{user.username}}</a>
+        </div>
       </span>
   </div>
 

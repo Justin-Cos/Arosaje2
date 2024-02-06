@@ -51,7 +51,7 @@ img_nav{
   margin-right: 1.5em;
   font-size: 2.5em;
   border: none !important;
-  background-color: white;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .text_nav{
