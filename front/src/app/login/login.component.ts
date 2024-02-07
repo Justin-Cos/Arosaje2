@@ -4,7 +4,6 @@ import {FormsModule, NgForm} from "@angular/forms";
 import {UserService} from "../services/ressources/user.service";
 import {MessageModule} from "primeng/message";
 import {NgIf} from "@angular/common";
-import {HttpHeaders} from "@angular/common/http";
 import { Router } from '@angular/router';
 import {AuthService} from "../services/auth.service";
 
@@ -36,7 +35,6 @@ export class LoginComponent {
           this.router.navigate(['/home']);
         },
         (error: any) => {
-          console.log(error);
           this.error_message = error.message;
         }
       );

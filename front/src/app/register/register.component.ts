@@ -1,14 +1,12 @@
 import {Component, ViewChild} from '@angular/core';
 import {Router, RouterLink} from "@angular/router";
-import {FileUpload, FileUploadEvent, FileUploadModule} from 'primeng/fileupload';
+import {FileUpload, FileUploadModule} from 'primeng/fileupload';
 import {FormsModule, NgForm, ReactiveFormsModule} from "@angular/forms";
 import {UserService} from "../services/ressources/user.service";
 import {ToastModule} from "primeng/toast";
 import {NgIf} from "@angular/common";
-import {Message} from "primeng/api";
 import {MessageModule} from "primeng/message";
 import {AuthService} from "../services/auth.service";
-import {response} from "express";
 
 @Component({
   selector: 'app-register',
@@ -51,8 +49,6 @@ export class RegisterComponent {
       this.error_email = !emailRegex.test(this.email);
       this.error_password = !passwordRegex.test(this.password);
       this.error_file = this.fileUpload?.files.length === 0;
-      console.log(this.fileUpload?.files, this.error_file);
-
       if (this.error_username || this.error_email || this.error_password || this.error_file) {
         return;
       }
@@ -67,7 +63,6 @@ export class RegisterComponent {
       }
       this.userService.register(formData).subscribe(
         (res) => {
-          console.log(res);
           this.authService.saveToken(res.token);
           this.router.navigate(['/home']);
         },

@@ -2,7 +2,7 @@ const User = require('../models/User');
 const Plant = require("../models/Plant");
 const {convertToSnakeCase, hashPassword} = require("../utils");
 const fs = require("fs");
-const {sign, verify} = require("jsonwebtoken");
+const {sign} = require("jsonwebtoken");
 const {Op} = require("sequelize");
 // Controller methods
 exports.getAllUserPlant = async (req, res) => {
@@ -59,7 +59,6 @@ exports.getUserById = async (req, res) => {
 exports.getUsersNameLike = async (req, res) => {
     const name = req.query.name;
     try {
-        console.log(name);
         const users = await User.findAll({
             where: {
                 username: {
@@ -74,6 +73,7 @@ exports.getUsersNameLike = async (req, res) => {
         res.status(500).send('Erreur serveur');
     }
 }
+
 exports.registerUser = async (req, res) => {
     const {username, email,bio, password, role} = req.body;
     try {
@@ -96,7 +96,6 @@ exports.registerUser = async (req, res) => {
                 console.error(err);
                 res.status(500).json({message: 'Internal Server Error'});
             } else {
-                console.log(token);
                 res.status(201).json({token: token});
             }
         });
@@ -111,9 +110,9 @@ exports.registerUser = async (req, res) => {
         }
     }
 }
+
 exports.loginUser = async (req, res) => {
     const {username, password} = req.body;
-    console.log(req.body,'h ' ,req.headers);
     try {
         const user = await User.findOne({
             where: {
@@ -123,14 +122,13 @@ exports.loginUser = async (req, res) => {
         if (!user) {
             return res.status(401).json({error: 'Invalid  or password'});
         } else if (user.password !== hashPassword(password)) {
-            console.log("d: ",user.password, hashPassword(password))
             return res.status(401).json({error: 'Invalid username or password'});
         } else {
             sign({
                 username: user.username,
                 role: user.role,
                 profile_picture: user.profile_picture,
-            }, process.env.JWT_SECRET, {expiresIn: '1h'}, (err, token) => {
+            }, process.env.JWT_SECRET, {}, (err, token) => {
                 if (err) {
                     console.error(err);
                     res.status(500).json({message: 'Internal Server Error'});

@@ -95,7 +95,6 @@ export class AddressModel {
 
   static fromJson(json: any): AddressModel {
     const { address_id, owner, longitude, latitude, country, city, address, zip_code } = json;
-    console.log(json);
     if (!address_id || !owner || !longitude || !latitude || !country || !city || !address || !zip_code) {
       throw new Error('Le JSON ne contient pas toutes les propriétés requises.');
     }
