@@ -10,11 +10,9 @@ export class AddressService {
   private endpoint = 'address';
   constructor(private apiService: ApiService) {
   }
-  getAddressById(): Observable<AddressModel[]> {
-    return this.apiService.get<AddressModel[]>(this.endpoint).pipe(
-      map((jsonArray: any[]) => {
-        return jsonArray.map((json: any) => AddressModel.fromJson(json));
-      })
+  getAddressById(addressId: string): Observable<AddressModel> {
+    return this.apiService.get<AddressModel>(`${this.endpoint}/${addressId}`).pipe(
+      map((json: any) => AddressModel.fromJson(json))
     );
   }
 }

@@ -46,4 +46,12 @@ export class AuthService {
     }
     return '';
   }
+  getAddresses(): [] {
+    const storedToken = this.getToken();
+    if (storedToken) {
+      const tokenData = JSON.parse(atob(storedToken.split('.')[1]));
+      return tokenData.addresses;
+    }
+    return [];
+  }
 }

@@ -11,8 +11,15 @@ $thirdColor:#4A4A4A;
 .color-third{
   background-color: $thirdColor;
 }
-
-
+.App {
+  text-align: center;
+}
+.mapboxgl-marker, .maplibregl-marker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
+}
 
 
 

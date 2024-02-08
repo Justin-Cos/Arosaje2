@@ -1,5 +1,7 @@
 const User = require('../models/User');
 const Plant = require("../models/Plant");
+const Address = require('../models/Address');
+
 const {convertToSnakeCase, hashPassword} = require("../utils");
 const fs = require("fs");
 const {sign} = require("jsonwebtoken");
@@ -91,7 +93,8 @@ exports.registerUser = async (req, res) => {
             username: username,
             role: role,
             profile_picture: image_name,
-        }, process.env.JWT_SECRET, {expiresIn: '1h'}, (err, token) => {
+            addresses: [],
+        }, process.env.JWT_SECRET, {}, (err, token) => {
             if (err) {
                 console.error(err);
                 res.status(500).json({message: 'Internal Server Error'});
@@ -119,6 +122,11 @@ exports.loginUser = async (req, res) => {
                 username: username,
             },
         });
+        const address = await Address.findAll({
+            where: {
+                owner: user.user_id
+            },
+        });
         if (!user) {
             return res.status(401).json({error: 'Invalid  or password'});
         } else if (user.password !== hashPassword(password)) {
@@ -128,6 +136,7 @@ exports.loginUser = async (req, res) => {
                 username: user.username,
                 role: user.role,
                 profile_picture: user.profile_picture,
+                addresses: address,
             }, process.env.JWT_SECRET, {}, (err, token) => {
                 if (err) {
                     console.error(err);

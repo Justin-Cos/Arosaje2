@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {HttpClient, provideHttpClient} from "@angular/common/http";
+import {HttpClient, provideHttpClient, withFetch} from "@angular/common/http";
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 
 @NgModule({
   declarations: [],
   providers:[
-      provideHttpClient(),HttpClient
+      provideHttpClient(withFetch()),HttpClient,
       ],
   imports: [
     CommonModule,

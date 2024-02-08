@@ -32,7 +32,7 @@ const CareSession = sequelize.define('CareSessions', {
         allowNull: false,
         references: {
             model: AddressModel,
-            key: 'adress_id',
+            key: 'address_id',
         },
     },
     date_start: {

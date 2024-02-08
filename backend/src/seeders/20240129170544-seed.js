@@ -5,7 +5,7 @@ const Plant = require('../models/Plant');
 const CareSession = require('../models/CareSession');
 const Comment = require('../models/Comment');
 const utils = require('../utils.js');
-const {getRandomIndex, randomBoolean, hashPassword} = require("../utils");
+const {getRandomIndex, randomBoolean, hashPassword, generateRandomCoordinatesInFrance} = require("../utils");
 module.exports = {
     up: async (queryInterface, Sequelize) => {
 
@@ -72,6 +72,7 @@ module.exports = {
                 bio: 'Believes in the healing power of plants.',
                 role: 'botanist',
             },
+
             {
                 username: 'Admin',
                 email: 'Admin@Admin.com',
@@ -81,6 +82,20 @@ module.exports = {
                 role: 'admin',
             },
         ];
+
+        for (let i = 1; i <= 15; i++) {
+            const newUser = {
+                username: `User${i}`,
+                email: `user${i}@example.com`,
+                password: hashPassword('hashed_password'),
+                profile_picture: `demo_data/user${i}.jpg`,
+                bio: `Bio for User${i}.`,
+            };
+
+            usersData.push(newUser);
+        }
+
+
         const plantTypesData = [
             {name: 'Aloe Vera'},
             {name: 'Cactus'},
@@ -102,13 +117,12 @@ module.exports = {
         const createdPlantTypes = await PlantType.bulkCreate(plantTypesData, {returning: true});
         const createdPlants = [];
         const createdCareSessions = [];
-        const createdAdresses = [];
+        const createdaddresses = [];
 
         for (const user of createdUsers) {
-            createdAdresses.push(await Address.create({
+            createdaddresses.push(await Address.create({
                 owner: user.user_id,
-                longitude: Math.random() * (180 - (-180)) + (-180),
-                latitude: Math.random() * (90 - (-90)) + (-90),
+                ...generateRandomCoordinatesInFrance(),
                 country: 'France',
                 city: 'Saint-Grégoire',
                 address: `Chez ${user.username}`,
@@ -116,11 +130,22 @@ module.exports = {
             }));
         }
 
+        for (const user of createdUsers) {
+            createdaddresses.push(await Address.create({
+                owner: user.user_id,
+                ...generateRandomCoordinatesInFrance(),
+                country: 'France',
+                city: 'Rennes',
+                address: `Maison secondaire de ${user.username}`,
+                zip_code: 35000,
+            }));
+        }
+
         let randomUser;
         let randomPlantType;
         let randomPlant;
 
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 40; i++) {
             randomPlantType = createdPlantTypes[getRandomIndex(createdPlantTypes.length)];
             randomUser = createdUsers[getRandomIndex(createdUsers.length)];
             createdPlants.push(await Plant.create({
@@ -133,7 +158,7 @@ module.exports = {
             createdCareSessions.push(await CareSession.create({
                 plant: createdPlants[i].plant_id,
                 caretaker: randomBoolean() ? randomUser.user_id : null, // 50% de chance d'avoir un caretaker
-                location: createdAdresses.find(address => address.owner === randomUser.user_id).adress_id,
+                location: createdaddresses.find(address => address.owner === randomUser.user_id).address_id,
                 date_start: new Date().setDate(new Date().getDate() - Math.floor(Math.random() * 10) + 11),
                 date_end: new Date().setDate(new Date().getDate() + Math.floor(Math.random() * 10) + 11),
             }));
@@ -143,7 +168,7 @@ module.exports = {
         createdCareSessions.push(await CareSession.create({
             plant: createdPlants[getRandomIndex(createdPlants.length)].plant_id,
             caretaker: randomUser.user_id,
-            location: createdAdresses.find(address => address.owner === randomUser.user_id).adress_id,
+            location: createdaddresses.find(address => address.owner === randomUser.user_id).address_id,
             date_start: new Date().setDate(new Date().getDate() - Math.floor(Math.random() * 10) - 11),
             date_end: new Date().setDate(new Date().getDate() + Math.floor(Math.random() * 10) - 11),
         }));
@@ -152,7 +177,7 @@ module.exports = {
         createdCareSessions.push(await CareSession.create({
             plant: createdPlants[getRandomIndex(createdPlants.length)].plant_id,
             caretaker: randomUser.user_id,
-            location: createdAdresses.find(address => address.owner === randomUser.user_id).adress_id,
+            location: createdaddresses.find(address => address.owner === randomUser.user_id).address_id,
             date_start: new Date().setDate(new Date().getDate() - Math.floor(Math.random() * 10)),
             date_end: new Date().setDate(new Date().getDate() + Math.floor(Math.random() * 10)),
         }));

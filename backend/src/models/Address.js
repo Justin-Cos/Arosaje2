@@ -2,7 +2,7 @@ const {DataTypes} = require('sequelize');
 const sequelize = require('../sequelize.js');
 const UserModel = require('./User.js');
 const Address = sequelize.define('Address', {
-    adress_id: {
+    address_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
@@ -45,7 +45,7 @@ const Address = sequelize.define('Address', {
 }, {
     timestamps: false,
 });
-UserModel.hasMany(Address, {foreignKey: 'owner', as: 'adresses'})
+UserModel.hasMany(Address, {foreignKey: 'owner', as: 'addresses'})
 Address.belongsTo(UserModel, {foreignKey: 'owner'});
 
 module.exports = Address;

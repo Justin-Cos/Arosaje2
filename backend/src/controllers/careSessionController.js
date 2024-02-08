@@ -4,6 +4,7 @@ const Plant = require('../models/Plant');
 const User = require('../models/User');
 const Address = require('../models/Address');
 const {Op} = require("sequelize");
+const {calculateDist} = require("../utils");
 
 
 // Controller methods
@@ -55,7 +56,46 @@ exports.getAvailableSessions = async (req, res) => {
         res.status(500).send('Erreur serveur');
     }
 };
+exports.getNearbySessions = async (req, res) => {
+    const {address_id, maxDistance} = req.query;
+    try {
+        const careSessions = await CareSessions.findAll({
+            include: [
+                {
+                    model: Plant,
+                    include: [
+                        {
+                            model: User,
+                        }
+                    ]},
+                { model: Address }],
+            where: {
+                caretaker: null,
+                date_end: {
+                    [Op.gt]: new Date(),
+                },
+            }
+        });
 
+        const nearbySessions = await Promise.all(
+            careSessions.map(async (session) => {
+                const sessionLatitude = session.Address.latitude;
+                const sessionLongitude = session.Address.longitude;
+                const user_address = await Address.findByPk(address_id);
+                const dist = calculateDist(user_address.latitude, user_address.longitude, sessionLatitude, sessionLongitude);
+                if (dist <= maxDistance) {
+                    return session;
+                }
+                return null;
+            })
+        );
+        const filteredSessions = nearbySessions.filter((session) => session !== null);
+        res.json(filteredSessions);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Erreur serveur');
+    }
+}
 
 exports.getPreviousCareSessions = async (req, res) => {
     try {
