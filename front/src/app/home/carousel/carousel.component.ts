@@ -3,12 +3,13 @@ import {SlickCarouselModule} from "ngx-slick-carousel";
 import {CommonModule} from "@angular/common";
 import { MatDividerModule } from '@angular/material/divider';
 import {DividerModule} from "primeng/divider";
+import {RouterLink} from "@angular/router";
 
 
 @Component({
   selector: 'app-carousel',
   standalone: true,
-  imports: [SlickCarouselModule, CommonModule, MatDividerModule, DividerModule],
+  imports: [SlickCarouselModule, CommonModule, MatDividerModule, DividerModule, RouterLink],
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.css'
 })

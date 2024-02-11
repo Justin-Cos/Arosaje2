@@ -23,4 +23,11 @@ export class PlantService {
       map((json: any) => PlantModel.fromJson(json))
     );
   }
+  public getPlantsByUserId(user_id: number): Observable<PlantModel[]> {
+    return this.apiService.get<PlantModel[]>(`${this.endpoint}/user/${user_id}`).pipe(
+      map((jsonArray: any[]) => {
+        return jsonArray.map((json: any) => PlantModel.fromJson(json));
+      })
+    );
+  }
 }

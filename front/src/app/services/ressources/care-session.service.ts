@@ -5,6 +5,7 @@ import {CareSessionModel} from "../../models/care-session.model";
 import {AddressModel} from "../../models/address.model";
 import {UserModel} from "../../models/user.model";
 import {PlantModel} from "../../models/plant.model";
+import {CommentModel} from "../../models/comment.model";
 @Injectable({
   providedIn: 'root',
 })
@@ -14,10 +15,24 @@ export class CareSessionService {
   constructor(private apiService: ApiService) {
   }
 
-  getCareSessions(): Observable<CareSessionModel[]> {
-    return this.apiService.get<CareSessionModel[]>(this.endpoint).pipe(
+  getCareSessions(caretaker?: number): Observable<any> {
+    let url = this.endpoint  ;
+
+    if (caretaker) {
+      url += `?caretaker=${caretaker}`;
+    }
+    return this.apiService.get<CareSessionModel[]>(url).pipe(
       map((jsonArray: any[]) => {
-        return jsonArray.map((json: any) => CareSessionModel.fromJson(json));
+        return jsonArray.map((json: any[]) => {
+          const careSession = CareSessionModel.fromJson(json);
+          // @ts-ignore
+          const plant = PlantModel.fromJson(json["Plant"]);
+
+          return {
+            careSession,
+            plant
+          };
+        });
       })
     );
   }
@@ -28,13 +43,28 @@ export class CareSessionService {
       })
     );
   }
-  getAvailableCareSessions(): Observable<CareSessionModel[]> {
-    return this.apiService.get<CareSessionModel[]>(this.endpoint + '/available').pipe(
+  getAvailableCareSessions(owner?: number): Observable<any> {
+    let url = this.endpoint + '/available' ;
+
+    if (owner) {
+      url += `?owner=${owner}`;
+    }
+    return this.apiService.get<CareSessionModel[]>(url).pipe(
       map((jsonArray: any[]) => {
-        return jsonArray.map((json: any) => CareSessionModel.fromJson(json));
+        return jsonArray.map((json: any[]) => {
+          const careSession = CareSessionModel.fromJson(json);
+          // @ts-ignore
+          const plant = PlantModel.fromJson(json["Plant"]);
+
+          return {
+            careSession,
+            plant
+          };
+        });
       })
     );
-  }getNearbyCareSessions(addressId: string, maxDistance: string): Observable<any> {
+  }
+  getNearbyCareSessions(addressId: string, maxDistance: string): Observable<any> {
     return this.apiService.get<CareSessionModel[]>(`${this.endpoint}/nearby?address_id=${addressId}&maxDistance=${maxDistance}`).pipe(
       map((jsonArray: any[]) => {
         return jsonArray.map((json: any) => {

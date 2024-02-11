@@ -184,8 +184,9 @@ module.exports = {
 
         const commentsData = [
             {
-                care_session: createdCareSessions[0].session_id,
-                author: createdCareSessions[0].caretaker,
+                title: 'Arrosage',
+                care_session: createdCareSessions[createdCareSessions.length -1].session_id,
+                author: createdCareSessions[createdCareSessions.length -1].caretaker,
                 author_role: 'caretaker',
                 date: new Date(),
                 content: 'J\'ai bien arrosé la plante aujourd\'hui.',
@@ -198,8 +199,8 @@ module.exports = {
                 content: 'Arrêtez de l\'arroser, elle a déjà assez d\'eau !',
             },
             {
-                care_session: createdCareSessions[3].session_id,
-                author: createdCareSessions[3].caretaker,
+                care_session: createdCareSessions[createdCareSessions.length -1].session_id,
+                author: createdCareSessions[createdCareSessions.length -1].caretaker,
                 author_role: 'caretaker',
                 date: new Date(),
                 content: 'Je l\'ai mise au soleil aujourd\'hui.',
@@ -227,8 +228,8 @@ module.exports = {
 
             },
             {
-                care_session: createdCareSessions[2].session_id,
-                author: createdCareSessions[2].caretaker,
+                care_session: createdCareSessions[createdCareSessions.length -1].session_id,
+                author: createdCareSessions[createdCareSessions.length -1].caretaker,
                 author_role: 'caretaker',
                 date: new Date(),
                 content: 'pas de soucis, je m\'en occupe !',
@@ -241,8 +242,8 @@ module.exports = {
                 content: 'tu fais n\'importe quoi, elle a déjà assez d\'eau !',
             },
             {
-                care_session: createdCareSessions[1].session_id,
-                author: createdCareSessions[1].caretaker,
+                care_session: createdCareSessions[createdCareSessions.length -1].session_id,
+                author: createdCareSessions[createdCareSessions.length -1].caretaker,
                 author_role: 'caretaker',
                 date: new Date(),
                 content: 'un peu d\'engrais aujourd\'hui.',

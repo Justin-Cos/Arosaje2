@@ -80,7 +80,7 @@ exports.registerUser = async (req, res) => {
     const {username, email,bio, password, role} = req.body;
     try {
         const image_name = convertToSnakeCase(`${username}_${Date.now()}`) + '.jpg';
-        await User.create({
+        const createdUser = await User.create({
             username: username,
             email: email,
             bio: bio,
@@ -90,6 +90,7 @@ exports.registerUser = async (req, res) => {
         });
         await fs.renameSync(req.file.path, `./uploads/profile_pictures/${image_name}`);
         sign({
+            user_id: createdUser.user_id,
             username: username,
             role: role,
             profile_picture: image_name,
@@ -133,6 +134,7 @@ exports.loginUser = async (req, res) => {
             return res.status(401).json({error: 'Invalid username or password'});
         } else {
             sign({
+                user_id: user.user_id,
                 username: user.username,
                 role: user.role,
                 profile_picture: user.profile_picture,

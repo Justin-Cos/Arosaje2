@@ -19,6 +19,20 @@ exports.getAllPlants = async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 };
+exports.getAllPlantsFromUser = async (req, res) => {
+    const userId = req.params.user_id;
+    try {
+        const plants = await Plant.findAll({
+            where: {
+                owner: userId,
+            },
+        });
+        res.status(200).json(plants);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("Internal Server Error");
+    }
+}
 
 exports.getPlantById = async (req, res) => {
     const plantId = req.params.id;

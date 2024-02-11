@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@maplibre/ngx-maplibre-gl": "^17.4.0",
+    "maplibre-gl": "^4.0.0"
+  }
+}

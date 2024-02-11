@@ -22,6 +22,8 @@ const Comments = sequelize.define('Comments', {
             model: UserModel,
             key: 'user_id',
         },
+        allowNull: false,
+
     },
     author_role: {
         type: DataTypes.ENUM('owner', 'caretaker', 'botanist', 'admin'),
@@ -30,6 +32,10 @@ const Comments = sequelize.define('Comments', {
     date: {
         type: DataTypes.INTEGER,
         allowNull: false,
+    },
+    title: {
+        type: DataTypes.STRING,
+        allowNull: true,
     },
     content: {
         type: DataTypes.TEXT,

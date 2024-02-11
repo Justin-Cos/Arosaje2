@@ -24,22 +24,17 @@ export class NextCareSessionsCarouselComponent implements OnInit {
 
 
   ngOnInit() {
-    this.CareSessionService.getAvailableCareSessions().subscribe((nextCareSessions: CareSessionModel[]) => {
+    this.CareSessionService.getAvailableCareSessions().subscribe((nextCareSessions: any[] ) => {
       this.nextCareSessions = nextCareSessions;
-
-      const observables = this.nextCareSessions.map(nextCareSession =>
-        this.PlantService.getPlantById(nextCareSession.plant)
-      );
-
-      forkJoin(observables).subscribe((plants: PlantModel[]) => {
-        this.slides = plants.map((plant, index) => {
-          return {
-            img: `${ApiService.baseUrl}/uploads/plants/${plant.image}`,
-            nom: plant.name,
-            bio: `${format(nextCareSessions[index].date_start, 'EEEE d MMMM yyyy', { locale: fr })} -
-            ${format(nextCareSessions[index].date_end, 'EEEE d MMMM yyyy', { locale: fr })}`,
-          };
-        });
+      this.slides = nextCareSessions.map((nextCareSessions, index) => {
+        console.log(nextCareSessions);
+        return {
+          link: `/`,
+          img: `${ApiService.baseUrl}/uploads/plants/${nextCareSessions.plant.image}`,
+          nom: nextCareSessions.plant.name,
+          bio: `${format(nextCareSessions.careSession.date_start, 'EEEE d MMMM yyyy', { locale: fr })} -
+          ${format(nextCareSessions.careSession.date_end, 'EEEE d MMMM yyyy', { locale: fr })}`,
+        };
       });
     });
   }

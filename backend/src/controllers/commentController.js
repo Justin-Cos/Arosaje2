@@ -31,6 +31,20 @@ exports.getCommentById = async (req, res) => {
         res.status(500).send('Erreur serveur');
     }
 };
+exports.getCommentsByCareSessionId = async (req, res) => {
+    const sessionId = req.params.id;
+    try {
+        const comments = await Comments.findAll({
+            where: {
+                care_session: sessionId,
+            },
+        });
+        res.json(comments);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Erreur serveur');
+    }
+}
 
 exports.createComment = async (req, res) => {
     const {care_session, author, author_role, date, content, image} = req.body;

@@ -21,6 +21,7 @@ exports.getAllCareSessions = async (req, res) => {
 };
 
 exports.getNextCareSessions = async (req, res) => {
+
     try {
         const careSessions = await CareSessions.findAll({
             include: [{model: User}, {model: Plant}, {model: Address}],
@@ -40,16 +41,20 @@ exports.getNextCareSessions = async (req, res) => {
     }
 };
 exports.getAvailableSessions = async (req, res) => {
-    try {
-        const careSessions = await CareSessions.findAll({
+    let options= req.query.owner ? {
             include: [{model: User}, {model: Plant}, {model: Address}],
             where: {
+                plant: {
+                    owner: req.query.owner,
+                },
                 caretaker: null,
                 date_end: {
-                    [Op.gt]: new Date(),
-                },
+                    [Op.gt]: new Date()
+                }
             }
-        });
+        } : {include: [{model: User}, {model: Plant}, {model: Address}], where: {caretaker: null, date_end: {[Op.gt]: new Date()}}}
+    try {
+        const careSessions = await CareSessions.findAll(options);
         res.json(careSessions);
     } catch (error) {
         console.error(error.message);

@@ -20,6 +20,14 @@ export class AuthService {
   getToken() {
     return localStorage.getItem('token');
   }
+  getUserId(): number {
+    const storedToken = this.getToken();
+    if (storedToken) {
+      const tokenData = JSON.parse(atob(storedToken.split('.')[1]));
+      return tokenData.user_id;
+    }
+    return 0;
+  }
   getUsername(): string {
     const storedToken = this.getToken();
     if (storedToken) {

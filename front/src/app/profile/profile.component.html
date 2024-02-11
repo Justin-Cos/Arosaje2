@@ -1,1 +1,54 @@
-<p>profile works!</p>
+<div class="w-100 vh-100 flex-row">
+  <div class="w-25 color-prim h-100 " style="margin-top: 180px">
+    <p-avatar image="{{ApiService.baseUrl}}/uploads/profile_pictures/{{user?.profile_picture}}" shape="circle" size="xlarge" />
+  </div>
+  <div class="w-75 color-sec h-100" >
+    <div  style="margin-top: 180px">
+      <h2 class="w-100 text-center">Mes plantes</h2>
+      <p-carousel [value]="plants" [numVisible]="3" [numScroll]="3" [circular]="true"  [autoplayInterval]=10000 >
+        <ng-template let-plant pTemplate="item">
+          <div class="border-1 surface-border border-round m-2 text-center py-5 px-3">
+            <div class="mb-3">
+              <img src="{{ApiService.baseUrl}}/uploads/plants/{{ plant.image }}" [alt]="plant.name" class="w-6 shadow-2" style="width:100px;" />
+            </div>
+            <div>
+              <h4 class="mb-1">{{ plant.name }}</h4>
+            </div>
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+    <div class="w-100 flex-col">
+      <h2 class="w-100 text-center">Les plantes que j'aimerai faire garder</h2>
+      <p-carousel [value]="availableCareSessions" [numVisible]="3" [numScroll]="3" [circular]="true"  [autoplayInterval]=10000 >
+        <ng-template let-availableCareSession pTemplate="item">
+          <div class="border-1 surface-border border-round m-2 text-center py-5 px-3">
+            <div class="mb-3 w-10">
+              <img src="{{ApiService.baseUrl}}/uploads/plants/{{ availableCareSession.image }}" [alt]="availableCareSession.name" class="w-6 shadow-2 " style="width:100px;" />
+            </div>
+            <div>
+              <h4 class="mb-1">{{ availableCareSession.name }}</h4>
+            </div>
+          </div>
+        </ng-template>
+      </p-carousel>
+
+    </div>
+    <div class="w-100 flex-col">
+      <h2 class="w-100 text-center">Les plantes que j'ai gardées</h2>
+      <p-carousel [value]="plants" [numVisible]="3" [numScroll]="3" [circular]="true"  [autoplayInterval]=10000 >
+        <ng-template let-plant pTemplate="item">
+          <div class="border-1 surface-border border-round m-2 text-center py-5 px-3">
+            <div class="mb-3">
+              <img src="{{ApiService.baseUrl}}/uploads/plants/{{ plant.image }}" [alt]="plant.name" class="w-6 shadow-2"  style="width:100px;"/>
+            </div>
+            <div>
+              <h4 class="mb-1">{{ plant.name }}</h4>
+            </div>
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,4 @@
+@use "../../styles/styles.scss" as *;
+.p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {
+  background-color: $thirdColor !important;
+}
