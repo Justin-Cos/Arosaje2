@@ -1,4 +1,5 @@
 @use "sass:map";
+@import 'maplibre-gl/dist/maplibre-gl.css';
 $primaryColor:#FFFFFF;
 $secondaryColor:#5DB075;
 $thirdColor:#4A4A4A;
@@ -15,6 +16,13 @@ $thirdColor:#4A4A4A;
   text-align: center;
 }
 .mapboxgl-marker, .maplibregl-marker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
+}
+.maplibregl-popup {
+  transform: translate(-50%, -50%) translate(1206px, 1016px) rotateX(0deg) rotateZ(0deg);
   position: absolute;
   top: 0;
   left: 0;

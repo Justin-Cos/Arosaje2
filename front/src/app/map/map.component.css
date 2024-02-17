@@ -1,5 +1,3 @@
-@import '../../../node_modules/maplibre-gl/dist/maplibre-gl.css';
-
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -31,3 +29,12 @@ code {
   bottom: 10px;
   z-index: 999;
 }
+.maplibregl-popup {
+  transform: translate(-50%, -50%) translate(1206px, 1016px) rotateX(0deg) rotateZ(0deg);
+   position: absolute;
+   top: 0;
+   left: 0;
+   will-change: transform;
+ }
+
+
