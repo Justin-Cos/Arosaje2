@@ -152,7 +152,7 @@ module.exports = {
                 owner: randomUser.user_id,
                 plant_type: randomPlantType.plant_type_id,
                 name: `${randomPlantType.name} de ${randomUser.username}`,
-                image: `demo_data/${i}.jpg`,
+                image: `demo_data/${getRandomIndex(10)}.jpg`,
                 indoor: utils.randomBoolean(),
             }));
             createdCareSessions.push(await CareSession.create({

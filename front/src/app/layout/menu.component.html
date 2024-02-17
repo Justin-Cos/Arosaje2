@@ -1,11 +1,10 @@
 <!-- menu.component.html -->
 
-<p-toolbar class="fixe" id="header">
+<p-toolbar class="sticky  overflow-hidden" id="header">
   <div class="p-toolbar-group-start d-flex align-items-center">
     <button (click)="menuVertical()" class="icone_nav "><i class="fa-solid fa-bars"></i></button>
     <span class="title_nav">Arosaje</span>
-    <p-image src="\..\assets\images\arosaje.png" alt="Image" class="img_menu"></p-image>
-
+    <p-image></p-image>
   </div>
 
   <div *ngIf="authService.isLoggedIn()" routerLink="/profile/{{authService.getUserId()}}"  class="p-toolbar-group-end d-flex align-items-center">
@@ -30,11 +29,10 @@
       </span>
   </div>
 
-    <li *ngIf="authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/home">Home</a></li>
-    <li *ngIf="!authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/login">Login</a></li>
-    <li *ngIf="!authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/register">Register</a></li>
-    <li *ngIf="authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/profile">Profile</a></li>
-    <li *ngIf="authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/map">Map</a></li>
+    <li *ngIf="authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/home">Voir les annonces</a></li>
+    <li *ngIf="!authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/login">Se connecter</a></li>
+    <li *ngIf="!authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/register">Se créer un compte</a></li>
+    <li *ngIf="authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/map">Carte</a></li>
   </ul>
 </div>
 

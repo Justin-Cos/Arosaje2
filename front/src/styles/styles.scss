@@ -28,6 +28,9 @@ $thirdColor:#4A4A4A;
   left: 0;
   will-change: transform;
 }
+.p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {
+  background-color: $thirdColor !important;
+}
 
 
 

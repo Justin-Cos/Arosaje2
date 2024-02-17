@@ -44,6 +44,10 @@ img_nav{
   margin-left: 7%;
   font-size: 2.5em;
 }
+img_menu {
+  width: 50%;
+
+}
 
 .icone_nav{
   color: #5DB075;
@@ -80,6 +84,12 @@ img_nav{
   width: 100%;
   z-index: 1000;
 }
-
+.sticky{
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
 
 
