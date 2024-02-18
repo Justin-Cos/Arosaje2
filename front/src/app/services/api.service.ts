@@ -19,6 +19,7 @@ export class ApiService {
       headers =  new HttpHeaders({
         Authorization: `Bearer ${this.authService.getToken()}`
       })
+      console.log(headers);
     }
     return this.http.get<T>(url, {headers})
   }
@@ -27,11 +28,11 @@ export class ApiService {
     const url = `${this.apiBaseRoute}/${endpoint}`;
     let headers = {};
     if (this.authService.isLoggedIn()) {
-      headers =  new HttpHeaders({
+      headers = {
         Authorization: `Bearer ${this.authService.getToken()}`
-      })
+      }
     }
-    let httpOptions = Object.assign({}, headers, options);
+    let httpOptions = { headers: new HttpHeaders(headers), ...options };
     return this.http.post<T>(url, data, httpOptions);
   }
 

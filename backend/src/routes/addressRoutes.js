@@ -7,6 +7,7 @@ const router = express.Router();
 // Routes
 router.get('/', middleware.authenticateToken, addressController.getAllAddresses);
 router.get('/:id', middleware.authenticateToken, addressController.getAddressById);
+router.get('/user/:id', middleware.authenticateToken, addressController.getAddressesByUserId);
 router.post('/', middleware.authenticateToken, addressController.createAddress);
 router.put('/:id', middleware.authenticateToken, addressController.updateAddressById);
 router.delete('/:id', middleware.authenticateToken, addressController.deleteAddressById);

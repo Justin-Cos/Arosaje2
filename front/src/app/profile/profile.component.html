@@ -1,76 +1,74 @@
-<div class="w-100 h-100 flex-row overflow-hidden">
+<div class="w-100 flex-row overflow-hidden" style="min-height: 90vh;">
   <div class="w-25 color-prim">
     <figure class="snip1336 w-100">
       <img src="assets/images/plantes_illustration.jpg" alt="sample87" />
       <figcaption>
-        <img src="{{ApiService.baseUrl}}/uploads/profile_pictures/{{user?.profile_picture}}" alt="profile-sample4" class="profile" />
-        <h2>{{ user?.username }}<span>{{ user?.role }}</span></h2>
-        <p>{{ user?.bio }}</p>
+        <img src="{{ApiService.baseUrl}}/uploads/profile_pictures/{{user.profile_picture}}" alt="profile-sample4" class="profile" />
+        <h2>{{ user.username }}<span>{{ user.role }}</span></h2>
+        <p>{{ user.bio }}</p>
       </figcaption>
     </figure>
   </div>
-  <div class="w-75 color-sec" >
-        <div class="tab-panel">
-          <label for="tab-4" tabindex="0" class="tab-panel-label two-tabs"></label>
-          <input id="tab-4" type="radio" name="tabs2" checked="true" aria-hidden="true" />
-          <h2 class="tab-title two-tabs">Mes plantes</h2>
+  <div class="tab-panel w-75 color-sec">
+      <label for="tab-4" tabindex="0" class="tab-panel-label two-tabs"></label>
+      <input id="tab-4" type="radio" name="tabs2" checked="true" aria-hidden="true" />
+      <h2 class="tab-title two-tabs">Mes plantes</h2>
 
-          <div class="tab-panel-content">
-            <div *ngIf="plants.length > 0" class="w-100 flex-col">
-              <h2 class="w-100 text-center">Mes plantes</h2>
-              <p-carousel [value]="plants" [numVisible]="3" [numScroll]="3" [circular]="true"  [autoplayInterval]=10000 >
-                <ng-template let-plant pTemplate="item">
-                  <div class="border-1 surface-border border-round m-2 text-center py-5 px-3">
-                    <div class="mb-3">
-                      <img src="{{ApiService.baseUrl}}/uploads/plants/{{ plant.image }}" [alt]="plant.name" class="w-6 shadow-2" style="width:100px;" />
-                    </div>
-                    <div>
-                      <h4 class="mb-1">{{ plant.name }}</h4>
-                    </div>
-                  </div>
-                </ng-template>
-              </p-carousel>
-            </div>
-            <div *ngIf="availableCareSessions.length > 0" class="w-100 flex-col">
-              <h2 class="w-100 text-center">Les plantes que j'aimerai faire garder</h2>
-              <p-carousel [value]="availableCareSessions" [numVisible]="3" [numScroll]="3" [circular]="true"  [autoplayInterval]=10000 >
-                <ng-template let-availableCareSession pTemplate="item">
-                  <div class="border-1 surface-border border-round m-2 text-center py-5 px-3">
-                    <div class="mb-3 w-10">
-                      <img src="{{ApiService.baseUrl}}/uploads/plants/{{ availableCareSession.plant.image }}" [alt]="availableCareSession.plant.name" class="w-6 shadow-2 " style="width:100px;" />
-                    </div>
-                    <div>
-                      <h4 class="mb-1">{{ availableCareSession.plant.name }}</h4>
-                    </div>
-                  </div>
-                </ng-template>
-              </p-carousel>
-            </div>
-          </div>
-
-          <label for="tab-5" tabindex="0" class="tab-panel-label two-tabs"></label>
-          <input id="tab-5" type="radio" name="tabs2" aria-hidden="true" />
-          <h2 class="tab-title two-tabs">Les plantes dont je me suis occupées</h2>
-
-          <div class="tab-panel-content">
-            <div *ngIf="careTakerExperiences.length > 0" class="w-100 flex-col">
-              <h2 class="w-100 text-center">Les plantes que j'ai gardées</h2>
-              <p-carousel [value]="careTakerExperiences" [numVisible]="3" [numScroll]="3" [circular]="true"  [autoplayInterval]=10000 >
-                <ng-template let-careTakerExperience pTemplate="item">
-                  <div class="border-1 surface-border border-round m-2 text-center py-5 px-3">
-                    <div class="mb-3">
-                      <img src="{{ApiService.baseUrl}}/uploads/plants/{{ careTakerExperience.plant.image }}" [alt]="careTakerExperience.plant.name" class="w-6 shadow-2"  style="width:100px;"/>
-                    </div>
-                    <div>
-                      <h4 class="mb-1">{{ careTakerExperience.plant.name }}</h4>
-                    </div>
-                  </div>
-                </ng-template>
-              </p-carousel>
-            </div>
-          </div>
+      <div class="tab-panel-content">
+        <div *ngIf="plants.length > 0" class="w-100 flex-col">
+          <h2 class="w-100 text-center">Mes plantes</h2>
+          <p-carousel [value]="plants" [numVisible]="3" [numScroll]="3" [circular]="true"  [autoplayInterval]=10000 >
+            <ng-template let-plant pTemplate="item">
+              <div class="border-1 surface-border border-round m-2 text-center py-5 px-3">
+                <div class="mb-3">
+                  <img src="{{ApiService.baseUrl}}/uploads/plants/{{ plant.image }}" [alt]="plant.name" class="w-6 shadow-2" style="width:100px;" />
+                </div>
+                <div>
+                  <h4 class="mb-1">{{ plant.name }}</h4>
+                </div>
+              </div>
+            </ng-template>
+          </p-carousel>
         </div>
-  </div>
+        <div *ngIf="availableCareSessions.length > 0" class="w-100 flex-col">
+          <h2 class="w-100 text-center">Les plantes que j'aimerai faire garder</h2>
+          <p-carousel [value]="availableCareSessions" [numVisible]="3" [numScroll]="3" [circular]="true"  [autoplayInterval]=10000 >
+            <ng-template let-availableCareSession pTemplate="item">
+              <div class="border-1 surface-border border-round m-2 text-center py-5 px-3">
+                <div class="mb-3">
+                  <img src="{{ApiService.baseUrl}}/uploads/plants/{{ availableCareSession.plant.image }}" [alt]="availableCareSession.plant.name" class="w-6 shadow-2 " style="width:100px;" />
+                </div>
+                <div>
+                  <h4 class="mb-1">{{ availableCareSession.plant.name }}</h4>
+                </div>
+              </div>
+            </ng-template>
+          </p-carousel>
+        </div>
+      </div>
+
+      <label for="tab-5" tabindex="0" class="tab-panel-label two-tabs"></label>
+      <input id="tab-5" type="radio" name="tabs2" aria-hidden="true" />
+      <h2 class="tab-title two-tabs">Les plantes dont je me suis occupées</h2>
+
+      <div class="tab-panel-content">
+        <div *ngIf="careTakerExperiences.length > 0" class="w-100 flex-col">
+          <h2 class="w-100 text-center">Les plantes que j'ai gardées</h2>
+          <p-carousel [value]="careTakerExperiences" [numVisible]="3" [numScroll]="3" [circular]="true"  [autoplayInterval]=10000 >
+            <ng-template let-careTakerExperience pTemplate="item">
+              <div class="border-1 surface-border border-round m-2 text-center py-5 px-3">
+                <div class="mb-3">
+                  <img src="{{ApiService.baseUrl}}/uploads/plants/{{ careTakerExperience.plant.image }}" [alt]="careTakerExperience.plant.name" class="w-6 shadow-2"  style="width:100px;"/>
+                </div>
+                <div>
+                  <h4 class="mb-1">{{ careTakerExperience.plant.name }}</h4>
+                </div>
+              </div>
+            </ng-template>
+          </p-carousel>
+        </div>
+      </div>
+    </div>
 </div>
 
 

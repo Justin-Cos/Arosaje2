@@ -59,15 +59,19 @@
   opacity: 1;
 }
 .snip1336 .profile {
+  background-color: var(--avatar-bgColor, var(--color-avatar-bg));
+  box-shadow: 0 0 0 1px var(--avatar-borderColor, var(--color-avatar-border));
+  display: block; // Change from inline-block to block
+  flex-shrink: 0;
+  line-height: 1;
+  overflow: hidden;
   border-radius: 50%;
-  position: absolute;
-  bottom: 100%;
-  left: 25px;
-  z-index: 1;
-  max-width: 90px;
-  opacity: 1;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  width: 10vw;
+  height: 10vw;
+  object-fit: cover;
+  margin-top: -10vh;
 }
+
 .snip1336 .follow {
   margin-right: 4%;
   border-color: #121212;
@@ -92,15 +96,8 @@
 .p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {
   background-color: $secondaryColor !important;
 }
-@function subtractValueFromColor($color, $value) {
-  @return rgb(
-      red($color) - $value,
-      green($color) - $value,
-      blue($color) - $value
-  );
-}
 /* vars */
-$secondaryColorDarker: mix($secondaryColor, gray, 70);;
+$secondaryColorDarker: mix($secondaryColor, gray, 70%);;
 /* */
 body {
   margin: 30px;

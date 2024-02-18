@@ -1,6 +1,6 @@
 <!-- menu.component.html -->
 
-<p-toolbar class="sticky  overflow-hidden" id="header">
+<p-toolbar class="sticky flex-col overflow-hidden" [style]="{'height': '10vh'}" id="header">
   <div class="p-toolbar-group-start d-flex align-items-center">
     <button (click)="menuVertical()" class="icone_nav "><i class="fa-solid fa-bars"></i></button>
     <span class="title_nav">Arosaje</span>
@@ -33,6 +33,9 @@
     <li *ngIf="!authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/login">Se connecter</a></li>
     <li *ngIf="!authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/register">Se créer un compte</a></li>
     <li *ngIf="authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/map">Carte</a></li>
+    <li *ngIf="authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/profile/{{authService.getUserId()}}">Mon profil</a></li>
+    <li *ngIf="authService.isLoggedIn()" class="options-menu-lateral li-clean" style="cursor: pointer"><a class="liens-menu-lateral a-clean" (click)="this.authService.logout();">Se déconnecter</a></li>
+
   </ul>
 </div>
 

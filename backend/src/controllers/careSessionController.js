@@ -75,7 +75,6 @@ exports.getAvailableSessions = async (req, res) => {
     }
     try {
         const careSessions = await CareSessions.findAll(options);
-        console.log(careSessions);
         res.json(careSessions);
     } catch (error) {
         console.error(error.message);

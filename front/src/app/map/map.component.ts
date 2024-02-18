@@ -42,7 +42,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       this.careSessionService.getNearbyCareSessions(userAdress.address_id.toString(), "350").subscribe((careSessions) => {
         careSessions.forEach((careSession: any) => {
           const location = careSession.address;
-          console.log(careSession);
           new Marker({color: "#2df600"})
             .setLngLat([location.longitude, location.latitude])
             .setPopup(new Popup().setHTML(`

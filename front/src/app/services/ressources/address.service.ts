@@ -15,4 +15,9 @@ export class AddressService {
       map((json: any) => AddressModel.fromJson(json))
     );
   }
+  getAddressesByUserId(userId: number): Observable<AddressModel[]> {
+    return this.apiService.get<AddressModel[]>(`${this.endpoint}/user/${userId}`).pipe(
+      map((json: any) => json.map((address: any) => AddressModel.fromJson(address)))
+    );
+  }
 }

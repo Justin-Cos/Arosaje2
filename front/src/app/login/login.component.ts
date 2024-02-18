@@ -19,7 +19,7 @@ import {AuthService} from "../services/auth.service";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']})
 export class LoginComponent {
-  error_message: string = ""
+  errorMessage: string = ""
   username: any;
   password: string | undefined;
   constructor(private userService: UserService, private router: Router, private authService: AuthService) {
@@ -35,7 +35,7 @@ export class LoginComponent {
           this.router.navigate(['/home']);
         },
         (error: any) => {
-          this.error_message = error.message;
+          this.errorMessage = error.message;
         }
       );
     }

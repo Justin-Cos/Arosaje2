@@ -51,11 +51,9 @@ export class ProfileComponent implements OnInit {
         this.plants = plants;
       });
       this.careSessionService.getAvailableCareSessions(this.user.user_id).subscribe((careSessions) => {
-        console.log(careSessions);
         this.availableCareSessions = careSessions;
       })
       this.careSessionService.getPreviousCareSession(true, this.user.user_id).subscribe((careTakerExperiences) => {
-        console.log(careTakerExperiences);
         this.careTakerExperiences = careTakerExperiences;
       })
     });

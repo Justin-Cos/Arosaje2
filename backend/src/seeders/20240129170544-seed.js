@@ -6,6 +6,7 @@ const CareSession = require('../models/CareSession');
 const Comment = require('../models/Comment');
 const utils = require('../utils.js');
 const {getRandomIndex, randomBoolean, hashPassword, generateRandomCoordinatesInFrance} = require("../utils");
+const {LoremIpsum} = require("lorem-ipsum");
 module.exports = {
     up: async (queryInterface, Sequelize) => {
 
@@ -144,6 +145,16 @@ module.exports = {
         let randomUser;
         let randomPlantType;
         let randomPlant;
+        const lorem = new LoremIpsum({
+            sentencesPerParagraph: {
+                max: 4,
+                min: 0
+            },
+            wordsPerSentence: {
+                max: 10,
+                min: 4
+            }
+        })
 
         for (let i = 0; i < 40; i++) {
             randomPlantType = createdPlantTypes[getRandomIndex(createdPlantTypes.length)];
@@ -157,10 +168,11 @@ module.exports = {
             }));
             createdCareSessions.push(await CareSession.create({
                 plant: createdPlants[i].plant_id,
-                caretaker: randomBoolean() ? randomUser.user_id : null, // 50% de chance d'avoir un caretaker
+                caretaker: randomBoolean() ? randomUser.user_id : null,
                 location: createdaddresses.find(address => address.owner === randomUser.user_id).address_id,
                 date_start: new Date().setDate(new Date().getDate() - Math.floor(Math.random() * 10) + 11),
                 date_end: new Date().setDate(new Date().getDate() + Math.floor(Math.random() * 10) + 11),
+                details:  randomBoolean() ? lorem.generateParagraphs(1) : null,
             }));
         }
 

@@ -110,4 +110,14 @@ export class CareSessionService {
       })
     );
   }
+
+  createCareSession(plant: number, address: number, startDate: Date, endDate: Date, details?: null | string): Observable<any> {
+    return this.apiService.post<CareSessionModel>(this.endpoint, {
+      plant,
+      location: address,
+      date_start: startDate,
+      date_end: endDate,
+      details
+    });
+  }
 }

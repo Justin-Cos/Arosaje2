@@ -105,12 +105,12 @@ exports.registerUser = async (req, res) => {
         });
     } catch (error) {
         if (error.name === 'SequelizeUniqueConstraintError') {
-            res.status(400).json({ message: 'Username or email already exists' });
+            res.status(400).json({ message: "Nom d'utilisateur ou email déjà existant"});
         } else if (error.name === 'ValidationError') {
-            res.status(400).json({ message: 'Username or email already exists', errors: error.errors });
+            res.status(400).json({ message: "Nom d'utilisateur ou email incorrect" , errors: error.errors });
         } else {
             console.error(error);
-            res.status(500).json({ message: 'Internal Server Error' });
+            res.status(500).json({ message: 'Erreur inconnue' });
         }
     }
 }
@@ -129,9 +129,9 @@ exports.loginUser = async (req, res) => {
             },
         });
         if (!user) {
-            return res.status(401).json({error: 'Invalid  or password'});
+            return res.status(401).json({error: 'Utilisateur non trouvé'});
         } else if (user.password !== hashPassword(password)) {
-            return res.status(401).json({error: 'Invalid username or password'});
+            return res.status(401).json({error: 'Mot de passe incorrect'});
         } else {
             sign({
                 user_id: user.user_id,
@@ -142,7 +142,7 @@ exports.loginUser = async (req, res) => {
             }, process.env.JWT_SECRET, {}, (err, token) => {
                 if (err) {
                     console.error(err);
-                    res.status(500).json({message: 'Internal Server Error'});
+                    res.status(500).json({message: 'Erreur inconnue'});
                 } else {
                     res.json({token: token});
                 }
