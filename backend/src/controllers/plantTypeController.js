@@ -3,7 +3,7 @@ const Plant = require("../models/Plant");
 
 exports.getAllPlantTypes = async (req, res) => {
     try {
-        const plantTypes = await PlantsType.findAll({include: [{model: Plant}]});
+        const plantTypes = await PlantsType.findAll();
         res.json(plantTypes);
     } catch (error) {
         console.error(error.message);

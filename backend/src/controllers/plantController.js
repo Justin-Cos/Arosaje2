@@ -55,8 +55,7 @@ exports.createPlant = async (req, res) => {
     let image_name;
     let owner;
     try {
-        owner = await User.findByPk(owner_id);
-        image_name = convertToSnakeCase(`${name}_${owner.user_id}_${Date.now()}`) + '.jpg';
+        image_name = convertToSnakeCase(`${name}_${owner_id}_${Date.now()}`) + '.jpg';
         await Plant.create({
             plant_type: plant_type,
             owner: owner_id,

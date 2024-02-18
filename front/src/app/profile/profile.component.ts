@@ -13,6 +13,9 @@ import {PlantService} from "../services/ressources/plant.service";
 import {CareSessionService} from "../services/ressources/care-session.service";
 import {CareSessionModel} from "../models/care-session.model";
 import {DialogModule} from "primeng/dialog";
+import {PlantFormComponent} from "./form-modal/plant-form/plant-form.component";
+import { switchMap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-profile',
@@ -22,7 +25,8 @@ import {DialogModule} from "primeng/dialog";
     CarouselModule,
     ButtonModule,
     AvatarModule,
-    DialogModule
+    DialogModule,
+    PlantFormComponent
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
@@ -35,23 +39,22 @@ export class ProfileComponent implements OnInit {
   protected readonly ApiService = ApiService;
   displayPlantForm: boolean = false;
 
-  constructor(private route: ActivatedRoute, private authService: AuthService, private router: Router, private userService: UserService, private plantService: PlantService, private careSessionService: CareSessionService) {
+  constructor(private route: ActivatedRoute, public authService: AuthService, private router: Router, private userService: UserService, private plantService: PlantService, private careSessionService: CareSessionService) {
   }
   ngOnInit() {
-    let user_id = 0;
-    if (this.route.snapshot.params['user_id']){
-      user_id = this.route.snapshot.params['user_id'];
-    } else if (this.authService.isLoggedIn()){
-      user_id = this.authService.getUserId();
-    } else {
-      this.router.navigate(['/error']);
-    }
-    this.userService.getUserById(user_id).subscribe((user ) => {
+    this.route.params
+      .pipe(
+        switchMap(params => {
+          const user_id = params['user_id'];
+          return this.userService.getUserById(user_id);
+        })
+      )
+      .subscribe(user => {
       if (user === null) {
         this.router.navigate(['/error']);
       }
       this.user = user;
-      this.plantService.getPlantsByUserId(user_id).subscribe((plants) => {
+      this.plantService.getPlantsByUserId(this.user.user_id).subscribe((plants) => {
         this.plants = plants;
       });
       this.careSessionService.getAvailableCareSessions(this.user.user_id).subscribe((careSessions) => {

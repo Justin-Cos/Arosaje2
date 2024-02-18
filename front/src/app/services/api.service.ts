@@ -19,7 +19,6 @@ export class ApiService {
       headers =  new HttpHeaders({
         Authorization: `Bearer ${this.authService.getToken()}`
       })
-      console.log(headers);
     }
     return this.http.get<T>(url, {headers})
   }

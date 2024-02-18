@@ -2,8 +2,8 @@
   <div class="w-25 color-prim">
     <figure class="snip1336 w-100">
       <img src="assets/images/plantes_illustration.jpg" alt="sample87" />
-      <figcaption>
-        <img src="{{ApiService.baseUrl}}/uploads/profile_pictures/{{user.profile_picture}}" alt="profile-sample4" class="profile" />
+      <figcaption *ngIf="user">
+        <img src="{{ApiService.baseUrl}}/uploads/profile_pictures/{{user?.profile_picture}}" alt="profile-sample4" class="profile" />
         <h2>{{ user.username }}<span>{{ user.role }}</span></h2>
         <p>{{ user.bio }}</p>
       </figcaption>
@@ -18,7 +18,7 @@
         <div *ngIf="plants.length > 0" class="w-100 flex-col">
           <div>
             <h2 class="w-100 text-center">Mes plantes
-              <p-button [styleClass]="'p-button-plus'" [style]="{'width':'5vw','border':0,'color':'#4A4A4A','margin': 0,'padding': 0}" icon="pi pi-plus" class="p-button-plus" (click)="openPlantForm()"></p-button>            </h2>
+              <p-button *ngIf="user.user_id === this.authService.getUserId()" [styleClass]="'p-button-plus'" [style]="{'width':'5vw','border':0,'color':'#4A4A4A','margin': 0,'padding': 0}" icon="pi pi-plus" class="p-button-plus" (click)="openPlantForm()"></p-button>            </h2>
 
           </div>
 
@@ -75,7 +75,7 @@
       </div>
     </div>
 </div>
-<p-dialog [(visible)]="displayPlantForm" [modal]="true" [style]="{width: '50vw'}" [closable]="false">
-  <!-- Votre formulaire ici -->
+<p-dialog [(visible)]="displayPlantForm" [modal]="true" [style]="{width: '50vw'}" [closable]="true">
+  <app-plant-form (closeModal)="displayPlantForm = false"></app-plant-form>
 </p-dialog>
 

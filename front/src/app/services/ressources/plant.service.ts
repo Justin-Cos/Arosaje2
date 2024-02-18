@@ -10,14 +10,6 @@ export class PlantService {
 
   constructor(private apiService: ApiService) {
   }
-
-  public getPlants(): Observable<PlantModel[]> {
-    return this.apiService.get<PlantModel[]>(this.endpoint).pipe(
-      map((jsonArray: any[]) => {
-        return jsonArray.map((json: any) => PlantModel.fromJson(json));
-      })
-    );
-  }
   public getPlantById(id: number): Observable<PlantModel> {
     return this.apiService.get<PlantModel>(`${this.endpoint}/${id}`).pipe(
       map((json: any) => PlantModel.fromJson(json))
@@ -29,5 +21,8 @@ export class PlantService {
         return jsonArray.map((json: any) => PlantModel.fromJson(json));
       })
     );
+  }
+  public createPlant(formData: FormData): Observable<any> {
+    return this.apiService.post<any>(this.endpoint, formData);
   }
 }
