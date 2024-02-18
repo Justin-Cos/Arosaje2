@@ -1,6 +1,6 @@
 <!-- menu.component.html -->
 
-<p-toolbar class="fixe" id="header">
+<p-toolbar class="sticky" id="header">
   <div class="p-toolbar-group-start d-flex align-items-center">
     <button (click)="menuVertical()" class="icone_nav "><i class="fa-solid fa-bars"></i></button>
     <p-image src="../assets/images/arosaje.png" alt="Image" width="100"></p-image>
@@ -33,7 +33,7 @@
     <li *ngIf="authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/home">Home</a></li>
     <li *ngIf="!authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/login">Login</a></li>
     <li *ngIf="!authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/register">Register</a></li>
-    <li *ngIf="authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/profile">Profile</a></li>
+    <li *ngIf="authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/profile/{{authService.getUserId()}}">Profile</a></li>
     <li *ngIf="authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/map">Map</a></li>
   </ul>
 </div>

@@ -16,12 +16,17 @@
 
       <div class="tab-panel-content">
         <div *ngIf="plants.length > 0" class="w-100 flex-col">
-          <h2 class="w-100 text-center">Mes plantes</h2>
+          <div>
+            <h2 class="w-100 text-center">Mes plantes
+              <p-button [styleClass]="'p-button-plus'" [style]="{'width':'5vw','border':0,'color':'#4A4A4A','margin': 0,'padding': 0}" icon="pi pi-plus" class="p-button-plus" (click)="openPlantForm()"></p-button>            </h2>
+
+          </div>
+
           <p-carousel [value]="plants" [numVisible]="3" [numScroll]="3" [circular]="true"  [autoplayInterval]=10000 >
             <ng-template let-plant pTemplate="item">
               <div class="border-1 surface-border border-round m-2 text-center py-5 px-3">
                 <div class="mb-3">
-                  <img src="{{ApiService.baseUrl}}/uploads/plants/{{ plant.image }}" [alt]="plant.name" class="w-6 shadow-2" style="width:100px;" />
+                  <img  src="{{ApiService.baseUrl}}/uploads/plants/{{ plant.image }}" [alt]="plant.name" class="w-6 shadow-2 image-plant" />
                 </div>
                 <div>
                   <h4 class="mb-1">{{ plant.name }}</h4>
@@ -36,7 +41,7 @@
             <ng-template let-availableCareSession pTemplate="item">
               <div class="border-1 surface-border border-round m-2 text-center py-5 px-3">
                 <div class="mb-3">
-                  <img src="{{ApiService.baseUrl}}/uploads/plants/{{ availableCareSession.plant.image }}" [alt]="availableCareSession.plant.name" class="w-6 shadow-2 " style="width:100px;" />
+                  <img src="{{ApiService.baseUrl}}/uploads/plants/{{ availableCareSession.plant.image }}" [alt]="availableCareSession.plant.name" class="w-6 shadow-2 image-plant" />
                 </div>
                 <div>
                   <h4 class="mb-1">{{ availableCareSession.plant.name }}</h4>
@@ -58,7 +63,7 @@
             <ng-template let-careTakerExperience pTemplate="item">
               <div class="border-1 surface-border border-round m-2 text-center py-5 px-3">
                 <div class="mb-3">
-                  <img src="{{ApiService.baseUrl}}/uploads/plants/{{ careTakerExperience.plant.image }}" [alt]="careTakerExperience.plant.name" class="w-6 shadow-2"  style="width:100px;"/>
+                  <img src="{{ApiService.baseUrl}}/uploads/plants/{{ careTakerExperience.plant.image }}" [alt]="careTakerExperience.plant.name" class="w-6 shadow-2 image-plant"/>
                 </div>
                 <div>
                   <h4 class="mb-1">{{ careTakerExperience.plant.name }}</h4>
@@ -70,5 +75,7 @@
       </div>
     </div>
 </div>
-
+<p-dialog [(visible)]="displayPlantForm" [modal]="true" [style]="{width: '50vw'}" [closable]="false">
+  <!-- Votre formulaire ici -->
+</p-dialog>
 

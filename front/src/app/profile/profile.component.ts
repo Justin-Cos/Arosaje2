@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, signal} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../services/auth.service";
 import {UserService} from "../services/ressources/user.service";
@@ -12,6 +12,7 @@ import {UserModel} from "../models/user.model";
 import {PlantService} from "../services/ressources/plant.service";
 import {CareSessionService} from "../services/ressources/care-session.service";
 import {CareSessionModel} from "../models/care-session.model";
+import {DialogModule} from "primeng/dialog";
 
 @Component({
   selector: 'app-profile',
@@ -20,7 +21,8 @@ import {CareSessionModel} from "../models/care-session.model";
     CarouselComponent,
     CarouselModule,
     ButtonModule,
-    AvatarModule
+    AvatarModule,
+    DialogModule
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
@@ -30,6 +32,8 @@ export class ProfileComponent implements OnInit {
   plants: PlantModel[] = []
   availableCareSessions: CareSessionModel[] = [];
   careTakerExperiences: CareSessionModel[] = [];
+  protected readonly ApiService = ApiService;
+  displayPlantForm: boolean = false;
 
   constructor(private route: ActivatedRoute, private authService: AuthService, private router: Router, private userService: UserService, private plantService: PlantService, private careSessionService: CareSessionService) {
   }
@@ -59,5 +63,7 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  protected readonly ApiService = ApiService;
+  openPlantForm() {
+    this.displayPlantForm = true;
+  }
 }

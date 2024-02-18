@@ -1,5 +1,9 @@
+
 @use "../../styles/styles.scss" as *;
 @import url(https://fonts.googleapis.com/css?family=Roboto:300,400,600);
+.p-button-plus {
+  border: 0;
+}
 .snip1336 {
   font-family: 'Roboto', Arial, sans-serif;
   position: relative;
@@ -280,4 +284,11 @@ body {
     }
 
   }
+  .image-plant {
+    width: 80%;
+    max-width: 20vw;
+    height: 15vw;
+    object-fit: cover;
+  }
+
 }
