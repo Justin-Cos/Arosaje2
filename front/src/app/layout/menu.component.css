@@ -80,6 +80,13 @@ img_nav{
   width: 100%;
   z-index: 1000;
 }
+.sticky{
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
 
 .p-element.img_menu img {
   width: 50% !important;
