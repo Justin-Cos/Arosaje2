@@ -31,6 +31,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     const initialState = { lng: this.userAdressLong, lat: this.userAdressLat , zoom: 10 };
 
     let userAdresses: AddressModel[] = this.authService.getAddresses() ?? [];
+
     this.map = new Map({
       container: this.mapContainer.nativeElement,
       style: `https://api.maptiler.com/maps/streets-v2/style.json?key=QVXST2w7a0YlOzOVek3p`,

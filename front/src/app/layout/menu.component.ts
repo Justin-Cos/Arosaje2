@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ElementRef, HostListener, ViewChild} from '@angular/core';
 import {AuthService} from "../services/auth.service";
 import {ApiService} from "../services/api.service";
 import {UserService} from "../services/ressources/user.service";
@@ -72,6 +72,13 @@ export class MenuComponent {
   onSearchSubmit() {
     this.searchValue = this.searchForm.value.search ?? '';
     this.fetchUsers(this.searchValue);
+  }
+  @ViewChild('dropdown') dropdown: ElementRef | undefined;
+  @HostListener('document:click', ['$event'])
+  handleDocumentClick(event: MouseEvent) {
+    if (this.dropdown && !this.dropdown.nativeElement.contains(event.target as Node)) {
+      this.dropdownOpen = false;
+    }
   }
 
 }
