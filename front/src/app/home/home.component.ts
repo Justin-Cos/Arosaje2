@@ -10,7 +10,6 @@ import {
   standalone: true,
   imports: [CarouselComponent, NextCareSessionsCarouselComponent, ProfilesCarouselComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
 })
 export class HomeComponent {
 }

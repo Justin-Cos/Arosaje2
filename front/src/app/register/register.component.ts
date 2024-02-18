@@ -34,7 +34,7 @@ export class RegisterComponent {
   error_email: boolean = false;
   error_password: boolean = false;
   error_file: boolean = false;
-  error_message: string = "";
+  errorMessage: string = "";
 
   constructor(private userService: UserService, private authService: AuthService, private router: Router) {
   }
@@ -57,17 +57,17 @@ export class RegisterComponent {
       formData.append('email', this.email);
       formData.append('bio', this.bio);
       formData.append('password', this.password);
-
       if (this.fileUpload && this.fileUpload.files.length > 0) {
         formData.append('image_file', this.fileUpload.files[0]);
       }
+
       this.userService.register(formData).subscribe(
         (res) => {
           this.authService.saveToken(res.token);
           this.router.navigate(['/home']);
         },
         (error) => {
-          this.error_message = error.error.message;
+          this.errorMessage = error.error.message;
         }
       );
     }

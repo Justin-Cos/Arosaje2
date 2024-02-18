@@ -43,8 +43,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       this.careSessionService.getNearbyCareSessions(userAdress.address_id.toString(), "350").subscribe((careSessions) => {
         careSessions.forEach((careSession: any) => {
           const location = careSession.address;
-          console.log(careSession);
-          new Marker({color: "#FF0000"})
+          new Marker({color: "#2df600"})
             .setLngLat([location.longitude, location.latitude])
             .setPopup(new Popup().setHTML(`
             <a href="/care-session/${careSession.id}">
@@ -59,7 +58,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
             `))
             .addTo(<Map>this.map);
         });
-        new Marker({color: "#ffffff"})
+        new Marker({color: "#ff0000"})
           .setLngLat([userAdress.longitude ?? 0, userAdress.latitude ?? 0])
           .setPopup(new Popup().setHTML("<h1>"+ userAdress.address + "</h1>"))
           .addTo(<Map>this.map);

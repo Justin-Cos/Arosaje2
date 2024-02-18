@@ -24,6 +24,16 @@ exports.getAddressById = async (req, res) => {
         res.status(500).send('Erreur serveur');
     }
 };
+exports.getAddressesByUserId = async (req, res) => {
+    const userId = req.params.id;
+    try {
+        const addresses = await Address.findAll({where: {owner: userId}});
+        res.json(addresses);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Erreur serveur');
+    }
+}
 
 exports.createAddress = async (req, res) => {
     const {owner, longitude, latitude, country, city, address, zip_code} = req.body;

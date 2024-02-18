@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+  constructor(private router: Router) { }
   isLoggedIn() {
     if (typeof window === 'undefined') {
       return false
@@ -13,6 +14,10 @@ export class AuthService {
       const token = localStorage.getItem('token');
     return !(token === null || token.length === 0);
     }
+  }
+  logout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
   saveToken(token: string) {
     localStorage.setItem('token', token);

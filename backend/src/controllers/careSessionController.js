@@ -41,18 +41,38 @@ exports.getNextCareSessions = async (req, res) => {
     }
 };
 exports.getAvailableSessions = async (req, res) => {
-    let options= req.query.owner ? {
-            include: [{model: User}, {model: Plant}, {model: Address}],
-            where: {
-                plant: {
-                    owner: req.query.owner,
+    let options = {};
+    if (req.query.owner) {
+        options = {
+            include: [{
+                model: Plant,
+                where: {
+                    owner: req.query.owner
                 },
+                required: true
+            }, {
+                model: User
+            }, {
+                model: Address
+            }],
+            where: {
                 caretaker: null,
                 date_end: {
                     [Op.gt]: new Date()
                 }
             }
-        } : {include: [{model: User}, {model: Plant}, {model: Address}], where: {caretaker: null, date_end: {[Op.gt]: new Date()}}}
+        }
+    } else {
+        options = {
+            include: [{model: User}, {model: Plant}, {model: Address}],
+            where: {
+                caretaker: null,
+                date_end: {
+                    [Op.gt]: new Date()
+                }
+            }
+        }
+    }
     try {
         const careSessions = await CareSessions.findAll(options);
         res.json(careSessions);
@@ -61,6 +81,21 @@ exports.getAvailableSessions = async (req, res) => {
         res.status(500).send('Erreur serveur');
     }
 };
+exports.getSessionsByCaretaker = async (req, res) => {
+    const caretaker = req.query.caretaker;
+    try {
+        const careSessions = await CareSessions.findAll({
+            include: [{model: User}, {model: Plant}, {model: Address}],
+            where: {
+                caretaker: caretaker,
+            }
+        });
+        res.json(careSessions);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Erreur serveur');
+    }
+}
 exports.getNearbySessions = async (req, res) => {
     const {address_id, maxDistance} = req.query;
     try {
@@ -103,17 +138,31 @@ exports.getNearbySessions = async (req, res) => {
 }
 
 exports.getPreviousCareSessions = async (req, res) => {
+    let whereClause = {};
+    if (req.query.caretaker) {
+        whereClause = {
+            caretaker: req.query.caretaker,
+            date_end: {
+                [Op.lt]: new Date(),
+            },
+            date_start: {
+                [Op.lt]: new Date(),
+            }
+        }
+    } else {
+        whereClause = {
+            date_end: {
+                [Op.lt]: new Date(),
+            },
+            date_start: {
+                [Op.lt]: new Date(),
+            }
+        }
+    }
     try {
         const careSessions = await CareSessions.findAll({
             include: [{model: User}, {model: Plant}, {model: Address}],
-            where: {
-                date_end: {
-                    [Op.lt]: new Date(),
-                },
-                date_start: {
-                    [Op.lt]: new Date(),
-                }
-            }
+            where: whereClause
         });
         res.json(careSessions);
     } catch (error) {

@@ -89,7 +89,6 @@ export class CommentModel {
   }
 
   static fromJson(json: any) {
-    console.log(json);
     const { id_comment, care_session, author, author_role, date, title, content, image } = json;
     if (!id_comment || !care_session || !author || !author_role || !date) {
       throw new Error('Le JSON ne contient pas toutes les propriétés requises.');

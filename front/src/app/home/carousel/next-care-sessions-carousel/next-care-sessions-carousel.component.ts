@@ -27,7 +27,6 @@ export class NextCareSessionsCarouselComponent implements OnInit {
     this.CareSessionService.getAvailableCareSessions().subscribe((nextCareSessions: any[] ) => {
       this.nextCareSessions = nextCareSessions;
       this.slides = nextCareSessions.map((nextCareSessions, index) => {
-        console.log(nextCareSessions);
         return {
           link: `/`,
           img: `${ApiService.baseUrl}/uploads/plants/${nextCareSessions.plant.image}`,

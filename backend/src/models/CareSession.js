@@ -35,6 +35,10 @@ const CareSession = sequelize.define('CareSessions', {
             key: 'address_id',
         },
     },
+    details: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+    },
     date_start: {
         type: DataTypes.DATE,
         allowNull: false,

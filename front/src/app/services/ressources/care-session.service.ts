@@ -64,6 +64,33 @@ export class CareSessionService {
       })
     );
   }
+
+  /**
+   * Get the previous care session
+   * @param caretaker - caretaker ou owner
+   * @param user
+   */
+  getPreviousCareSession(caretaker?: boolean, user?: number): Observable<any> {
+    let url = this.endpoint + '/previous' ;
+
+    if (caretaker && user) {
+      url += `?caretaker=${user}`;
+    }
+    return this.apiService.get<CareSessionModel[]>(url).pipe(
+      map((jsonArray: any[]) => {
+        return jsonArray.map((json: any[]) => {
+          const careSession = CareSessionModel.fromJson(json);
+          // @ts-ignore
+          const plant = PlantModel.fromJson(json["Plant"]);
+
+          return {
+            careSession,
+            plant
+          };
+        });
+      })
+    );
+  }
   getNearbyCareSessions(addressId: string, maxDistance: string): Observable<any> {
     return this.apiService.get<CareSessionModel[]>(`${this.endpoint}/nearby?address_id=${addressId}&maxDistance=${maxDistance}`).pipe(
       map((jsonArray: any[]) => {
@@ -82,5 +109,15 @@ export class CareSessionService {
         });
       })
     );
+  }
+
+  createCareSession(plant: number, address: number, startDate: Date, endDate: Date, details?: null | string): Observable<any> {
+    return this.apiService.post<CareSessionModel>(this.endpoint, {
+      plant,
+      location: address,
+      date_start: startDate,
+      date_end: endDate,
+      details
+    });
   }
 }

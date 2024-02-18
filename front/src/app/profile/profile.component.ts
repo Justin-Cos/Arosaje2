@@ -27,8 +27,9 @@ import {CareSessionModel} from "../models/care-session.model";
 })
 export class ProfileComponent implements OnInit {
   user!: UserModel;
-  plants!: PlantModel[];
-  availableCareSessions!: CareSessionModel[];
+  plants: PlantModel[] = []
+  availableCareSessions: CareSessionModel[] = [];
+  careTakerExperiences: CareSessionModel[] = [];
 
   constructor(private route: ActivatedRoute, private authService: AuthService, private router: Router, private userService: UserService, private plantService: PlantService, private careSessionService: CareSessionService) {
   }
@@ -39,19 +40,21 @@ export class ProfileComponent implements OnInit {
     } else if (this.authService.isLoggedIn()){
       user_id = this.authService.getUserId();
     } else {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/error']);
     }
     this.userService.getUserById(user_id).subscribe((user ) => {
       if (user === null) {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/error']);
       }
       this.user = user;
-      console.log(this.user);
       this.plantService.getPlantsByUserId(user_id).subscribe((plants) => {
         this.plants = plants;
       });
       this.careSessionService.getAvailableCareSessions(this.user.user_id).subscribe((careSessions) => {
         this.availableCareSessions = careSessions;
+      })
+      this.careSessionService.getPreviousCareSession(true, this.user.user_id).subscribe((careTakerExperiences) => {
+        this.careTakerExperiences = careTakerExperiences;
       })
     });
   }
