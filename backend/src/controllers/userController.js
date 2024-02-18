@@ -154,7 +154,39 @@ exports.loginUser = async (req, res) => {
         res.status(500).send(error.message);
     }
 }
-
+exports.updateToken = async (req, res) => {
+    const userId = req.user.user_id;
+    try {
+        const user = await User.findOne({
+            where: {
+                user_id: userId,
+            },
+        });
+        const addresses = await Address.findAll({
+            where: {
+                owner: user.user_id
+            },
+        });
+        sign({
+            user_id: user.user_id,
+            username: user.username,
+            role: user.role,
+            profile_picture: user.profile_picture,
+            addresses: addresses,
+        }, process.env.JWT_SECRET, {}, (err, token) => {
+            if (err) {
+                console.error(err);
+                res.status(500).json({message: 'Erreur inconnue'});
+            } else {
+                res.json({token: token});
+            }
+        });
+    }
+    catch (error) {
+        console.error(error.message);
+        res.status(500).send(error.message);
+    }
+}
 
 exports.updateUserById = async (req, res) => {
     const userId = req.params.id;

@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import {Router} from "@angular/router";
+import {ApiService} from "./api.service";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private http: HttpClient) { }
   isLoggedIn() {
     if (typeof window === 'undefined') {
       return false
@@ -20,7 +22,15 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
   saveToken(token: string) {
+    console.log(localStorage.getItem('token'));
+
     localStorage.setItem('token', token);
+  }
+  updateToken() {
+    console.log('update token');
+    this.http.get(ApiService.baseUrl + '/user/update-token?user=' + this.getUserId()).subscribe((response: any) => {
+      this.saveToken(response.token);
+    });
   }
   getToken() {
     return localStorage.getItem('token');

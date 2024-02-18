@@ -4,7 +4,7 @@
     <form (ngSubmit)="onSubmit(publicationForm)" #publicationForm="ngForm" enctype="multipart/form-data" method="POST" class="form register">
       <h1> Nouvelle plante </h1>
 
-      <p-message *ngIf="errorName" severity="error" text="Choisissez un type de plante."></p-message>
+      <p-message *ngIf="errorName" severity="error" text="Nom de plante invalide."></p-message>
       <label for="name">Nom <span class="mandatory">*</span></label>
       <input type="text" [(ngModel)]="name" class="form-control" id="name" name="name" ngModel required>
 

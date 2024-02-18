@@ -40,6 +40,7 @@ exports.createAddress = async (req, res) => {
     try {
         const newAddress = await Address.create({owner, longitude, latitude, country, city, address, zip_code});
         res.status(201).json(newAddress);
+
     } catch (error) {
         console.error(error.message);
         res.status(500).send('Erreur serveur');

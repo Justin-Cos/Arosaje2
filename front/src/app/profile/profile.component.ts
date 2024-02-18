@@ -15,6 +15,9 @@ import {CareSessionModel} from "../models/care-session.model";
 import {DialogModule} from "primeng/dialog";
 import {PlantFormComponent} from "./form-modal/plant-form/plant-form.component";
 import { switchMap } from 'rxjs/operators';
+import {AddressModel} from "../models/address.model";
+import {AddressService} from "../services/ressources/address.service";
+import {AddressFormComponent} from "./form-modal/address-form/address-form.component";
 
 
 @Component({
@@ -26,7 +29,8 @@ import { switchMap } from 'rxjs/operators';
     ButtonModule,
     AvatarModule,
     DialogModule,
-    PlantFormComponent
+    PlantFormComponent,
+    AddressFormComponent
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
@@ -38,8 +42,10 @@ export class ProfileComponent implements OnInit {
   careTakerExperiences: CareSessionModel[] = [];
   protected readonly ApiService = ApiService;
   displayPlantForm: boolean = false;
+  addresses: AddressModel[] = [];
+  displayAddressForm: boolean = false;
 
-  constructor(private route: ActivatedRoute, public authService: AuthService, private router: Router, private userService: UserService, private plantService: PlantService, private careSessionService: CareSessionService) {
+  constructor(private route: ActivatedRoute, public authService: AuthService, private router: Router, private userService: UserService, private addressService: AddressService, private plantService: PlantService, private careSessionService: CareSessionService) {
   }
   ngOnInit() {
     this.route.params
@@ -57,6 +63,9 @@ export class ProfileComponent implements OnInit {
       this.plantService.getPlantsByUserId(this.user.user_id).subscribe((plants) => {
         this.plants = plants;
       });
+      this.addressService.getAddressesByUserId(this.user.user_id).subscribe((addresses) => {
+        this.addresses = addresses;
+      });
       this.careSessionService.getAvailableCareSessions(this.user.user_id).subscribe((careSessions) => {
         this.availableCareSessions = careSessions;
       })
@@ -66,7 +75,17 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  deleteAddress(address: AddressModel) {
+    this.addressService.deleteAddress(address.address_id).subscribe(() => {
+      this.addresses = this.addresses.filter((a) => a.address_id !== address.address_id);
+      this.authService.updateToken();
+    });
+  }
   openPlantForm() {
     this.displayPlantForm = true;
+  }
+  openAddressForm() {
+    this.displayAddressForm = true;
+
   }
 }

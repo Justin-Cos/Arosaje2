@@ -18,5 +18,6 @@ router.delete('/:id', middleware.authenticateToken, userController.deleteUserByI
 //authent
 router.post('/register',upload.single('image_file'), userController.registerUser);
 router.post('/login', userController.loginUser);
+router.get('/update-token', middleware.authenticateToken, userController.updateToken);
 
 module.exports = router;
