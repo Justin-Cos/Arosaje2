@@ -1,20 +1,20 @@
 const express = require("express");
 const path = require("path");
-const sequelize = require('./sequelize.js');
+const models = require('./models/index.js');
+const sequelize = models.sequelize;
 const userRoutes = require("./routes/userRoutes");
 const plantRoutes = require("./routes/plantRoutes");
 const addressRoutes = require("./routes/addressRoutes");
 const careSessionRoutes = require("./routes/careSessionRoutes");
 const commentRoutes = require("./routes/commentRoutes");
 const plantTypeRoutes = require("./routes/plantTypeRoutes");
-const User = require('./models/User');
 
 
 // Synchronize Sequelize models with the database and add seed data if necessary
 sequelize.sync().then(async () => {
     console.log('Sequelize models synchronized with the database');
     // Connexion à la base de données SQLite
-    let usersCount = await User.count();
+    let usersCount = await models.User.count();
     if (usersCount === 0) {
         await require('./seeders/20240129170544-seed').down(sequelize.getQueryInterface())
         await require('./seeders/20240129170544-seed').up(sequelize.getQueryInterface());

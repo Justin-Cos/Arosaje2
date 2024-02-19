@@ -12,6 +12,7 @@ export class CareSessionModel {
   private _location: number;
   private _date_start: Date;
   private _date_end: Date;
+  private _details: string | null;
 
   constructor(
     session_id: number,
@@ -19,7 +20,8 @@ export class CareSessionModel {
     caretaker: number | null,
     location: number,
     date_start: Date,
-    date_end: Date
+    date_end: Date,
+    details: string | null
   ) {
     this._session_id = session_id;
     this._plant = plant;
@@ -27,6 +29,7 @@ export class CareSessionModel {
     this._location = location;
     this._date_start = date_start;
     this._date_end = date_end;
+    this._details = details;
   }
 
   get session_id(): number {
@@ -76,28 +79,22 @@ export class CareSessionModel {
   set date_end(value: Date) {
     this._date_end = value;
   }
+  get details(): string | null {
+    return this._details;
+  }
+  set details(value: string | null) {
+    this._details = value;
+  }
   get duration(): number {
     return this._date_end.getTime() - this._date_start.getTime();
   }
-  /*
-  public getPlant(): PlantModel {
-    return PlantService.getPlantById(this._plant);
-  }
-  public geCareTaker(): UserModel {
-    return UserService.getUserById(this._caretaker);
-  }
-  public getLocation(): AddressModel {
-    return AddressService.getAddressById(this._location);
-  }
-*/
-
   static fromJson(json: any): CareSessionModel {
-    const { session_id, plant, caretaker, location, date_start, date_end } = json;
+    const { session_id, plant, caretaker, location, date_start, date_end, details } = json;
     if (!session_id || !plant || !location || !date_start || !date_end) {
       throw new Error('Le JSON ne contient pas toutes les propriétés requises.');
     }
 
 
-    return new CareSessionModel(session_id, plant, caretaker, location, date_start, date_end);
+    return new CareSessionModel(session_id, plant, caretaker, location, date_start, date_end, details);
   }
 }

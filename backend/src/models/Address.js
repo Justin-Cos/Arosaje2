@@ -45,7 +45,5 @@ const Address = sequelize.define('Address', {
 }, {
     timestamps: false,
 });
-UserModel.hasMany(Address, {foreignKey: 'owner', as: 'addresses'})
-Address.belongsTo(UserModel, {foreignKey: 'owner'});
 
 module.exports = Address;

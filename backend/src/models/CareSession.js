@@ -51,8 +51,4 @@ const CareSession = sequelize.define('CareSessions', {
     timestamps: false,
 });
 
-CareSession.belongsTo(UserModel, {foreignKey: 'caretaker'});
-CareSession.belongsTo(PlantsModel, {foreignKey: 'plant'});
-CareSession.belongsTo(AddressModel, {foreignKey: 'location'});
-
 module.exports = CareSession;

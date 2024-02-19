@@ -46,14 +46,14 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
           new Marker({color: "#2df600"})
             .setLngLat([location.longitude, location.latitude])
             .setPopup(new Popup().setHTML(`
-            <a href="/care-session/${careSession.id}">
-              <h2>
-                ${careSession.plant.name}
-              </h2>
-              <p>
-                 ${format(careSession.careSession.date_start, 'EEEE d MMMM yyyy', { locale: fr })} - ${format(careSession.careSession.date_end, 'EEEE d MMMM yyyy', { locale: fr })}
-              </p>
-            </a>
+              <a href="/care-session/${careSession.careSession.session_id}" class="text-decoration-none text-dark">
+                <h2 class="fs-5 mb-2">
+                  ${careSession.plant.name}
+                </h2>
+                <p class="fs-6">
+                   ${format(careSession.careSession.date_start, 'EEEE d MMMM yyyy', { locale: fr })} - ${format(careSession.careSession.date_end, 'EEEE d MMMM yyyy', { locale: fr })}
+                </p>
+              </a>
 
             `))
             .addTo(<Map>this.map);

@@ -1,10 +1,5 @@
 import {UserRole} from "./user.model";
 
-const { DataTypes } = require('sequelize');
-const sequelize = require('../sequelize.js');
-const UserModel = require('./User');
-const CareSession = require('./CareSession');
-
 export class CommentModel {
   private _id_comment: number;
   private _care_session: number;
@@ -55,7 +50,12 @@ export class CommentModel {
   set author(value) {
     this._author = value;
   }
-
+  get title() {
+    return this._title;
+  }
+  set title(value) {
+    this._title = value;
+  }
   get author_role() {
     return this._author_role;
   }

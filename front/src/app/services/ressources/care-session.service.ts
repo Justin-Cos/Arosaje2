@@ -15,6 +15,41 @@ export class CareSessionService {
   constructor(private apiService: ApiService) {
   }
 
+  getCareSessionById(id: number): Observable<any> {
+    return this.apiService.get<CareSessionModel>(`${this.endpoint}/${id}`).pipe(
+      map((json: any) => {
+        const careSession = CareSessionModel.fromJson(json);
+        let user : UserModel | null = null;
+        if (json["User"]) {
+           user = UserModel.fromJson(json["User"]);
+        }
+
+        const address = AddressModel.fromJson(json["Address"]);
+        let comments : CommentModel[] = [];
+        const plant = {
+          plant: PlantModel.fromJson(json["Plant"]),
+          owner: UserModel.fromJson(json["Plant"]["User"])
+        }
+        if (json["Comments"]) {
+          comments = json["Comments"].map((comment: any) => {
+              return {
+                comment: CommentModel.fromJson(comment),
+                author: UserModel.fromJson(comment['User'])
+              }
+            }
+          );
+        }
+
+        return {
+          careSession,
+          plant,
+          user,
+          address,
+          comments
+        };
+      })
+    );
+  }
   getCareSessions(caretaker?: number): Observable<any> {
     let url = this.endpoint  ;
 
@@ -118,6 +153,16 @@ export class CareSessionService {
       date_start: startDate,
       date_end: endDate,
       details
+    });
+  }
+  updateCareSession(careSession: CareSessionModel): Observable<any> {
+    return this.apiService.put<CareSessionModel>(`${this.endpoint}/${careSession.session_id}`, {
+      plant: careSession.plant,
+      location: careSession.location,
+      date_start: careSession.date_start,
+      date_end: careSession.date_end,
+      details: careSession.details,
+      caretaker: careSession.caretaker,
     });
   }
 }

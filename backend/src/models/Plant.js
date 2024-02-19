@@ -40,8 +40,5 @@ const Plant = sequelize.define('Plants', {
     timestamps: false,
 });
 
-UserModel.hasMany(Plant, {foreignKey: 'owner', as: 'plants'});
-Plant.belongsTo(UserModel, {foreignKey: 'owner'});
-Plant.belongsTo(PlantsTypeModel, {foreignKey: 'plant_type'});
 
 module.exports = Plant;

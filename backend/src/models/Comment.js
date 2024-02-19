@@ -49,7 +49,4 @@ const Comments = sequelize.define('Comments', {
     timestamps: false,
 });
 
-Comments.belongsTo(UserModel, {foreignKey: 'author'});
-Comments.belongsTo(CareSession, {foreignKey: 'care_session'});
-
 module.exports = Comments;

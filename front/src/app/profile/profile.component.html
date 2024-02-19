@@ -24,14 +24,14 @@
       <h2 class="tab-title two-tabs">Mes plantes</h2>
 
       <div class="tab-panel-content">
-        <div *ngIf="plants.length > 0" class="w-100 flex-col">
+        <div  class="w-100 flex-col">
           <div>
             <h2 class="w-100 text-center">Mes plantes
               <p-button *ngIf="user.user_id === this.authService.getUserId()" [styleClass]="'p-button-plus'" [style]="{'width':'5vw','border':0,'color':'#4A4A4A','margin': 0,'padding': 0}" icon="pi pi-plus" class="p-button-plus" (click)="openPlantForm()"></p-button>
             </h2>
 
           </div>
-          <p-carousel [value]="plants" [numVisible]="3" [numScroll]="3" [circular]="true"  [autoplayInterval]=10000 >
+          <p-carousel *ngIf="plants.length > 0" [value]="plants" [numVisible]="3" [numScroll]="3" [circular]="true"  [autoplayInterval]=10000 >
             <ng-template let-plant pTemplate="item">
               <div class="border-1 surface-border border-round m-2 text-center py-5 px-3">
                 <div class="mb-3">
@@ -44,9 +44,11 @@
             </ng-template>
           </p-carousel>
         </div>
-        <div *ngIf="availableCareSessions.length > 0" class="w-100 flex-col">
-          <h2 class="w-100 text-center">Les plantes que j'aimerai faire garder</h2>
-          <p-carousel [value]="availableCareSessions" [numVisible]="3" [numScroll]="3" [circular]="true"  [autoplayInterval]=10000 >
+        <div  class="w-100 flex-col">
+          <h2 class="w-100 text-center">Les plantes que j'aimerai faire garder
+            <p-button *ngIf="user.user_id === this.authService.getUserId()" [styleClass]="'p-button-plus'" [style]="{'width':'5vw','border':0,'color':'#4A4A4A','margin': 0,'padding': 0}" icon="pi pi-plus" class="p-button-plus" (click)="openCareSessionPublicationForm()"></p-button>
+          </h2>
+          <p-carousel *ngIf="availableCareSessions.length > 0" [value]="availableCareSessions" [numVisible]="3" [numScroll]="3" [circular]="true"  [autoplayInterval]=10000 >
             <ng-template let-availableCareSession pTemplate="item">
               <div class="border-1 surface-border border-round m-2 text-center py-5 px-3">
                 <div class="mb-3">
@@ -66,9 +68,9 @@
       <h2 class="tab-title two-tabs">Les plantes dont je me suis occupées</h2>
 
       <div class="tab-panel-content">
-        <div *ngIf="careTakerExperiences.length > 0" class="w-100 flex-col">
+        <div class="w-100 flex-col">
           <h2 class="w-100 text-center">Les plantes que j'ai gardées</h2>
-          <p-carousel [value]="careTakerExperiences" [numVisible]="3" [numScroll]="3" [circular]="true"  [autoplayInterval]=10000 >
+          <p-carousel *ngIf="careTakerExperiences.length > 0"  [value]="careTakerExperiences" [numVisible]="3" [numScroll]="3" [circular]="true"  [autoplayInterval]=10000 >
             <ng-template let-careTakerExperience pTemplate="item">
               <div class="border-1 surface-border border-round m-2 text-center py-5 px-3">
                 <div class="mb-3">
@@ -85,9 +87,12 @@
     </div>
 </div>
 <p-dialog [(visible)]="displayPlantForm" [modal]="true" [style]="{width: '50vw'}" [closable]="true">
-  <app-plant-form (closeModal)="displayPlantForm = false"></app-plant-form>
+  <app-plant-form (closeModal)="displayPlantForm = false ; ngOnInit()"></app-plant-form>
 </p-dialog>
 
 <p-dialog [(visible)]="displayAddressForm" [modal]="true" [style]="{width: '50vw'}" [closable]="true">
-  <app-address-form (closeModal)="displayAddressForm = false"></app-address-form>
+  <app-address-form (closeModal)="displayAddressForm = false; ngOnInit()"></app-address-form>
+</p-dialog>
+<p-dialog [(visible)]="displayCareSessionForm" [modal]="true" [style]="{width: '50vw'}" [closable]="true">
+  <app-publication-form (closeModal)="displayCareSessionForm = false; ngOnInit()"></app-publication-form>
 </p-dialog>

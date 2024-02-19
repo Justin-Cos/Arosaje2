@@ -3,6 +3,7 @@ const CareSessions = require('../models/CareSession'); // Adjust the path based 
 const Plant = require('../models/Plant');
 const User = require('../models/User');
 const Address = require('../models/Address');
+const Comment = require('../models/Comment');
 const {Op} = require("sequelize");
 const {calculateDist} = require("../utils");
 
@@ -193,7 +194,7 @@ exports.getCareSessionById = async (req, res) => {
     const sessionId = req.params.id;
     try {
         const careSession = await CareSessions.findByPk(sessionId, {
-            include: [{model: User}, {model: Plant}, {model: Address}],
+            include: [{model: User}, {model: Plant, include: [User]}, {model: Address}, {model: Comment, include: [User]}],
         });
         if (!careSession) {
             return res.status(404).json({error: 'Care session not found'});

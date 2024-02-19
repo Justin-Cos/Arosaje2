@@ -1,15 +1,15 @@
-import {Component, OnInit} from '@angular/core';
-import {PlantModel} from "../models/plant.model";
-import {PlantService} from "../services/ressources/plant.service";
-import {AuthService} from "../services/auth.service";
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {PlantModel} from "../../../models/plant.model";
+import {PlantService} from "../../../services/ressources/plant.service";
+import {AuthService} from "../../../services/auth.service";
 import {NgForOf, NgIf} from "@angular/common";
 import {FileUploadModule} from "primeng/fileupload";
-import {AddressService} from "../services/ressources/address.service";
-import {AddressModel} from "../models/address.model";
+import {AddressService} from "../../../services/ressources/address.service";
+import {AddressModel} from "../../../models/address.model";
 import {FormsModule, NgForm} from "@angular/forms";
 import {PaginatorModule} from "primeng/paginator";
 import {MessageModule} from "primeng/message";
-import {CareSessionService} from "../services/ressources/care-session.service";
+import {CareSessionService} from "../../../services/ressources/care-session.service";
 import {Router} from "@angular/router";
 
 @Component({
@@ -24,9 +24,10 @@ import {Router} from "@angular/router";
     NgIf
   ],
   templateUrl: './publication-form.component.html',
-  styleUrl: './publication-form.component.scss'
+  styleUrl: '../form-modal.component.scss'
 })
 export class PublicationFormComponent implements OnInit {
+  @Output() closeModal = new EventEmitter<void>();
   constructor(private plantService: PlantService, private addressService: AddressService, private careSessionService: CareSessionService, private authService: AuthService, private router: Router) {}
   plants: PlantModel[] = [];
   addresses: AddressModel[] = [];
@@ -63,8 +64,8 @@ export class PublicationFormComponent implements OnInit {
       }
       this.careSessionService.createCareSession(this.plant, this.address, this.startDate, this.endDate, this.details ?? null).subscribe(
         (res) => {
-          this.router.navigate(['/home']);
-        },
+          this.closeModal.emit();
+          },
         (error) => {
           console.log(error);
           this.errorMessage = error.message;

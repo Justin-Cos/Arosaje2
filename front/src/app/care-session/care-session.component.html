@@ -1,0 +1,30 @@
+<div class="container" *ngIf="careSession">
+  <div class="row">
+    <div class="col-12">
+      <div class="plant-info">
+        <img [src]="ApiService.baseUrl + '/uploads/plants/' + plant.image" class="img-fluid plant-image" alt="Plant image">
+        <div class="plant-details">
+          <h2 class="mt-2 plant-name">{{plant.name}}</h2>
+          <p class="plant-date">Du {{careSession.date_start | date:'shortDate'}} au {{careSession.date_end | date:'shortDate'}}</p>
+          <p class="plant-description">{{careSession.details}}</p>
+          <div class="caretaker-info" *ngIf="careSession">
+            <p *ngIf="careTaker">{{careTaker.username}} is in charge of this plant.</p>
+            <button *ngIf="!careTaker && authService.getRole() !== 'caretaker'" class="add-comment-btn" (click)="becomeCaretaker()">Become the caretaker</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-12">
+      <h3>Commentaires</h3>
+      <div class="comments">
+        <div *ngFor="let comment of comments">
+          <p *ngIf="comment.comment.content">{{comment.comment.content}}</p>
+          <p><small>Par {{comment.author.username}} le {{comment.comment.date | date:'shortDate'}}</small> {{comment.comment.author_role}}</p>
+        </div>
+        <button *ngIf="this.getRole(this.authService.getUserId()) === '' && this.authService.getRole() === ''" class="add-comment-btn">Ajouter un commentaire</button>
+      </div>
+    </div>
+  </div>
+</div>

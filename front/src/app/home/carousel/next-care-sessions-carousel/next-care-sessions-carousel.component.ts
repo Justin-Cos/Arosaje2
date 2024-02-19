@@ -28,7 +28,7 @@ export class NextCareSessionsCarouselComponent implements OnInit {
       this.nextCareSessions = nextCareSessions;
       this.slides = nextCareSessions.map((nextCareSessions, index) => {
         return {
-          link: `/`,
+          link: `/care-session/${nextCareSessions.careSession.session_id}`,
           img: `${ApiService.baseUrl}/uploads/plants/${nextCareSessions.plant.image}`,
           nom: nextCareSessions.plant.name,
           bio: `${format(nextCareSessions.careSession.date_start, 'EEEE d MMMM yyyy', { locale: fr })} -

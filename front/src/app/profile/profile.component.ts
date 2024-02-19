@@ -18,6 +18,7 @@ import { switchMap } from 'rxjs/operators';
 import {AddressModel} from "../models/address.model";
 import {AddressService} from "../services/ressources/address.service";
 import {AddressFormComponent} from "./form-modal/address-form/address-form.component";
+import {PublicationFormComponent} from "./form-modal/publication-form/publication-form.component";
 
 
 @Component({
@@ -30,7 +31,8 @@ import {AddressFormComponent} from "./form-modal/address-form/address-form.compo
     AvatarModule,
     DialogModule,
     PlantFormComponent,
-    AddressFormComponent
+    AddressFormComponent,
+    PublicationFormComponent
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
@@ -44,6 +46,7 @@ export class ProfileComponent implements OnInit {
   displayPlantForm: boolean = false;
   addresses: AddressModel[] = [];
   displayAddressForm: boolean = false;
+  displayCareSessionForm: boolean = false;
 
   constructor(private route: ActivatedRoute, public authService: AuthService, private router: Router, private userService: UserService, private addressService: AddressService, private plantService: PlantService, private careSessionService: CareSessionService) {
   }
@@ -86,6 +89,8 @@ export class ProfileComponent implements OnInit {
   }
   openAddressForm() {
     this.displayAddressForm = true;
-
+  }
+  openCareSessionPublicationForm() {
+    this.displayCareSessionForm = true;
   }
 }
