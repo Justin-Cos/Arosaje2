@@ -23,7 +23,7 @@
           <p *ngIf="comment.comment.content">{{comment.comment.content}}</p>
           <p><small>Par {{comment.author.username}} le {{comment.comment.date | date:'shortDate'}}</small> {{comment.comment.author_role}}</p>
         </div>
-        <button *ngIf="this.getRole(this.authService.getUserId()) === '' && this.authService.getRole() === ''" class="add-comment-btn">Ajouter un commentaire</button>
+        <button *ngIf="this.getRole(this.authService.getUserId()) !== '' && this.authService.getRole() !== ''" class="add-comment-btn">Ajouter un commentaire</button>
       </div>
     </div>
   </div>

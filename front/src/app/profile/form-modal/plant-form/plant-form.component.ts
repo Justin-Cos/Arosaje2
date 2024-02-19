@@ -46,7 +46,7 @@ export class PlantFormComponent implements OnInit {
     );
   }
   onSubmit(publicationForm: NgForm) {
-    const plantNameRegEx = /^[a-zA-Z0-9_-]+$/;
+    const plantNameRegEx = /^[a-zA-Z0-9_ -]+$/;
     this.errorName = this.name === undefined || !plantNameRegEx.test(this.name)
     this.errorTypePlant = this.plantType === undefined;
 

@@ -11,13 +11,15 @@ const upload = multer({storage});
 router.get('/', middleware.authenticateToken, userController.getAllUsers);
 router.get('/botanist', middleware.authenticateToken, userController.getAllBotanists);
 router.get('/search', middleware.authenticateToken, userController.getUsersNameLike);
-router.get('/:id', middleware.authenticateToken, userController.getUserById);
-router.put('/:id', middleware.authenticateToken, userController.updateUserById);
-router.delete('/:id', middleware.authenticateToken, userController.deleteUserById);
+
 
 //authent
 router.post('/register',upload.single('image_file'), userController.registerUser);
 router.post('/login', userController.loginUser);
 router.get('/update-token', middleware.authenticateToken, userController.updateToken);
+
+router.get('/:id', middleware.authenticateToken, userController.getUserById);
+router.put('/:id', middleware.authenticateToken, userController.updateUserById);
+router.delete('/:id', middleware.authenticateToken, userController.deleteUserById);
 
 module.exports = router;

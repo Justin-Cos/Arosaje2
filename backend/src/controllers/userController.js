@@ -155,7 +155,7 @@ exports.loginUser = async (req, res) => {
     }
 }
 exports.updateToken = async (req, res) => {
-    const userId = req.user.user_id;
+    const userId = req.query.user;
     try {
         const user = await User.findOne({
             where: {

@@ -10,12 +10,14 @@
         <p-message *ngIf="errorPlant" severity="error" text="Choisissez une plante."></p-message>
         <label for="plant">Plante: <span class="mandatory">*</span></label>
         <select id="plant" [(ngModel)]="plant" name="plant">
+          <option value="0">Choisissez une plante</option>
           <option *ngFor="let plant of plants" value="{{plant.plant_id}}">{{plant.name}}</option>
         </select>
 
         <p-message *ngIf="errorAddress" severity="error" text="Choisissez une addresse."></p-message>
         <label for="address">Adresse: <span class="mandatory">*</span></label>
         <select id="address" [(ngModel)]="address" name="address">
+          <option value="0">Choisissez une adresse</option>
           <option *ngFor="let address of addresses" value="{{address.address_id}}">{{address.address}}</option>
         </select>
 

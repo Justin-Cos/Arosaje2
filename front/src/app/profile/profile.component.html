@@ -5,15 +5,15 @@
       <figcaption *ngIf="user">
         <img src="{{ApiService.baseUrl}}/uploads/profile_pictures/{{user.profile_picture}}" alt="profile-sample4" class="profile" />
         <h2>{{ user.username }}<span *ngIf="user.role === 'botanist'">Botaniste certifié</span></h2>
-        <p>{{ user.bio }}</p>
+        <p>{{ user.bio ?? "Cet utilisateur n'a pas encore défini de bio"}}</p>
 
         <h3 style=" border-top: solid 1px rgba(0, 0, 0, 0.125);padding-top: 10px">Adresses</h3>
         <div *ngFor="let address of addresses" class="address flex-row">
           <p>{{ address.address }},  <span class="long-lat">{{address.city}} - {{address.country}}</span></p>
-          <p-button *ngIf="user.user_id === this.authService.getUserId()" [style]="{'border':0,'color':'#4A4A4A','margin': '0 1vw','padding': 0,'background-color':'white'}" icon="pi pi-trash" class="p-button-danger" (click)="deleteAddress(address)"></p-button>
+          <p-button *ngIf="user?.user_id === this.authService.getUserId()" [style]="{'border':0,'color':'#4A4A4A','margin': '0 1vw','padding': 0,'background-color':'white'}" icon="pi pi-trash" class="p-button-danger" (click)="deleteAddress(address)"></p-button>
 
         </div>
-        <p-button *ngIf="user.user_id === this.authService.getUserId()" [styleClass]="'p-button-plus'" icon="pi pi-plus" class="p-button-plus" (click)="openAddressForm()"></p-button>
+        <p-button *ngIf="user?.user_id === this.authService.getUserId()" [styleClass]="'p-button-plus'" icon="pi pi-plus" class="p-button-plus" (click)="openAddressForm()"></p-button>
 
       </figcaption>
     </figure>
@@ -27,7 +27,7 @@
         <div  class="w-100 flex-col">
           <div>
             <h2 class="w-100 text-center">Mes plantes
-              <p-button *ngIf="user.user_id === this.authService.getUserId()" [styleClass]="'p-button-plus'" [style]="{'width':'5vw','border':0,'color':'#4A4A4A','margin': 0,'padding': 0}" icon="pi pi-plus" class="p-button-plus" (click)="openPlantForm()"></p-button>
+              <p-button *ngIf="user?.user_id === this.authService.getUserId()" [styleClass]="'p-button-plus'" [style]="{'width':'5vw','border':0,'color':'#4A4A4A','margin': 0,'padding': 0}" icon="pi pi-plus" class="p-button-plus" (click)="openPlantForm()"></p-button>
             </h2>
 
           </div>
@@ -46,7 +46,7 @@
         </div>
         <div  class="w-100 flex-col">
           <h2 class="w-100 text-center">Les plantes que j'aimerai faire garder
-            <p-button *ngIf="user.user_id === this.authService.getUserId()" [styleClass]="'p-button-plus'" [style]="{'width':'5vw','border':0,'color':'#4A4A4A','margin': 0,'padding': 0}" icon="pi pi-plus" class="p-button-plus" (click)="openCareSessionPublicationForm()"></p-button>
+            <p-button *ngIf="user?.user_id === this.authService.getUserId()" [styleClass]="'p-button-plus'" [style]="{'width':'5vw','border':0,'color':'#4A4A4A','margin': 0,'padding': 0}" icon="pi pi-plus" class="p-button-plus" (click)="openCareSessionPublicationForm()"></p-button>
           </h2>
           <p-carousel *ngIf="availableCareSessions.length > 0" [value]="availableCareSessions" [numVisible]="3" [numScroll]="3" [circular]="true"  [autoplayInterval]=10000 >
             <ng-template let-availableCareSession pTemplate="item">
@@ -87,12 +87,12 @@
     </div>
 </div>
 <p-dialog [(visible)]="displayPlantForm" [modal]="true" [style]="{width: '50vw'}" [closable]="true">
-  <app-plant-form (closeModal)="displayPlantForm = false ; ngOnInit()"></app-plant-form>
+  <app-plant-form (closeModal)="closePlantForm()"></app-plant-form>
 </p-dialog>
 
 <p-dialog [(visible)]="displayAddressForm" [modal]="true" [style]="{width: '50vw'}" [closable]="true">
-  <app-address-form (closeModal)="displayAddressForm = false; ngOnInit()"></app-address-form>
+  <app-address-form (closeModal)="closeAddressForm()"></app-address-form>
 </p-dialog>
-<p-dialog [(visible)]="displayCareSessionForm" [modal]="true" [style]="{width: '50vw'}" [closable]="true">
-  <app-publication-form (closeModal)="displayCareSessionForm = false; ngOnInit()"></app-publication-form>
+<p-dialog [(visible)]="displayCareSessionForm" [modal]="true" [style]="{width: '50vw'}" [closable]="true" (onShow)="publicationForm.ngOnInit()">
+  <app-publication-form #publicationForm (closeModal)="closeCareSessionPublicationForm()"></app-publication-form>
 </p-dialog>

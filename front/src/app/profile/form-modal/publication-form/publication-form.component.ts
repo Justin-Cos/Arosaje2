@@ -43,20 +43,19 @@ export class PublicationFormComponent implements OnInit {
   endDate!: Date;
   details!: string ;
   ngOnInit() {
-
     this.plantService.getPlantsByUserId(this.authService.getUserId()).subscribe((plants: PlantModel[]) => {
       this.plants = plants;
     });
     this.addresses = this.authService.getAddresses()
-
   }
 
 
   onSubmit(publicationForm: NgForm) {
     this.tried_once = true;
     if (publicationForm.valid) {
-      this.errorPlant = this.plant === undefined;
-      this.errorAddress = this.address === undefined;
+      this.errorPlant = this.plant === undefined || this.plant == 0;
+      console.log(this.address);
+      this.errorAddress = this.address === undefined || this.address == 0;
       this.errorStartDate = this.startDate === undefined;
       this.errorEndDate = this.endDate === undefined;
       if (this.errorPlant || this.errorAddress || this.errorStartDate || this.errorEndDate) {

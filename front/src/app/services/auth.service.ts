@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Router} from "@angular/router";
 import {ApiService} from "./api.service";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -22,13 +22,11 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
   saveToken(token: string) {
-    console.log(localStorage.getItem('token'));
-
     localStorage.setItem('token', token);
   }
   updateToken() {
-    console.log('update token');
-    this.http.get(ApiService.baseUrl + '/user/update-token?user=' + this.getUserId()).subscribe((response: any) => {
+    const headers = new HttpHeaders({Authorization: `Bearer ${this.getToken()}`})
+    this.http.get(ApiService.apiBaseRoute + '/user/update-token?user=' + this.getUserId(),{headers}).subscribe((response: any) => {
       this.saveToken(response.token);
     });
   }

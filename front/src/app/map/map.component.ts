@@ -28,14 +28,15 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    const initialState = { lng: this.userAdressLong, lat: this.userAdressLat , zoom: 10 };
+    const initialState = { lng: this.userAdressLong, lat: this.userAdressLat , zoom: 5 };
 
     let userAdresses: AddressModel[] = this.authService.getAddresses() ?? [];
+
 
     this.map = new Map({
       container: this.mapContainer.nativeElement,
       style: `https://api.maptiler.com/maps/streets-v2/style.json?key=QVXST2w7a0YlOzOVek3p`,
-      center: [userAdresses[0].longitude ?? 0, userAdresses[0].latitude ?? 0],
+      center: [userAdresses[0]?.longitude ?? 0, userAdresses[0]?.latitude ?? 0],
       zoom: initialState.zoom
     });
 

@@ -35,6 +35,7 @@
     <li *ngIf="!authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/register">Register</a></li>
     <li *ngIf="authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/profile/{{authService.getUserId()}}">Profile</a></li>
     <li *ngIf="authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/map">Map</a></li>
+    <li *ngIf="authService.isLoggedIn()" class="options-menu-lateral li-clean" style="cursor: pointer"><a class="liens-menu-lateral a-clean" (click)="this.authService.logout();">Se déconnecter</a></li>
   </ul>
 </div>
 

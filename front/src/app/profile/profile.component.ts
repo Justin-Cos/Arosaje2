@@ -80,17 +80,29 @@ export class ProfileComponent implements OnInit {
 
   deleteAddress(address: AddressModel) {
     this.addressService.deleteAddress(address.address_id).subscribe(() => {
-      this.addresses = this.addresses.filter((a) => a.address_id !== address.address_id);
       this.authService.updateToken();
+      this.ngOnInit()
     });
   }
   openPlantForm() {
     this.displayPlantForm = true;
   }
+  closePlantForm() {
+    this.displayPlantForm = false;
+    this.ngOnInit();
+  }
   openAddressForm() {
     this.displayAddressForm = true;
   }
+  closeAddressForm() {
+    this.displayAddressForm = false;
+    this.ngOnInit();
+  }
   openCareSessionPublicationForm() {
     this.displayCareSessionForm = true;
+  }
+  closeCareSessionPublicationForm() {
+    this.displayCareSessionForm = false;
+    this.ngOnInit();
   }
 }

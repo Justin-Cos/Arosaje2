@@ -7,13 +7,13 @@ import {AuthService} from "./auth.service";
   providedIn: 'root',
 })
 export class ApiService {
-  static baseUrl = 'http://localhost:3000';
-  private readonly apiBaseRoute = 'http://localhost:3000/api/v1';
+  static readonly baseUrl = 'http://localhost:3000';
+  static readonly apiBaseRoute = 'http://localhost:3000/api/v1';
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   get<T>(endpoint: string): Observable<T> {
-    const url = `${this.apiBaseRoute}/${endpoint}`;
+    const url = `${ApiService.apiBaseRoute}/${endpoint}`;
     let headers = {};
     if (this.authService.isLoggedIn()) {
       headers =  new HttpHeaders({
@@ -24,7 +24,7 @@ export class ApiService {
   }
 
   post<T>(endpoint: string, data: any, options?: {}): Observable<T> {
-    const url = `${this.apiBaseRoute}/${endpoint}`;
+    const url = `${ApiService.apiBaseRoute}/${endpoint}`;
     let headers = {};
     if (this.authService.isLoggedIn()) {
       headers = {
@@ -36,7 +36,7 @@ export class ApiService {
   }
 
   delete<T>(endpoint: string): Observable<T> {
-    const url = `${this.apiBaseRoute}/${endpoint}`;
+    const url = `${ApiService.apiBaseRoute}/${endpoint}`;
     let headers = {};
     if (this.authService.isLoggedIn()) {
       headers =  new HttpHeaders({
@@ -47,7 +47,7 @@ export class ApiService {
   }
 
   put<T>(endpoint: string, data: any): Observable<T> {
-    const url = `${this.apiBaseRoute}/${endpoint}`;
+    const url = `${ApiService.apiBaseRoute}/${endpoint}`;
     let headers = {};
     if (this.authService.isLoggedIn()) {
       headers =  new HttpHeaders({
