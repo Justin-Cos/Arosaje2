@@ -24,7 +24,6 @@ const User = sequelize.define('User', {
     profile_picture: {
         type: DataTypes.TEXT,
         allowNull: false,
-        unique: true,
     },
     bio: {
         type: DataTypes.TEXT,

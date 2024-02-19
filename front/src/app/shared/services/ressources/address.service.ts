@@ -21,7 +21,6 @@ export class AddressService {
     );
   }
   createAddress(formData: FormData): Observable<AddressModel> {
-    console.log(formData.get('owner'));
     return this.apiService.post<AddressModel>(this.endpoint, {
       country: formData.get('country'),
       city: formData.get('city'),

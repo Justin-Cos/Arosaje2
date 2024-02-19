@@ -8,7 +8,7 @@ import {CommentModel} from "../../models/comment.model";
   providedIn: 'root',
 })
 export class CommentService {
-  private endpoint = 'comments';
+  private endpoint = 'comment';
   constructor(private apiService: ApiService) {
   }
   getCommentsByCareSessionId(careSessionId: number): Observable<any> {
@@ -17,5 +17,8 @@ export class CommentService {
         return jsonArray.map((json: any) => CommentModel.fromJson(json));
       })
     );
+  }
+  createComment(formData: FormData): Observable<any> {
+    return this.apiService.post<any>(this.endpoint, formData);
   }
 }

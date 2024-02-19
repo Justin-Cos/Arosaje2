@@ -89,7 +89,7 @@ module.exports = {
                 username: `User${i}`,
                 email: `user${i}@example.com`,
                 password: hashPassword('hashed_password'),
-                profile_picture: `demo_data/user${i}.jpg`,
+                profile_picture: `demo_data/user.jpg`,
                 bio: `Bio for User${i}.`,
             };
 

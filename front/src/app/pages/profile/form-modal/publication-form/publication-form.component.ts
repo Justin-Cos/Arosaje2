@@ -54,7 +54,6 @@ export class PublicationFormComponent implements OnInit {
     this.tried_once = true;
     if (publicationForm.valid) {
       this.errorPlant = this.plant === undefined || this.plant == 0;
-      console.log(this.address);
       this.errorAddress = this.address === undefined || this.address == 0;
       this.errorStartDate = this.startDate === undefined;
       this.errorEndDate = this.endDate === undefined || this.startDate > this.endDate;
@@ -66,7 +65,6 @@ export class PublicationFormComponent implements OnInit {
           this.closeModal.emit();
           },
         (error) => {
-          console.log(error);
           this.errorMessage = error.message;
         })
     }

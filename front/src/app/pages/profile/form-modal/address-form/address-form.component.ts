@@ -57,8 +57,6 @@ export class AddressFormComponent implements OnInit {
       formData.append('owner', this.authService.getUserId().toString());
       formData.append('longitude', this.longitude.toString());
       formData.append('latitude', this.latitude.toString());
-      console.log(formData.get('owner'));
-      console.log( this.country);
       this.addressService.createAddress(formData).subscribe(
         (response) => {
           this.authService.updateToken();

@@ -21,9 +21,7 @@
   transition: transform 0.5s ease-in-out;
 }
 
-.plant-image:hover {
-  transform: scale(1.05);
-}
+
 
 .plant-details {
   background-color: #f9f9f9;
@@ -69,15 +67,48 @@
   background-color: #e9e9e9;
 }
 
-.comments p {
-  font-size: 16px;
+.comment {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.comment-content {
+  font-size: 18px;
   color: #333;
   margin-bottom: 10px;
 }
 
-.comments p small {
-  font-size: 12px;
+.comment-author {
+  display: flex;
+  align-items: center;
+}
+
+.author-image {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.comment-author p {
+  font-size: 14px;
   color: #666;
+}
+
+.comment-title {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.comment-image {
+  max-width: 50%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
 
 .add-comment-btn {

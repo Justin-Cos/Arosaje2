@@ -1,6 +1,8 @@
 const Comments = require('../models/Comment');
 const CareSession = require('../models/CareSession');
 const User = require('../models/User');
+const fs = require("fs");
+const {convertToSnakeCase} = require("../utils");
 
 
 // Controller methods
@@ -47,10 +49,24 @@ exports.getCommentsByCareSessionId = async (req, res) => {
 }
 
 exports.createComment = async (req, res) => {
-    const {care_session, author, author_role, date, content, image} = req.body;
+    const {care_session, author, author_role, date, content} = req.body;
+    let image_name;
+
     try {
-        const newComment = await Comments.create({care_session, author, author_role, date, content, image});
-        res.status(201).json(newComment);
+        image_name = req.file ? convertToSnakeCase(`${care_session}_${author}_${Date.now()}`) + '.jpg' : null;
+        const newComment = await Comments.create({
+            care_session,
+            author,
+            author_role,
+            date,
+            content,
+            image: image_name,
+        });
+        if (req.file){
+            await fs.renameSync(req.file.path, `./uploads/comments/${image_name}`);
+        }
+        res.json(newComment);
+
     } catch (error) {
         console.error(error.message);
         res.status(500).send('Erreur serveur');

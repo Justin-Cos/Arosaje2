@@ -18,7 +18,7 @@
       <input type="checkbox" id="isIndoor" [(ngModel)]="isIndoor" name="isIndoor">
 
 
-
+        <p-message *ngIf="errorImage" severity="error" text="Choisissez une image."></p-message>
         <p-fileUpload #fileUpload
                       mode="basic" name="demo[]"
         cancelIcon="pi pi-times"
@@ -27,6 +27,7 @@
         accept="image/*"
         [maxFileSize]="10000000">
         </p-fileUpload>
+
       <button type="submit">Créer plante</button>
       <p-message *ngIf="errorName || errorTypePlant" severity="error" text="Formulaire invalide remplissez les champs marqués d'un *"></p-message>
       <p-message *ngIf="errorMessage" severity="error" [text]=errorMessage></p-message>

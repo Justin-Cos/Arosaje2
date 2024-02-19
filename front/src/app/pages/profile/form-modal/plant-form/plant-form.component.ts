@@ -34,6 +34,7 @@ export class PlantFormComponent implements OnInit {
   plantType!: number;
   isIndoor: boolean = false;
   errorMessage!: string;
+  errorImage: boolean = false;
 
   constructor(private plantTypeService: PlantTypeService, private plantService: PlantService, private authService: AuthService) {}
 
@@ -49,8 +50,9 @@ export class PlantFormComponent implements OnInit {
     const plantNameRegEx = /^[a-zA-Z0-9_ -]+$/;
     this.errorName = this.name === undefined || !plantNameRegEx.test(this.name)
     this.errorTypePlant = this.plantType === undefined;
+    this.errorImage = this.fileUpload?.files[0] === undefined;
 
-    if (publicationForm.valid && !this.errorName && !this.errorTypePlant) {
+    if (publicationForm.valid && !this.errorName && !this.errorTypePlant && !this.errorImage) {
       const formData = new FormData();
 
       formData.append('name', this.name);
