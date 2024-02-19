@@ -1,13 +1,13 @@
 import { Routes } from '@angular/router';
-import {LoginComponent} from "./login/login.component";
-import {RegisterComponent} from "./register/register.component";
-import {HomeComponent} from "./home/home.component";
-import {MapComponent} from "./map/map.component";
-import {ProfileComponent} from "./profile/profile.component";
-import {ErrorComponent} from "./error/error.component";
-import {PublicationFormComponent} from "./profile/form-modal/publication-form/publication-form.component";
-import {AuthGuard} from "./services/auth-guard.service";
-import {CareSessionComponent} from "./care-session/care-session.component";
+import {LoginComponent} from "./pages/authent/login/login.component";
+import {RegisterComponent} from "./pages/authent/register/register.component";
+import {HomeComponent} from "./pages/home/home.component";
+import {MapComponent} from "./pages/map/map.component";
+import {ProfileComponent} from "./pages/profile/profile.component";
+import {ErrorComponent} from "./shared/error/error.component";
+import {PublicationFormComponent} from "./pages/profile/form-modal/publication-form/publication-form.component";
+import {AuthGuard} from "./shared/services/auth-guard.service";
+import {CareSessionComponent} from "./pages/care-session/care-session.component";
 
 export const routes: Routes = [
   { path: 'profile/:user_id', component: ProfileComponent, canActivate: [AuthGuard] },

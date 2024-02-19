@@ -140,9 +140,30 @@ exports.getNearbySessions = async (req, res) => {
 
 exports.getPreviousCareSessions = async (req, res) => {
     let whereClause = {};
+    let includeClause = [{model: User}, {model: Plant}, {model: Address}];
     if (req.query.caretaker) {
         whereClause = {
             caretaker: req.query.caretaker,
+            date_end: {
+                [Op.lt]: new Date(),
+            },
+            date_start: {
+                [Op.lt]: new Date(),
+            }
+        }
+    }else if (req.query.owner) {
+        includeClause = [{
+                model: Plant,
+                where: {
+                    owner: req.query.owner
+                },
+                required: true
+            }, {
+                model: User
+            }, {
+                model: Address
+            }]
+        whereClause = {
             date_end: {
                 [Op.lt]: new Date(),
             },
@@ -162,7 +183,7 @@ exports.getPreviousCareSessions = async (req, res) => {
     }
     try {
         const careSessions = await CareSessions.findAll({
-            include: [{model: User}, {model: Plant}, {model: Address}],
+            include: includeClause,
             where: whereClause
         });
         res.json(careSessions);
