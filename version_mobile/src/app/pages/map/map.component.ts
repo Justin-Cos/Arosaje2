@@ -5,8 +5,7 @@ import {AddressService} from "../../shared/services/ressources/address.service";
 import {AddressModel} from "../../shared/models/address.model";
 import {AuthService} from "../../shared/services/auth.service";
 import {CareSessionModel} from "../../shared/models/care-session.model";
-import {fr} from "date-fns/locale";
-import {format} from "date-fns";
+
 
 @Component({
   selector: 'app-map',
@@ -52,7 +51,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
                   ${careSession.plant.name}
                 </h2>
                 <p class="fs-6">
-                   ${format(careSession.careSession.date_start, 'EEEE d MMMM yyyy', { locale: fr })} - ${format(careSession.careSession.date_end, 'EEEE d MMMM yyyy', { locale: fr })}
+                   ${careSession.careSession.date_start} - ${careSession.careSession.date_end}
                 </p>
               </a>
 

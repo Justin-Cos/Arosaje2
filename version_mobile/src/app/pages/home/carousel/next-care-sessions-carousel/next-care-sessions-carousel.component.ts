@@ -6,8 +6,7 @@ import {CareSessionModel} from "../../../../shared/models/care-session.model";
 import {PlantModel} from "../../../../shared/models/plant.model";
 import {PlantService} from "../../../../shared/services/ressources/plant.service";
 import { forkJoin } from 'rxjs';
-import { format, parseISO } from 'date-fns';
-import { fr } from 'date-fns/locale';
+
 @Component({
   selector: 'app-next-care-sessions-carousel',
   standalone: true,
@@ -31,8 +30,7 @@ export class NextCareSessionsCarouselComponent implements OnInit {
           link: `/care-session/${nextCareSessions.careSession.session_id}`,
           img: `${ApiService.baseUrl}/uploads/plants/${nextCareSessions.plant.image}`,
           nom: nextCareSessions.plant.name,
-          bio: `${format(nextCareSessions.careSession.date_start, 'EEEE d MMMM yyyy', { locale: fr })} -
-          ${format(nextCareSessions.careSession.date_end, 'EEEE d MMMM yyyy', { locale: fr })}`,
+          bio: `${nextCareSessions.careSession.date_start} - ${nextCareSessions.careSession.date_end}`,
         };
       });
     });
