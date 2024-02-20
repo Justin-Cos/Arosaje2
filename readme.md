@@ -10,18 +10,20 @@
 
 ### Backend
 
-1. **Récupérer les dépendances :**
+1. **Naviguer vers le dossier frontend :**
+   ```bash
+   cd backend
+
+2. **Récupérer les dépendances :**
    ```bash
    npm install
-2. **Lancer les seeds :**
-   ```bash
-   npx sequelize-cli db:seed:all
 
 3. **Lancer le serveur backend avec Docker :** 
    ```bash
    docker-compose --build --force-recreate
 
 ### Frontend
+
 1. **Naviguer vers le dossier frontend :**
    ```bash
    cd front
