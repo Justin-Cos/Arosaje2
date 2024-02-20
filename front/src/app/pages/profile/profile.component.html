@@ -5,7 +5,7 @@
       <figcaption *ngIf="user">
         <img src="{{ApiService.baseUrl}}/uploads/profile_pictures/{{user.profile_picture}}" alt="profile-sample4" class="profile" />
         <h2>{{ user.username }}<span *ngIf="user.role === 'botanist'">Botaniste certifié</span></h2>
-        <p>{{ user.bio ?? "Cet utilisateur n'a pas encore défini de bio"}}</p>
+        <p>{{ user.bio}}</p>
 
         <h3 style=" border-top: solid 1px rgba(0, 0, 0, 0.125);padding-top: 10px">Adresses</h3>
         <div *ngFor="let address of addresses" class="address flex-row">
