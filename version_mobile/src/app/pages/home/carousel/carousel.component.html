@@ -1,0 +1,25 @@
+<section class="carousel-section">
+  <div class="custom-carousel">
+    <h2 class="line-title">{{title}}</h2>
+    <hr class="divider">
+    <ngx-slick-carousel class="carousel"
+                        #slickModal="slick-carousel"
+                        [config]="slideConfig">
+        <div ngxSlickItem class="slide" *ngFor="let slide of slides; let i = index">
+            <div
+              class="item"
+                 [style.backgroundImage]="'url(' + slide.img + ')'"
+                 (mouseenter)="hoveredItemIndex = i"
+                 (mouseleave)="hoveredItemIndex = null"
+                 [ngClass]="{'active': hoveredItemIndex === i}">
+              <div class="item-desc">
+                <h3><a routerLink="{{slide.link}}">{{ slide.nom }}</a> </h3>
+                <p>
+                  {{ slide.bio }}
+                </p>
+              </div>
+            </div>
+        </div>
+    </ngx-slick-carousel>
+  </div>
+</section>
