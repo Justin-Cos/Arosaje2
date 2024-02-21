@@ -31,11 +31,12 @@
     "@capacitor/keyboard": "5.0.8",
     "@capacitor/status-bar": "5.0.7",
     "@ionic/angular": "^7.5.0",
+    "@ionic/cli": "^7.2.0",
     "@ionic/cordova-builders": "^11.0.0",
     "@types/geojson": "^7946.0.14",
     "@types/maplibre-gl": "^1.14.0",
     "bootstrap": "^5.3.2",
-    "cordova-android": "12.0.1",
+    "cordova": "^12.0.0",
     "express": "^4.18.2",
     "ionicons": "^7.2.1",
     "jquery": "^3.7.1",
@@ -57,15 +58,17 @@
     "@angular-eslint/eslint-plugin-template": "^17.0.0",
     "@angular-eslint/schematics": "^17.0.0",
     "@angular-eslint/template-parser": "^17.0.0",
-    "@angular/cli": "^17.0.0",
+    "@angular/cli": "^17.2.0",
     "@angular/compiler-cli": "^17.0.2",
     "@angular/language-service": "^17.0.2",
     "@angular/material": "^17.1.2",
     "@capacitor/cli": "5.7.0",
-    "@ionic/angular-toolkit": "^9.0.0",
+    "@ionic/angular-toolkit": "^11.0.1",
     "@types/jasmine": "~5.1.0",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
+    "cordova-android": "^12.0.1",
+    "cordova-ios": "^7.0.1",
     "cordova-plugin-device": "2.0.2",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-ionic-webview": "^5.0.0",
@@ -95,6 +98,7 @@
       "cordova-plugin-ionic-keyboard": {}
     },
     "platforms": [
+      "ios",
       "android"
     ]
   }

@@ -13,3 +13,4 @@ import {MenuComponent} from "./pages/layout/menu.component";
 export class AppComponent {
   title = 'front';
 }
+
