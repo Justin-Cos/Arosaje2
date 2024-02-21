@@ -10,7 +10,6 @@ import {AddressModel} from "../../shared/models/address.model";
 import {DatePipe, NgForOf, NgIf} from "@angular/common";
 import {AuthService} from "../../shared/services/auth.service";
 import {ApiService} from "../../shared/services/api.service";
-import {getDate} from "date-fns";
 import {FormsModule, NgForm} from "@angular/forms";
 import {FileUpload, FileUploadModule} from "primeng/fileupload";
 import {MessageModule} from "primeng/message";
@@ -42,7 +41,7 @@ export class CareSessionComponent implements OnInit {
   content: string = '';
   title: string = '';
   commentFormOpened: boolean = false;
-
+  date_end!: Date;
   constructor(private CareSessionService: CareSessionService, private commentService: CommentService, private route: ActivatedRoute, public authService: AuthService, private router: Router) {}
   @ViewChild('fileUpload') fileUpload: FileUpload | undefined;
 
@@ -56,11 +55,13 @@ export class CareSessionComponent implements OnInit {
         )).subscribe(data => {
           this.dateNow = new Date();
           this.careSession = data.careSession;
+          this.date_end = new Date(this.careSession.date_end);
           this.plant = data.plant.plant;
           this.careTaker = data.user;
           this.address = data.address;
           this.comments = data.comments;
           this.owner = data.plant.owner;
+          console.log(new Date(this.careSession.date_end) > new Date());
       });
   }
   getRole(user_id: number): string {
