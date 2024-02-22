@@ -1,5 +1,6 @@
 # Ignore node_modules directory
 node_modules/
+coverage/
 #uploads
 src/assets/uploads/plants/*
 !src/assets/uploads/plants/demo_data/

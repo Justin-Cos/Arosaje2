@@ -56,7 +56,7 @@ exports.createPlant = async (req, res) => {
     let owner;
     try {
         image_name = convertToSnakeCase(`${name}_${owner_id}_${Date.now()}`) + '.jpg';
-        await Plant.create({
+        const plant = await Plant.create({
             plant_type: plant_type,
             owner: owner_id,
             name: name,
@@ -64,7 +64,7 @@ exports.createPlant = async (req, res) => {
             indoor: indoor,
         });
         await fs.renameSync(req.file.path, `./uploads/plants/${image_name}`);
-        res.status(201).json({message: 'Plant created successfully'});
+        res.status(201).json(plant);
     } catch (error) {
         console.error(error.message);
         fs.unlink(req.file.path, (err) => {

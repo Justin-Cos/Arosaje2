@@ -78,6 +78,7 @@ exports.getUsersNameLike = async (req, res) => {
 
 exports.registerUser = async (req, res) => {
     const {username, email,bio, password, role} = req.body;
+    console.log('image',req.file.path)
     try {
         const image_name = convertToSnakeCase(`${username}_${Date.now()}`) + '.jpg';
         const createdUser = await User.create({
@@ -100,7 +101,7 @@ exports.registerUser = async (req, res) => {
                 console.error(err);
                 res.status(500).json({message: 'Internal Server Error'});
             } else {
-                res.status(201).json({token: token});
+                res.status(201).json({token: token, user_id: createdUser.user_id});
             }
         });
     } catch (error) {
@@ -117,15 +118,11 @@ exports.registerUser = async (req, res) => {
 
 exports.loginUser = async (req, res) => {
     const {username, password} = req.body;
+    console.log(req.body)
     try {
         const user = await User.findOne({
             where: {
                 username: username,
-            },
-        });
-        const address = await Address.findAll({
-            where: {
-                owner: user.user_id
             },
         });
         if (!user) {
@@ -133,6 +130,11 @@ exports.loginUser = async (req, res) => {
         } else if (user.password !== hashPassword(password)) {
             return res.status(401).json({error: 'Mot de passe incorrect'});
         } else {
+            const address = await Address.findAll({
+                where: {
+                    owner: user.user_id
+                },
+            });
             sign({
                 user_id: user.user_id,
                 username: user.username,
