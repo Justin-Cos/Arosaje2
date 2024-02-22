@@ -6,8 +6,8 @@ const router = express.Router();
 
 router.get('/', middleware.authenticateToken, plantsTypeController.getAllPlantTypes);
 router.get('/:id', middleware.authenticateToken, plantsTypeController.getPlantTypeById);
-router.post('/', middleware.authenticateToken, plantsTypeController.createPlantType);
-router.put('/:id', middleware.authenticateToken, plantsTypeController.updatePlantTypeById);
-router.delete('/:id', middleware.authenticateToken, plantsTypeController.deletePlantTypeById);
+router.post('/', middleware.authenticateTokenAdminOnly, plantsTypeController.createPlantType);
+router.put('/:id', middleware.authenticateTokenAdminOnly, plantsTypeController.updatePlantTypeById);
+router.delete('/:id', middleware.authenticateTokenAdminOnly, plantsTypeController.deletePlantTypeById);
 
 module.exports = router;

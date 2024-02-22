@@ -51,7 +51,7 @@ exports.getCommentsByCareSessionId = async (req, res) => {
 exports.createComment = async (req, res) => {
     const {care_session, author, author_role, date, content} = req.body;
     let image_name;
-
+    console.log(req.file);
     try {
         image_name = req.file ? convertToSnakeCase(`${care_session}_${author}_${Date.now()}`) + '.jpg' : null;
         const newComment = await Comments.create({
@@ -62,10 +62,10 @@ exports.createComment = async (req, res) => {
             content,
             image: image_name,
         });
-        if (req.file){
+        if (req.file) {
             await fs.renameSync(req.file.path, `./uploads/comments/${image_name}`);
         }
-        res.json(newComment);
+        res.status(201).json(newComment);
 
     } catch (error) {
         console.error(error.message);
@@ -81,12 +81,12 @@ exports.updateCommentById = async (req, res) => {
         if (!commentToUpdate) {
             return res.status(404).json({error: 'Comment not found'});
         }
-        commentToUpdate.care_session = care_session;
-        commentToUpdate.author = author;
-        commentToUpdate.author_role = author_role;
-        commentToUpdate.date = date;
-        commentToUpdate.content = content;
-        commentToUpdate.image = image;
+        commentToUpdate.care_session = care_session ?? commentToUpdate.care_session;
+        commentToUpdate.author = author ?? commentToUpdate.author;
+        commentToUpdate.author_role = author_role ?? commentToUpdate.author_role;
+        commentToUpdate.date = date ?? commentToUpdate.date;
+        commentToUpdate.content = content ?? commentToUpdate.content;
+        commentToUpdate.image = image ?? commentToUpdate.image;
         await commentToUpdate.save();
         res.json({message: 'Comment updated successfully', comment: commentToUpdate});
     } catch (error) {

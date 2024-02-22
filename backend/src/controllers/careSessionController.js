@@ -10,6 +10,9 @@ const {calculateDist} = require("../utils");
 
 // Controller methods
 exports.getAllCareSessions = async (req, res) => {
+    if (req.query.caretaker) {
+        return exports.getSessionsByCaretaker(req, res);
+    }
     try {
         const careSessions = await CareSessions.findAll({
             include: [{model: User}, {model: Plant}, {model: Address}],
@@ -108,8 +111,9 @@ exports.getNearbySessions = async (req, res) => {
                         {
                             model: User,
                         }
-                    ]},
-                { model: Address }],
+                    ]
+                },
+                {model: Address}],
             where: {
                 caretaker: null,
                 date_end: {
@@ -151,18 +155,18 @@ exports.getPreviousCareSessions = async (req, res) => {
                 [Op.lt]: new Date(),
             }
         }
-    }else if (req.query.owner) {
+    } else if (req.query.owner) {
         includeClause = [{
-                model: Plant,
-                where: {
-                    owner: req.query.owner
-                },
-                required: true
-            }, {
-                model: User
-            }, {
-                model: Address
-            }]
+            model: Plant,
+            where: {
+                owner: req.query.owner
+            },
+            required: true
+        }, {
+            model: User
+        }, {
+            model: Address
+        }]
         whereClause = {
             date_end: {
                 [Op.lt]: new Date(),
@@ -196,7 +200,7 @@ exports.getActiveCareSessions = async (req, res) => {
     try {
         const careSessions = await CareSessions.findAll({
             include: [{model: User}, {model: Plant}, {model: Address}],
-            where : {
+            where: {
                 date_end: {
                     [Op.gt]: new Date(),
                 },
@@ -215,7 +219,10 @@ exports.getCareSessionById = async (req, res) => {
     const sessionId = req.params.id;
     try {
         const careSession = await CareSessions.findByPk(sessionId, {
-            include: [{model: User}, {model: Plant, include: [User]}, {model: Address}, {model: Comment, include: [User]}],
+            include: [{model: User}, {model: Plant, include: [User]}, {model: Address}, {
+                model: Comment,
+                include: [User]
+            }],
         });
         if (!careSession) {
             return res.status(404).json({error: 'Care session not found'});
@@ -246,12 +253,12 @@ exports.updateCareSessionById = async (req, res) => {
         if (!careSessionToUpdate) {
             return res.status(404).json({error: 'Care session not found'});
         }
-        careSessionToUpdate.plant = plant;
-        careSessionToUpdate.caretaker = caretaker;
-        careSessionToUpdate.location = location;
-        careSessionToUpdate.date_start = date_start;
-        careSessionToUpdate.date_end = date_end;
-        careSessionToUpdate.details = details ?? null;
+        careSessionToUpdate.plant = plant ?? careSessionToUpdate.plant;
+        careSessionToUpdate.caretaker = caretaker ?? careSessionToUpdate.caretaker;
+        careSessionToUpdate.location = location ?? careSessionToUpdate.location;
+        careSessionToUpdate.date_start = date_start ?? careSessionToUpdate.date_start;
+        careSessionToUpdate.date_end = date_end ?? careSessionToUpdate.date_end;
+        careSessionToUpdate.details = details ?? careSessionToUpdate.details;
         await careSessionToUpdate.save();
         res.json({message: 'Care session updated successfully', careSession: careSessionToUpdate});
     } catch (error) {

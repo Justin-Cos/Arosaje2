@@ -3,7 +3,7 @@ const Address = require('../models/Address');
 
 exports.getAllAddresses = async (req, res) => {
     try {
-        const addresses = await Address.findAll({include: [{model: User}]});
+        const addresses = await Address.findAll();
         res.json(addresses);
     } catch (error) {
         console.error(error.message);
@@ -14,7 +14,7 @@ exports.getAllAddresses = async (req, res) => {
 exports.getAddressById = async (req, res) => {
     const addressId = req.params.id;
     try {
-        const address = await Address.findByPk(addressId, {include: User});
+        const address = await Address.findByPk(addressId);
         if (!address) {
             return res.status(404).json({error: 'Address not found'});
         }
@@ -55,13 +55,13 @@ exports.updateAddressById = async (req, res) => {
         if (!addressToUpdate) {
             return res.status(404).json({error: 'Address not found'});
         }
-        addressToUpdate.owner = owner;
-        addressToUpdate.longitude = longitude;
-        addressToUpdate.latitude = latitude;
-        addressToUpdate.country = country;
-        addressToUpdate.city = city;
-        addressToUpdate.address = address;
-        addressToUpdate.zip_code = zip_code;
+        addressToUpdate.owner = owner ?? addressToUpdate.owner
+        addressToUpdate.longitude = longitude ?? addressToUpdate.longitude
+        addressToUpdate.latitude = latitude ?? addressToUpdate.latitude
+        addressToUpdate.country = country ?? addressToUpdate.country
+        addressToUpdate.city = city ?? addressToUpdate.city
+        addressToUpdate.address = address ?? addressToUpdate.address
+        addressToUpdate.zip_code = zip_code ?? addressToUpdate.zip_code;
         await addressToUpdate.save();
         res.json({message: 'Address updated successfully', address: addressToUpdate});
     } catch (error) {

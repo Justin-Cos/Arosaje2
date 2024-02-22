@@ -12,7 +12,7 @@ router.get('/', middleware.authenticateToken, commentsController.getAllComments)
 router.get('/careSession/:id', middleware.authenticateToken, commentsController.getCommentsByCareSessionId);
 router.get('/:id', middleware.authenticateToken, commentsController.getCommentById);
 router.post('/', middleware.authenticateToken, upload.single('image'), commentsController.createComment);
-router.put('/:id', middleware.authenticateToken, commentsController.updateCommentById);
-router.delete('/:id', middleware.authenticateToken, commentsController.deleteCommentById);
+router.put('/:id', middleware.authenticateTokenAdminOnly, commentsController.updateCommentById);
+router.delete('/:id', middleware.authenticateTokenAdminOnly, commentsController.deleteCommentById);
 
 module.exports = router;

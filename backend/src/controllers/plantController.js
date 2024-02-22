@@ -66,13 +66,16 @@ exports.createPlant = async (req, res) => {
         await fs.renameSync(req.file.path, `./uploads/plants/${image_name}`);
         res.status(201).json(plant);
     } catch (error) {
-        console.error(error.message);
-        fs.unlink(req.file.path, (err) => {
-            if (err) {
-                console.error(err);
-            }
-        });
-        res.status(500).send("Erreur serveur");
+        if (error.name === 'SequelizeForeignKeyConstraintError') {
+            return res.status(400).json({error: 'User or PlantType not found'});
+        } else if (error.name === 'SequelizeUniqueConstraintError') {
+            return res.status(400).json({error: 'Plant already exists'});
+        } else if (error.name === 'SequelizeValidationError') {
+            return res.status(400).json({error: error.message});
+        } else {
+            console.error(error.name);
+            res.status(500).send("Erreur serveur");
+        }
     }
 };
 

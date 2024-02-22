@@ -7,20 +7,6 @@ const fs = require("fs");
 const {sign} = require("jsonwebtoken");
 const {Op} = require("sequelize");
 // Controller methods
-exports.getAllUserPlant = async (req, res) => {
-    try {
-        const users = await User.findAll({
-            include: [{
-                model: Plant,
-            }],
-        });
-        res.json(users);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send("Erreur serveur");
-    }
-};
-
 exports.getAllUsers = async (req, res) => {
     try {
         const users = await User.findAll();
@@ -77,8 +63,8 @@ exports.getUsersNameLike = async (req, res) => {
 }
 
 exports.registerUser = async (req, res) => {
-    const {username, email,bio, password, role} = req.body;
-    console.log('image',req.file.path)
+    const {username, email, bio, password, role} = req.body;
+    console.log('image', req.file.path)
     try {
         const image_name = convertToSnakeCase(`${username}_${Date.now()}`) + '.jpg';
         const createdUser = await User.create({
@@ -106,12 +92,12 @@ exports.registerUser = async (req, res) => {
         });
     } catch (error) {
         if (error.name === 'SequelizeUniqueConstraintError') {
-            res.status(400).json({ message: "Nom d'utilisateur ou email déjà existant"});
+            res.status(400).json({message: "Nom d'utilisateur ou email déjà existant"});
         } else if (error.name === 'ValidationError') {
-            res.status(400).json({ message: "Nom d'utilisateur ou email incorrect" , errors: error.errors });
+            res.status(400).json({message: "Nom d'utilisateur ou email incorrect", errors: error.errors});
         } else {
             console.error(error);
-            res.status(500).json({ message: 'Erreur inconnue' });
+            res.status(500).json({message: 'Erreur inconnue'});
         }
     }
 }
@@ -150,8 +136,7 @@ exports.loginUser = async (req, res) => {
                 }
             });
         }
-    }
-    catch (error) {
+    } catch (error) {
         console.error(error.message);
         res.status(500).send(error.message);
     }
@@ -183,8 +168,7 @@ exports.updateToken = async (req, res) => {
                 res.json({token: token});
             }
         });
-    }
-    catch (error) {
+    } catch (error) {
         console.error(error.message);
         res.status(500).send(error.message);
     }

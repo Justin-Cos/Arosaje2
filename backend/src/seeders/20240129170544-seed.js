@@ -84,7 +84,7 @@ module.exports = {
             },
         ];
 
-        for (let i = 1; i <= 15; i++) {
+        for (let i = 1; i <= 10; i++) {
             const newUser = {
                 username: `User${i}`,
                 email: `user${i}@example.com`,
@@ -119,29 +119,6 @@ module.exports = {
         const createdPlants = [];
         const createdCareSessions = [];
         const createdaddresses = [];
-
-        for (const user of createdUsers) {
-            createdaddresses.push(await Address.create({
-                owner: user.user_id,
-                ...generateRandomCoordinatesInFrance(),
-                country: 'France',
-                city: 'Saint-Grégoire',
-                address: `Chez ${user.username}`,
-                zip_code: 35760,
-            }));
-        }
-
-        for (const user of createdUsers) {
-            createdaddresses.push(await Address.create({
-                owner: user.user_id,
-                ...generateRandomCoordinatesInFrance(),
-                country: 'France',
-                city: 'Rennes',
-                address: `Maison secondaire de ${user.username}`,
-                zip_code: 35000,
-            }));
-        }
-
         let randomUser;
         let randomPlantType;
         let randomPlant;
@@ -156,7 +133,48 @@ module.exports = {
             }
         })
 
-        for (let i = 0; i < 40; i++) {
+
+        //2 addresses and 2 plants for each user
+        for (const user of createdUsers) {
+            randomPlantType = createdPlantTypes[getRandomIndex(createdPlantTypes.length)];
+            createdaddresses.push(await Address.create({
+                owner: user.user_id,
+                ...generateRandomCoordinatesInFrance(),
+                country: 'France',
+                city: 'Saint-Grégoire',
+                address: `Chez ${user.username}`,
+                zip_code: 35760,
+            }));
+            createdPlants.push(await Plant.create({
+                owner: user.user_id,
+                plant_type: randomPlantType.plant_type_id,
+                name: `${randomPlantType.name} de ${user.username}`,
+                image: `demo_data/${getRandomIndex(10)}.jpg`,
+                indoor: utils.randomBoolean(),
+            }));
+        }
+
+        for (const user of createdUsers) {
+            randomPlantType = createdPlantTypes[getRandomIndex(createdPlantTypes.length)];
+            createdaddresses.push(await Address.create({
+                owner: user.user_id,
+                ...generateRandomCoordinatesInFrance(),
+                country: 'France',
+                city: 'Rennes',
+                address: `Maison secondaire de ${user.username}`,
+                zip_code: 35000,
+            }));
+            createdPlants.push(await Plant.create({
+                owner: user.user_id,
+                plant_type: randomPlantType.plant_type_id,
+                name: `${randomPlantType.name} de ${user.username}`,
+                image: `demo_data/${getRandomIndex(10)}.jpg`,
+                indoor: utils.randomBoolean(),
+            }));
+        }
+
+
+        for (let i = 0; i < 30; i++) {
             randomPlantType = createdPlantTypes[getRandomIndex(createdPlantTypes.length)];
             randomUser = createdUsers[getRandomIndex(createdUsers.length)];
             createdPlants.push(await Plant.create({
@@ -172,7 +190,7 @@ module.exports = {
                 location: createdaddresses.find(address => address.owner === randomUser.user_id).address_id,
                 date_start: new Date().setDate(new Date().getDate() - Math.floor(Math.random() * 10) + 11),
                 date_end: new Date().setDate(new Date().getDate() + Math.floor(Math.random() * 10) + 11),
-                details:  randomBoolean() ? lorem.generateParagraphs(1) : null,
+                details: randomBoolean() ? lorem.generateParagraphs(1) : null,
             }));
         }
 
@@ -197,8 +215,8 @@ module.exports = {
         const commentsData = [
             {
                 title: 'Arrosage',
-                care_session: createdCareSessions[createdCareSessions.length -1].session_id,
-                author: createdCareSessions[createdCareSessions.length -1].caretaker,
+                care_session: createdCareSessions[createdCareSessions.length - 1].session_id,
+                author: createdCareSessions[createdCareSessions.length - 1].caretaker,
                 author_role: 'caretaker',
                 date: new Date(),
                 content: 'J\'ai bien arrosé la plante aujourd\'hui.',
@@ -211,8 +229,8 @@ module.exports = {
                 content: 'Arrêtez de l\'arroser, elle a déjà assez d\'eau !',
             },
             {
-                care_session: createdCareSessions[createdCareSessions.length -1].session_id,
-                author: createdCareSessions[createdCareSessions.length -1].caretaker,
+                care_session: createdCareSessions[createdCareSessions.length - 1].session_id,
+                author: createdCareSessions[createdCareSessions.length - 1].caretaker,
                 author_role: 'caretaker',
                 date: new Date(),
                 content: 'Je l\'ai mise au soleil aujourd\'hui.',
@@ -240,8 +258,8 @@ module.exports = {
 
             },
             {
-                care_session: createdCareSessions[createdCareSessions.length -1].session_id,
-                author: createdCareSessions[createdCareSessions.length -1].caretaker,
+                care_session: createdCareSessions[createdCareSessions.length - 1].session_id,
+                author: createdCareSessions[createdCareSessions.length - 1].caretaker,
                 author_role: 'caretaker',
                 date: new Date(),
                 content: 'pas de soucis, je m\'en occupe !',
@@ -254,8 +272,8 @@ module.exports = {
                 content: 'tu fais n\'importe quoi, elle a déjà assez d\'eau !',
             },
             {
-                care_session: createdCareSessions[createdCareSessions.length -1].session_id,
-                author: createdCareSessions[createdCareSessions.length -1].caretaker,
+                care_session: createdCareSessions[createdCareSessions.length - 1].session_id,
+                author: createdCareSessions[createdCareSessions.length - 1].caretaker,
                 author_role: 'caretaker',
                 date: new Date(),
                 content: 'un peu d\'engrais aujourd\'hui.',

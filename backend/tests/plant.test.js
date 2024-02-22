@@ -9,6 +9,7 @@ const seedDown = require('../src/seeders/20240129170544-seed').down;
 
 describe('Plant routes', () => {
     beforeAll(async () => {
+        await seedDown()
         await seedUp()
     });
 
@@ -17,6 +18,18 @@ describe('Plant routes', () => {
             .get('/api/v1/plant')
             .set('Authorization', `Bearer ${token}`);
 
+        expect(res.statusCode).toEqual(200);
+    });
+    it('should get all plants from a user', async () => {
+        const user = await request(app)
+            .get('/api/v1/user')
+            .set('Authorization', `Bearer ${token}`);
+        const res = await request(app)
+            .get(`/api/v1/plant/user/${user.body[0].user_id}`)
+            .set('Authorization', `Bearer ${token}`);
+        res.body.forEach(plant => {
+            expect(plant.owner).toEqual(user.body[0].user_id);
+        })
         expect(res.statusCode).toEqual(200);
     });
 
@@ -60,14 +73,12 @@ describe('Plant routes', () => {
         expect(fetchRes.body.indoor).toEqual(plantData.indoor);
         await request(app)
             .delete(`/api/v1/plant/${plantId}`)
-            .set('Authorization', `Bearer ${token}`);
+            .set('Authorization', `Bearer ${testConfig.adminToken}`);
         const findDeletedPlantRes = await request(app)
             .get(`/api/v1/plant/${plantId}`)
             .set('Authorization', `Bearer ${token}`);
         expect(findDeletedPlantRes.statusCode).toEqual(404);
     });
-
-
     it('should update a plant by id', async () => {
         const plant = await request(app)
             .get('/api/v1/plant')
@@ -75,7 +86,7 @@ describe('Plant routes', () => {
         const plantId = plant.body[0].plant_id;
         const res = await request(app)
             .put(`/api/v1/plant/${plantId}`)
-            .set('Authorization', `Bearer ${token}`)
+            .set('Authorization', `Bearer ${testConfig.adminToken}`)
             .send({
                 name: 'UpdatedPlant',
                 plant_type: plant.body[0].plant_type,
@@ -89,15 +100,39 @@ describe('Plant routes', () => {
         expect(res.body.plant.name).toEqual('UpdatedPlant');
     });
 
-    it('should delete a plant by id', async () => {
-        const plant = await request(app)
-            .get('/api/v1/plant')
-            .set('Authorization', `Bearer ${token}`);
-        const res = await request(app)
-            .delete(`/api/v1/plant/${plant.body[0].plant_id}`)
-            .set('Authorization', `Bearer ${token}`);
 
-        expect(res.statusCode).toEqual(200);
+    describe('Plant routes error handling', () => {
+
+        it('should not create a plant without necessary data', async () => {
+            const res = await request(app)
+                .post('/api/v1/plant')
+                .set('Authorization', `Bearer ${token}`)
+                .send({
+                    name: 'TestPlant',
+                    indoor: true,
+                });
+
+            expect(res.statusCode).toEqual(400);
+        });
+
+        it('should not delete a non-existent plant', async () => {
+            const res = await request(app)
+                .delete('/api/v1/plant/0')
+                .set('Authorization', `Bearer ${testConfig.adminToken}`);
+
+            expect(res.statusCode).toEqual(404);
+        });
+
+        it('should not delete without admin rights', async () => {
+            const plant = await request(app)
+                .get('/api/v1/plant')
+                .set('Authorization', `Bearer ${token}`);
+            const res = await request(app)
+                .delete(`/api/v1/plant/${plant.body[0].plant_id}`)
+                .set('Authorization', `Bearer ${token}`);
+
+            expect(res.statusCode).toEqual(403);
+        });
     });
     afterAll(done => {
         seedDown()

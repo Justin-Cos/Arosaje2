@@ -14,7 +14,7 @@ exports.getAllPlantTypes = async (req, res) => {
 exports.getPlantTypeById = async (req, res) => {
     const plantTypeId = req.params.id;
     try {
-        const plantType = await PlantsType.findByPk(plantTypeId,{include: [{model: Plant}]});
+        const plantType = await PlantsType.findByPk(plantTypeId);
         if (!plantType) {
             return res.status(404).json({error: 'Plant type not found'});
         }

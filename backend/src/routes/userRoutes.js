@@ -14,12 +14,12 @@ router.get('/search', middleware.authenticateToken, userController.getUsersNameL
 
 
 //authent
-router.post('/register',upload.single('image_file'), userController.registerUser);
+router.post('/register', upload.single('image_file'), userController.registerUser);
 router.post('/login', userController.loginUser);
 router.get('/update-token', middleware.authenticateToken, userController.updateToken);
 
 router.get('/:id', middleware.authenticateToken, userController.getUserById);
-router.put('/:id', middleware.authenticateToken, userController.updateUserById);
-router.delete('/:id', middleware.authenticateToken, userController.deleteUserById);
+router.put('/:id', middleware.authenticateTokenAdminOnly, userController.updateUserById);
+router.delete('/:id', middleware.authenticateTokenAdminOnly, userController.deleteUserById);
 
 module.exports = router;

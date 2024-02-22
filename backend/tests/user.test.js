@@ -2,13 +2,14 @@ const request = require('supertest');
 const app = require('../src/index');
 const server = require('../src/index');
 const path = require('path');
-const testConfig = require ('../config/testConfig.json');
+const testConfig = require('../config/testConfig.json');
 const token = testConfig.token;
 const seedUp = require('../src/seeders/20240129170544-seed').up;
 const seedDown = require('../src/seeders/20240129170544-seed').down;
 describe('User routes', () => {
     beforeAll(async () => {
-        //await seedUp()
+        await seedDown()
+        await seedUp()
     });
 
     it('should get all users', async () => {
@@ -64,7 +65,7 @@ describe('User routes', () => {
 
     });
 
-    it ('create user then update and delete it using its token', async () => {
+    it('create user then update and delete it using its token', async () => {
         const res = await request(app)
             .post('/api/v1/user/register')
             .field('username', 'test2user')
