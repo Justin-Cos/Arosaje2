@@ -42,4 +42,4 @@ Le frontend utilise Angular, assurez-vous d'avoir Angular CLI installé.
 
 ## Préambule
 
-L'entreprise "A'rosa-je," fondée en 1984, offre des services aux propriétaires de plantes, incluant la garde des plantes en l'absence des propriétaires et des conseils d'entretien. Dans le cadre d'une nouvelle offre, notre équipe a été sélectionnée pour développer une application permettant aux utilisateurs de faire garder leurs plantes, avec un partage de photos et de conseils. 
+L'entreprise "A'rosa-je," fondée en 1984, offre des services aux propriétaires de plantes, incluant la garde des plantes en l'absence des propriétaires et des conseils d'entretien. Dans le cadre d'une nouvelle offre, notre équipe a été sélectionnée pour développer une application et un site web permettant aux utilisateurs de faire garder leurs plantes, avec un partage de photos et de conseils. 
