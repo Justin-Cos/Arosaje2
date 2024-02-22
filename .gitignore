@@ -1,3 +1,35 @@
 .idea
 database/*
 node_modules/*
+
+# Dossiers et fichiers générés par Cordova
+/node_modules
+/platforms
+/plugins
+/www
+
+# Fichiers de configuration de Cordova
+config.xml
+cordova_plugins.js
+package-lock.json
+
+# Dossiers et fichiers spécifiques à Ionic
+/www/build
+/www/cordova
+/www/capacitor
+/platforms/android
+/platforms/ios
+/plugins/ios.json
+/plugins/android.json
+/.idea
+
+# Dossiers et fichiers spécifiques à Capacitor
+/android
+/ios
+/www/build
+/www/cordova
+/www/node_modules
+/www/plugins
+/*.iml
+/*.log
+/*.log.*

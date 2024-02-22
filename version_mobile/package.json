@@ -5,11 +5,11 @@
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "lint": "ng lint"
+    "start": "nx serve",
+    "build": "nx build",
+    "watch": "nx build --watch --configuration development",
+    "test": "nx test",
+    "lint": "nx lint"
   },
   "private": true,
   "dependencies": {
@@ -25,8 +25,9 @@
     "@angular/platform-server": "^17.0.0",
     "@angular/router": "^17.0.0",
     "@angular/ssr": "^17.0.6",
+    "@capacitor/android": "^5.7.0",
     "@capacitor/app": "5.0.7",
-    "@capacitor/core": "5.7.0",
+    "@capacitor/core": "^5.7.0",
     "@capacitor/haptics": "5.0.7",
     "@capacitor/keyboard": "5.0.8",
     "@capacitor/status-bar": "5.0.7",
@@ -53,6 +54,8 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.0.0",
+    "@angular-devkit/core": "^17.2.0",
+    "@angular-devkit/schematics": "^17.2.0",
     "@angular-eslint/builder": "^17.0.0",
     "@angular-eslint/eslint-plugin": "^17.0.0",
     "@angular-eslint/eslint-plugin-template": "^17.0.0",
@@ -62,8 +65,11 @@
     "@angular/compiler-cli": "^17.0.2",
     "@angular/language-service": "^17.0.2",
     "@angular/material": "^17.1.2",
-    "@capacitor/cli": "5.7.0",
+    "@capacitor/cli": "^5.7.0",
     "@ionic/angular-toolkit": "^11.0.1",
+    "@nx/angular": "18.0.4",
+    "@nx/workspace": "18.0.4",
+    "@schematics/angular": "^17.2.0",
     "@types/jasmine": "~5.1.0",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
@@ -86,6 +92,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "ngx-slick-carousel": "^17.0.0",
+    "nx": "18.0.4",
     "typescript": "~5.2.2"
   },
   "description": "An Ionic project",

@@ -57,6 +57,7 @@ export class CareSessionComponent implements OnInit {
           this.careSession = data.careSession;
           this.careSession.date_end = new Date(this.careSession.date_end);
           this.plant = data.plant.plant;
+          this.careSession.date_end = new Date(this.careSession.date_end);
           this.careTaker = data.user;
           this.address = data.address;
           this.comments = data.comments;
