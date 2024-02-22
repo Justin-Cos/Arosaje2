@@ -228,9 +228,9 @@ exports.getCareSessionById = async (req, res) => {
 };
 
 exports.createCareSession = async (req, res) => {
-    const {plant, caretaker, location, date_start, date_end} = req.body;
+    const {plant, caretaker, location, date_start, date_end, details} = req.body;
     try {
-        const newCareSession = await CareSessions.create({plant, caretaker, location, date_start, date_end});
+        const newCareSession = await CareSessions.create({plant, caretaker, location, date_start, date_end, details});
         res.status(201).json(newCareSession);
     } catch (error) {
         console.error(error.message);
@@ -240,7 +240,7 @@ exports.createCareSession = async (req, res) => {
 
 exports.updateCareSessionById = async (req, res) => {
     const sessionId = req.params.id;
-    const {plant, caretaker, location, date_start, date_end} = req.body;
+    const {plant, caretaker, location, date_start, date_end, details} = req.body;
     try {
         const careSessionToUpdate = await CareSessions.findByPk(sessionId);
         if (!careSessionToUpdate) {
@@ -251,6 +251,7 @@ exports.updateCareSessionById = async (req, res) => {
         careSessionToUpdate.location = location;
         careSessionToUpdate.date_start = date_start;
         careSessionToUpdate.date_end = date_end;
+        careSessionToUpdate.details = details ?? null;
         await careSessionToUpdate.save();
         res.json({message: 'Care session updated successfully', careSession: careSessionToUpdate});
     } catch (error) {

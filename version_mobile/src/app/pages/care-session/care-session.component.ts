@@ -55,6 +55,7 @@ export class CareSessionComponent implements OnInit {
         )).subscribe(data => {
           this.dateNow = new Date();
           this.careSession = data.careSession;
+          this.careSession.date_end = new Date(this.careSession.date_end);
           this.plant = data.plant.plant;
           this.careTaker = data.user;
           this.address = data.address;
