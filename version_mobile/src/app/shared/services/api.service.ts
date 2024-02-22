@@ -7,8 +7,8 @@ import {AuthService} from "./auth.service";
   providedIn: 'root',
 })
 export class ApiService {
-  static readonly baseUrl = 'http://localhost:3000';
-  static readonly apiBaseRoute = 'http://localhost:3000/api/v1';
+  static readonly baseUrl = 'http://192.168.56.1:3000';
+  static readonly apiBaseRoute = 'http://192.168.56.1:3000/api/v1';
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 

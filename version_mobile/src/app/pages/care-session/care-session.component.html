@@ -9,7 +9,7 @@
           <p class="plant-description">{{careSession.details}}</p>
           <div class="caretaker-info" *ngIf="careSession">
             <p *ngIf="careTaker">{{careTaker.username}} s'occupe de cette plante.</p>
-            <button *ngIf="!careTaker && authService.getRole() !== 'caretaker' && careSession.date_end > dateNow" class="add-comment-btn" (click)="becomeCaretaker()">Prendre cette plante en charge</button>
+            <button *ngIf="!careTaker && getRole(authService.getUserId()) !== 'caretaker' && careSession.date_end > dateNow" class="add-comment-btn" (click)="becomeCaretaker()">Prendre cette plante en charge</button>
           </div>
         </div>
       </div>
