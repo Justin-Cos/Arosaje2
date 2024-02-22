@@ -10,7 +10,7 @@
 
 ### Backend
 
-1. **Naviguer vers le dossier frontend :**
+1. **Naviguer vers le dossier backend :**
    ```bash
    cd backend
 
@@ -24,7 +24,7 @@
 
 ### Frontend
 
-1. **Naviguer vers le dossier frontend :**
+1. **Naviguer vers le dossier front :**
    ```bash
    cd front
 

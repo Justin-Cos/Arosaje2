@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+
 module.exports = {
     convertToSnakeCase(name) {
         return name.replace(/\s+/g, '_').toLowerCase();
@@ -9,7 +11,6 @@ module.exports = {
         return Math.floor(Math.random() * max);
     },
     hashPassword(password) {
-        const bcrypt = require('bcrypt');
         return bcrypt.hashSync(password, process.env.SALT);
     },
     generateRandomCoordinatesInFrance() {

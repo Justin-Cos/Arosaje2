@@ -1,4 +1,5 @@
 const {verify} = require("jsonwebtoken");
+require('dotenv').config();
 exports.authenticateToken = (req, res, next) => {
     const authHeader = req.header('Authorization')
     const token = authHeader && authHeader.split(' ')[1];

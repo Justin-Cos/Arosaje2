@@ -8,16 +8,17 @@ const addressRoutes = require("./routes/addressRoutes");
 const careSessionRoutes = require("./routes/careSessionRoutes");
 const commentRoutes = require("./routes/commentRoutes");
 const plantTypeRoutes = require("./routes/plantTypeRoutes");
-
+const seedDown = require('./seeders/20240129170544-seed').down;
+const seedUp = require('./seeders/20240129170544-seed').up;
 
 // Synchronize Sequelize models with the database and add seed data if necessary
-sequelize.sync().then(async () => {
+const dbPromise = sequelize.sync().then(async () => {
     console.log('Sequelize models synchronized with the database');
     // Connexion à la base de données SQLite
     let usersCount = await models.User.count();
     if (usersCount === 0) {
-        await require('./seeders/20240129170544-seed').down(sequelize.getQueryInterface())
-        await require('./seeders/20240129170544-seed').up(sequelize.getQueryInterface());
+        await seedDown(sequelize.getQueryInterface())
+        await seedUp(sequelize.getQueryInterface());
     }
 }).catch((error) => {
     console.error('Error synchronizing Sequelize models:', error);
@@ -51,6 +52,8 @@ app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
 
 // Démarrage du serveur
-app.listen(3000, () => {
+const server = app.listen(3000, () => {
     console.log("Serveur démarré (http://localhost:3000/) !");
 });
+
+module.exports = server;
