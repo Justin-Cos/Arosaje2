@@ -19,11 +19,16 @@ describe('Comment routes', () => {
         expect(res.statusCode).toEqual(200);
     });
     it('should get a comment by id', async () => {
+        const comments = await request(app)
+            .get('/api/v1/comment')
+            .set('Authorization', `Bearer ${token}`);
+        expect(comments.statusCode).toEqual(200);
+
         const res = await request(app)
-            .get('/api/v1/comment/1')
+            .get('/api/v1/comment/' + comments.body[0].id_comment)
             .set('Authorization', `Bearer ${token}`);
         expect(res.statusCode).toEqual(200);
-        expect(res.body.id_comment).toEqual(1);
+        expect(res.body.id_comment).toEqual(comments.body[0].id_comment);
     });
     it('should create a new comment and then update then delete it', async () => {
         const user = await request(app)
