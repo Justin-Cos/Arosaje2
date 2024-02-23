@@ -72,7 +72,7 @@ html {
 }
 
 .align {
-  background-color:$secondaryColor;
+  background-color: $secondaryColor;
   color: var(--bodyColor);
   font-family: var(--bodyFontFamily), var(--bodyFontFamilyFallback);
   font-size: var(--bodyFontSize);
@@ -169,6 +169,7 @@ input[type="submit"] {
   font-weight: 700;
   text-transform: uppercase;
 }
+
 CareSessions
 .login input[type="submit"]:focus,
 .login input[type="submit"]:hover {
@@ -200,11 +201,13 @@ CareSessions
   font-weight: 700;
   text-transform: uppercase;
 }
+
 CareSessions
 .register input[type="submit"]:focus,
 .register input[type="submit"]:hover {
   background-color: $thirdColor;
 }
+
 /* modules/text.css */
 
 p {
@@ -214,7 +217,8 @@ p {
 .text--center {
   text-align: center;
 }
+
 .image-illustration {
   background-size: cover;
-  height:100vh;
+  height: 100vh;
 }

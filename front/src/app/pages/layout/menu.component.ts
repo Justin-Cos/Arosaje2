@@ -31,8 +31,9 @@ import {InputTextModule} from "primeng/inputtext";
   standalone: true
 })
 export class MenuComponent {
-  constructor(protected authService: AuthService,private  userService: UserService, private fb: FormBuilder) {
+  constructor(protected authService: AuthService, private userService: UserService, private fb: FormBuilder) {
   }
+
   dropdownOpen: boolean = false;
   searchValue: string = '';
   users: UserModel[] = [];
@@ -41,6 +42,7 @@ export class MenuComponent {
     search: ''
   });
   protected readonly ApiService = ApiService;
+
   menuVertical() {
     const navbar = document.getElementById('navbar-laterale')!;
     const header = document.getElementById('header')!;
@@ -54,6 +56,7 @@ export class MenuComponent {
 
     body.addEventListener('click', this.fermerMenu);
   }
+
   fermerMenu() {
     const navbar = document.getElementById('navbar-laterale')!;
     const header = document.getElementById('header')!;
@@ -63,17 +66,21 @@ export class MenuComponent {
     body.classList.remove('brightness-60');
     header.classList.remove('brightness-60');
   }
-  fetchUsers(searchValue: string){
+
+  fetchUsers(searchValue: string) {
     this.userService.getUsers(searchValue).subscribe((users: any) => {
       this.users = users;
     });
     this.dropdownOpen = true;
   }
+
   onSearchSubmit() {
     this.searchValue = this.searchForm.value.search ?? '';
     this.fetchUsers(this.searchValue);
   }
+
   @ViewChild('dropdown') dropdown: ElementRef | undefined;
+
   @HostListener('document:click', ['$event'])
   handleDocumentClick(event: MouseEvent) {
     if (this.dropdown && !this.dropdown.nativeElement.contains(event.target as Node)) {

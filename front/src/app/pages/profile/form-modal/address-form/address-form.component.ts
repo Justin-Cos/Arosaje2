@@ -33,9 +33,11 @@ export class AddressFormComponent implements OnInit {
   errorLongitude: boolean = false;
   errorLatitude: boolean = false;
 
-  constructor(private addressService: AddressService, private authService: AuthService) {}
+  constructor(private addressService: AddressService, private authService: AuthService) {
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   onSubmit(addressForm: NgForm) {
     const countryRegEx = /^[a-zA-Z]+$/;

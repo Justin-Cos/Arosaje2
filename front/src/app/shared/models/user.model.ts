@@ -1,10 +1,11 @@
-export class UserModel{
+export class UserModel {
   private _user_id: number;
   private _username: string;
   private _email: string;
   private _profile_picture: string;
   private _bio: string;
   private _role: UserRole | undefined;
+
   constructor(
     user_id: number,
     username: string,
@@ -20,6 +21,7 @@ export class UserModel{
     this._bio = bio;
     this._role = role;
   }
+
   get user_id(): number {
     return this._user_id;
   }
@@ -67,8 +69,9 @@ export class UserModel{
   set role(value: UserRole | undefined) {
     this._role = value;
   }
+
   static fromJson(json: any) {
-    const { user_id, username, email, profile_picture, bio, role } = json;
+    const {user_id, username, email, profile_picture, bio, role} = json;
     if (!username || !email || !profile_picture) {
       throw new Error('Le JSON ne contient pas toutes les propriétés requises.');
     }
@@ -78,6 +81,6 @@ export class UserModel{
 }
 
 export enum UserRole {
-  admin="admin",
-  botanist="botanist",
+  admin = "admin",
+  botanist = "botanist",
 }

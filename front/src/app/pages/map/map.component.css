@@ -11,6 +11,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
   monospace;
 }
+
 .map-wrap {
   position: relative;
   width: 100%;
@@ -29,12 +30,13 @@ code {
   bottom: 10px;
   z-index: 999;
 }
+
 .maplibregl-popup {
   transform: translate(-50%, -50%) translate(1206px, 1016px) rotateX(0deg) rotateZ(0deg);
-   position: absolute;
-   top: 0;
-   left: 0;
-   will-change: transform;
- }
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
+}
 
 

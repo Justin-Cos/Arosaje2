@@ -1,6 +1,7 @@
 <div class="row">
   <div class="col-md-12">
-    <form (ngSubmit)="onSubmit(addressForm)" #addressForm="ngForm" enctype="application/x-www-form-urlencoded" method="POST" class="form register">
+    <form (ngSubmit)="onSubmit(addressForm)" #addressForm="ngForm" enctype="application/x-www-form-urlencoded"
+          method="POST" class="form register">
       <h1> Nouvelle Adresse </h1>
 
       <label for="country">Pays <span class="mandatory">*</span></label>
@@ -28,7 +29,8 @@
       <p-message *ngIf="errorLatitude" severity="error" text="Latitude invalide"></p-message>
 
       <button type="submit">Créer Adresse</button>
-      <p-message *ngIf="errorAddress || errorCity || errorCountry || errorLatitude || errorLongitude || errorZipCode" severity="error" text="Formulaire invalide remplissez les champs marqués d'un *"></p-message>
+      <p-message *ngIf="errorAddress || errorCity || errorCountry || errorLatitude || errorLongitude || errorZipCode"
+                 severity="error" text="Formulaire invalide remplissez les champs marqués d'un *"></p-message>
       <p-message *ngIf="errorMessage" severity="error" [text]=errorMessage></p-message>
     </form>
   </div>

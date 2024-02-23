@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
 import {map, Observable} from 'rxjs';
-import {ApiService } from '../api.service';
+import {ApiService} from '../api.service';
 import {CareSessionModel} from "../../models/care-session.model";
 import {AddressModel} from "../../models/address.model";
 import {UserModel} from "../../models/user.model";
 import {PlantModel} from "../../models/plant.model";
 import {CommentModel} from "../../models/comment.model";
+
 @Injectable({
   providedIn: 'root',
 })
@@ -19,13 +20,13 @@ export class CareSessionService {
     return this.apiService.get<CareSessionModel>(`${this.endpoint}/${id}`).pipe(
       map((json: any) => {
         const careSession = CareSessionModel.fromJson(json);
-        let user : UserModel | null = null;
+        let user: UserModel | null = null;
         if (json["User"]) {
-           user = UserModel.fromJson(json["User"]);
+          user = UserModel.fromJson(json["User"]);
         }
 
         const address = AddressModel.fromJson(json["Address"]);
-        let comments : CommentModel[] = [];
+        let comments: CommentModel[] = [];
         const plant = {
           plant: PlantModel.fromJson(json["Plant"]),
           owner: UserModel.fromJson(json["Plant"]["User"])
@@ -50,8 +51,9 @@ export class CareSessionService {
       })
     );
   }
+
   getCareSessions(caretaker?: number): Observable<any> {
-    let url = this.endpoint  ;
+    let url = this.endpoint;
 
     if (caretaker) {
       url += `?caretaker=${caretaker}`;
@@ -71,6 +73,7 @@ export class CareSessionService {
       })
     );
   }
+
   getNextCareSessions(): Observable<CareSessionModel[]> {
     return this.apiService.get<CareSessionModel[]>(this.endpoint + '/next').pipe(
       map((jsonArray: any[]) => {
@@ -78,8 +81,9 @@ export class CareSessionService {
       })
     );
   }
+
   getAvailableCareSessions(owner?: number): Observable<any> {
-    let url = this.endpoint + '/available' ;
+    let url = this.endpoint + '/available';
 
     if (owner) {
       url += `?owner=${owner}`;
@@ -106,7 +110,7 @@ export class CareSessionService {
    * @param user
    */
   getPreviousCareSession(caretaker?: boolean, user?: number): Observable<any> {
-    let url = this.endpoint + '/previous' ;
+    let url = this.endpoint + '/previous';
 
     if (caretaker && user) {
       url += `?caretaker=${user}`;
@@ -128,6 +132,7 @@ export class CareSessionService {
       })
     );
   }
+
   getNearbyCareSessions(addressId: string, maxDistance: string): Observable<any> {
     return this.apiService.get<CareSessionModel[]>(`${this.endpoint}/nearby?address_id=${addressId}&maxDistance=${maxDistance}`).pipe(
       map((jsonArray: any[]) => {
@@ -157,6 +162,7 @@ export class CareSessionService {
       details
     });
   }
+
   updateCareSession(careSession: CareSessionModel): Observable<any> {
     return this.apiService.put<CareSessionModel>(`${this.endpoint}/${careSession.session_id}`, {
       plant: careSession.plant,

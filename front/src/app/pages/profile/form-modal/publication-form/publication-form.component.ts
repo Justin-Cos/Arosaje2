@@ -28,7 +28,10 @@ import {Router} from "@angular/router";
 })
 export class PublicationFormComponent implements OnInit {
   @Output() closeModal = new EventEmitter<void>();
-  constructor(private plantService: PlantService, private addressService: AddressService, private careSessionService: CareSessionService, private authService: AuthService, private router: Router) {}
+
+  constructor(private plantService: PlantService, private addressService: AddressService, private careSessionService: CareSessionService, private authService: AuthService, private router: Router) {
+  }
+
   plants: PlantModel[] = [];
   addresses: AddressModel[] = [];
   errorPlant: boolean = false;
@@ -41,7 +44,8 @@ export class PublicationFormComponent implements OnInit {
   address!: number;
   startDate!: Date;
   endDate!: Date;
-  details!: string ;
+  details!: string;
+
   ngOnInit() {
     this.plantService.getPlantsByUserId(this.authService.getUserId()).subscribe((plants: PlantModel[]) => {
       this.plants = plants;
@@ -63,7 +67,7 @@ export class PublicationFormComponent implements OnInit {
       this.careSessionService.createCareSession(this.plant, this.address, this.startDate, this.endDate, this.details ?? null).subscribe(
         (res) => {
           this.closeModal.emit();
-          },
+        },
         (error) => {
           this.errorMessage = error.message;
         })

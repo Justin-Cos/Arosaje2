@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {CarouselComponent} from "./carousel/carousel.component";
 import {ProfilesCarouselComponent} from "./carousel/profiles-carousel/profiles-carousel.component";
 import {

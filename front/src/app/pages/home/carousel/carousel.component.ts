@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {SlickCarouselModule} from "ngx-slick-carousel";
 import {CommonModule} from "@angular/common";
-import { MatDividerModule } from '@angular/material/divider';
+import {MatDividerModule} from '@angular/material/divider';
 import {DividerModule} from "primeng/divider";
 import {RouterLink} from "@angular/router";
 
@@ -16,7 +16,7 @@ import {RouterLink} from "@angular/router";
 export class CarouselComponent {
 
   @Input() slides: any[] = [];
-  @Input() title: string ="";
+  @Input() title: string = "";
 
 
   slideConfig = {"slidesToShow": 4, "slidesToScroll": 4};

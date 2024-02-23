@@ -1,4 +1,4 @@
-import {Component, OnInit, signal} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {AuthService} from "../../shared/services/auth.service";
 import {UserService} from "../../shared/services/ressources/user.service";
@@ -14,7 +14,7 @@ import {CareSessionService} from "../../shared/services/ressources/care-session.
 import {CareSessionModel} from "../../shared/models/care-session.model";
 import {DialogModule} from "primeng/dialog";
 import {PlantFormComponent} from "./form-modal/plant-form/plant-form.component";
-import { switchMap } from 'rxjs/operators';
+import {switchMap} from 'rxjs/operators';
 import {AddressModel} from "../../shared/models/address.model";
 import {AddressService} from "../../shared/services/ressources/address.service";
 import {AddressFormComponent} from "./form-modal/address-form/address-form.component";
@@ -54,6 +54,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, public authService: AuthService, private router: Router, private userService: UserService, private addressService: AddressService, private plantService: PlantService, private careSessionService: CareSessionService) {
   }
+
   ngOnInit() {
     this.route.params
       .pipe(
@@ -63,26 +64,26 @@ export class ProfileComponent implements OnInit {
         })
       )
       .subscribe(user => {
-      if (user === null) {
-        this.router.navigate(['/error']);
-      }
-      this.user = user;
-      this.plantService.getPlantsByUserId(this.user.user_id).subscribe((plants) => {
-        this.plants = plants;
+        if (user === null) {
+          this.router.navigate(['/error']);
+        }
+        this.user = user;
+        this.plantService.getPlantsByUserId(this.user.user_id).subscribe((plants) => {
+          this.plants = plants;
+        });
+        this.addressService.getAddressesByUserId(this.user.user_id).subscribe((addresses) => {
+          this.addresses = addresses;
+        });
+        this.careSessionService.getAvailableCareSessions(this.user.user_id).subscribe((careSessions) => {
+          this.availableCareSessions = careSessions;
+        })
+        this.careSessionService.getPreviousCareSession(false, this.user.user_id).subscribe((previousCareSessions) => {
+          this.previousCareSessions = previousCareSessions;
+        })
+        this.careSessionService.getPreviousCareSession(true, this.user.user_id).subscribe((careTakerExperiences) => {
+          this.careTakerExperiences = careTakerExperiences;
+        })
       });
-      this.addressService.getAddressesByUserId(this.user.user_id).subscribe((addresses) => {
-        this.addresses = addresses;
-      });
-      this.careSessionService.getAvailableCareSessions(this.user.user_id).subscribe((careSessions) => {
-        this.availableCareSessions = careSessions;
-      })
-      this.careSessionService.getPreviousCareSession(false, this.user.user_id).subscribe((previousCareSessions) => {
-        this.previousCareSessions = previousCareSessions;
-      })
-      this.careSessionService.getPreviousCareSession(true, this.user.user_id).subscribe((careTakerExperiences) => {
-        this.careTakerExperiences = careTakerExperiences;
-      })
-    });
   }
 
   deleteAddress(address: AddressModel) {
@@ -91,23 +92,29 @@ export class ProfileComponent implements OnInit {
       this.ngOnInit()
     });
   }
+
   openPlantForm() {
     this.displayPlantForm = true;
   }
+
   closePlantForm() {
     this.displayPlantForm = false;
     this.ngOnInit();
   }
+
   openAddressForm() {
     this.displayAddressForm = true;
   }
+
   closeAddressForm() {
     this.displayAddressForm = false;
     this.ngOnInit();
   }
+
   openCareSessionPublicationForm() {
     this.displayCareSessionForm = true;
   }
+
   closeCareSessionPublicationForm() {
     this.displayCareSessionForm = false;
     this.ngOnInit();

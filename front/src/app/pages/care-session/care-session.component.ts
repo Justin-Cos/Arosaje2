@@ -27,14 +27,15 @@ import {CommentService} from "../../shared/services/ressources/comment.service";
     MessageModule
   ],
   templateUrl: './care-session.component.html',
-  styleUrls: ['./care-session.component.scss', '../profile/form-modal/form-modal.component.scss']})
+  styleUrls: ['./care-session.component.scss', '../profile/form-modal/form-modal.component.scss']
+})
 export class CareSessionComponent implements OnInit {
   careSession!: CareSessionModel;
   plant!: PlantModel;
   careTaker!: UserModel;
   owner!: UserModel;
   address!: AddressModel;
-  comments: {author:UserModel,comment:CommentModel}[] = [];
+  comments: { author: UserModel, comment: CommentModel }[] = [];
   dateNow!: Date;
   session_id!: number;
   protected readonly ApiService = ApiService;
@@ -42,28 +43,32 @@ export class CareSessionComponent implements OnInit {
   title: string = '';
   commentFormOpened: boolean = false;
   date_end!: Date;
-  constructor(private CareSessionService: CareSessionService, private commentService: CommentService, private route: ActivatedRoute, public authService: AuthService, private router: Router) {}
+
+  constructor(private CareSessionService: CareSessionService, private commentService: CommentService, private route: ActivatedRoute, public authService: AuthService, private router: Router) {
+  }
+
   @ViewChild('fileUpload') fileUpload: FileUpload | undefined;
 
   ngOnInit() {
     this.route.params
       .pipe(
         switchMap(params => {
-          this.session_id = params['session_id'];
-          return this.CareSessionService.getCareSessionById(this.session_id);
-        }
+            this.session_id = params['session_id'];
+            return this.CareSessionService.getCareSessionById(this.session_id);
+          }
         )).subscribe(data => {
-          this.dateNow = new Date();
-          this.careSession = data.careSession;
-          this.date_end = new Date(this.careSession.date_end);
-          this.plant = data.plant.plant;
-          this.careTaker = data.user;
-          this.address = data.address;
-          this.comments = data.comments;
-          this.owner = data.plant.owner;
-          console.log(new Date(this.careSession.date_end) > new Date());
-      });
+      this.dateNow = new Date();
+      this.careSession = data.careSession;
+      this.date_end = new Date(this.careSession.date_end);
+      this.plant = data.plant.plant;
+      this.careTaker = data.user;
+      this.address = data.address;
+      this.comments = data.comments;
+      this.owner = data.plant.owner;
+      console.log(new Date(this.careSession.date_end) > new Date());
+    });
   }
+
   getRole(user_id: number): string {
     if (this.careTaker?.user_id === user_id) {
       return 'Gardien';
@@ -73,34 +78,37 @@ export class CareSessionComponent implements OnInit {
       return '';
     }
   }
+
   becomeCaretaker() {
     this.careSession.caretaker = this.authService.getUserId();
     this.CareSessionService.updateCareSession(this.careSession).subscribe((response: any) => {
       this.ngOnInit();
     });
   }
+
   showCommentForm() {
     this.commentFormOpened = !this.commentFormOpened;
   }
-  onSubmit(commentForm: NgForm) {
-      this.ngOnInit();
 
-      if (commentForm.valid && this.content !== '' || this.fileUpload?.files[0] !== undefined){
-        const formData = new FormData();
-        formData.append('content', this.content);
-        formData.append('title', this.title);
-        formData.append('care_session', this.session_id.toString());
-        formData.append('date', this.dateNow.toISOString());
-        formData.append('author', this.authService.getUserId().toString());
-        formData.append('author_role', this.getRole(this.authService.getUserId()) === '' ? this.authService.getRole() : this.getRole(this.authService.getUserId()));
-        if (this.fileUpload && this.fileUpload.files.length > 0) {
-          formData.append('image', this.fileUpload.files[0]);
-        }
-        this.commentService.createComment(formData).subscribe(
-          (response) => {
-            this.showCommentForm();
-            this.ngOnInit();
-          });
+  onSubmit(commentForm: NgForm) {
+    this.ngOnInit();
+
+    if (commentForm.valid && this.content !== '' || this.fileUpload?.files[0] !== undefined) {
+      const formData = new FormData();
+      formData.append('content', this.content);
+      formData.append('title', this.title);
+      formData.append('care_session', this.session_id.toString());
+      formData.append('date', this.dateNow.toISOString());
+      formData.append('author', this.authService.getUserId().toString());
+      formData.append('author_role', this.getRole(this.authService.getUserId()) === '' ? this.authService.getRole() : this.getRole(this.authService.getUserId()));
+      if (this.fileUpload && this.fileUpload.files.length > 0) {
+        formData.append('image', this.fileUpload.files[0]);
       }
+      this.commentService.createComment(formData).subscribe(
+        (response) => {
+          this.showCommentForm();
+          this.ngOnInit();
+        });
+    }
   }
 }

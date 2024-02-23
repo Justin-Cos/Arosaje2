@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Observable} from 'rxjs';
 import {AuthService} from "./auth.service";
 
 @Injectable({
@@ -10,13 +10,14 @@ export class ApiService {
   static readonly baseUrl = 'http://localhost:3000';
   static readonly apiBaseRoute = 'http://localhost:3000/api/v1';
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private http: HttpClient, private authService: AuthService) {
+  }
 
   get<T>(endpoint: string): Observable<T> {
     const url = `${ApiService.apiBaseRoute}/${endpoint}`;
     let headers = {};
     if (this.authService.isLoggedIn()) {
-      headers =  new HttpHeaders({
+      headers = new HttpHeaders({
         Authorization: `Bearer ${this.authService.getToken()}`
       })
     }
@@ -31,7 +32,7 @@ export class ApiService {
         Authorization: `Bearer ${this.authService.getToken()}`
       }
     }
-    let httpOptions = { headers: new HttpHeaders(headers), ...options };
+    let httpOptions = {headers: new HttpHeaders(headers), ...options};
     return this.http.post<T>(url, data, httpOptions);
   }
 
@@ -39,7 +40,7 @@ export class ApiService {
     const url = `${ApiService.apiBaseRoute}/${endpoint}`;
     let headers = {};
     if (this.authService.isLoggedIn()) {
-      headers =  new HttpHeaders({
+      headers = new HttpHeaders({
         Authorization: `Bearer ${this.authService.getToken()}`
       })
     }
@@ -50,7 +51,7 @@ export class ApiService {
     const url = `${ApiService.apiBaseRoute}/${endpoint}`;
     let headers = {};
     if (this.authService.isLoggedIn()) {
-      headers =  new HttpHeaders({
+      headers = new HttpHeaders({
         Authorization: `Bearer ${this.authService.getToken()}`
       })
     }

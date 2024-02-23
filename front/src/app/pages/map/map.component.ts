@@ -1,10 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
-import { Map, NavigationControl, Marker, Popup } from 'maplibre-gl';
+import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Map, Marker, Popup} from 'maplibre-gl';
 import {CareSessionService} from "../../shared/services/ressources/care-session.service";
 import {AddressService} from "../../shared/services/ressources/address.service";
 import {AddressModel} from "../../shared/models/address.model";
 import {AuthService} from "../../shared/services/auth.service";
-import {CareSessionModel} from "../../shared/models/care-session.model";
 import {fr} from "date-fns/locale";
 import {format} from "date-fns";
 
@@ -22,13 +21,14 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   private userAdressLat: number = 0;
   private userAdressLong: number = 0;
 
-  constructor(private careSessionService: CareSessionService, private addressService: AddressService, private authService: AuthService) { }
+  constructor(private careSessionService: CareSessionService, private addressService: AddressService, private authService: AuthService) {
+  }
 
   ngOnInit(): void {
   }
 
   ngAfterViewInit() {
-    const initialState = { lng: this.userAdressLong, lat: this.userAdressLat , zoom: 5 };
+    const initialState = {lng: this.userAdressLong, lat: this.userAdressLat, zoom: 5};
 
     let userAdresses: AddressModel[] = this.authService.getAddresses() ?? [];
 
@@ -52,7 +52,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
                   ${careSession.plant.name}
                 </h2>
                 <p class="fs-6">
-                   ${format(careSession.careSession.date_start, 'EEEE d MMMM yyyy', { locale: fr })} - ${format(careSession.careSession.date_end, 'EEEE d MMMM yyyy', { locale: fr })}
+                   ${format(careSession.careSession.date_start, 'EEEE d MMMM yyyy', {locale: fr})} - ${format(careSession.careSession.date_end, 'EEEE d MMMM yyyy', {locale: fr})}
                 </p>
               </a>
 
@@ -61,7 +61,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
         });
         new Marker({color: "#ff0000"})
           .setLngLat([userAdress.longitude ?? 0, userAdress.latitude ?? 0])
-          .setPopup(new Popup().setHTML("<h1>"+ userAdress.address + "</h1>"))
+          .setPopup(new Popup().setHTML("<h1>" + userAdress.address + "</h1>"))
           .addTo(<Map>this.map);
       });
     }

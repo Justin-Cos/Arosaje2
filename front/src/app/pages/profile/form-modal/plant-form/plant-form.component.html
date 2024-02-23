@@ -1,7 +1,7 @@
-
 <div class="row">
   <div class="col-md-12">
-    <form (ngSubmit)="onSubmit(publicationForm)" #publicationForm="ngForm" enctype="multipart/form-data" method="POST" class="form register">
+    <form (ngSubmit)="onSubmit(publicationForm)" #publicationForm="ngForm" enctype="multipart/form-data" method="POST"
+          class="form register">
       <h1> Nouvelle plante </h1>
 
       <p-message *ngIf="errorName" severity="error" text="Nom de plante invalide."></p-message>
@@ -11,25 +11,26 @@
       <p-message *ngIf="errorTypePlant" severity="error" text="Choisissez un type de plante."></p-message>
       <label for="plantType">Type de plante: <span class="mandatory">*</span></label>
       <select id="plantType" [(ngModel)]="plantType" name="plantType">
-        <option *ngFor="let plantType of plantTypes" value="{{plantType.plant_type_id}}">{{plantType.name}}</option>
+        <option *ngFor="let plantType of plantTypes" value="{{plantType.plant_type_id}}">{{ plantType.name }}</option>
       </select>
 
       <label for="isIndoor">Est-ce une plante d'intérieur ? <span class="mandatory">*</span></label>
       <input type="checkbox" id="isIndoor" [(ngModel)]="isIndoor" name="isIndoor">
 
 
-        <p-message *ngIf="errorImage" severity="error" text="Choisissez une image."></p-message>
-        <p-fileUpload #fileUpload
-                      mode="basic" name="demo[]"
-        cancelIcon="pi pi-times"
-        cancelLabel="téléchargement annulé"
-        chooseLabel="Choose"
-        accept="image/*"
-        [maxFileSize]="10000000">
-        </p-fileUpload>
+      <p-message *ngIf="errorImage" severity="error" text="Choisissez une image."></p-message>
+      <p-fileUpload #fileUpload
+                    mode="basic" name="demo[]"
+                    cancelIcon="pi pi-times"
+                    cancelLabel="téléchargement annulé"
+                    chooseLabel="Choose"
+                    accept="image/*"
+                    [maxFileSize]="10000000">
+      </p-fileUpload>
 
       <button type="submit">Créer plante</button>
-      <p-message *ngIf="errorName || errorTypePlant" severity="error" text="Formulaire invalide remplissez les champs marqués d'un *"></p-message>
+      <p-message *ngIf="errorName || errorTypePlant" severity="error"
+                 text="Formulaire invalide remplissez les champs marqués d'un *"></p-message>
       <p-message *ngIf="errorMessage" severity="error" [text]=errorMessage></p-message>
     </form>
   </div>

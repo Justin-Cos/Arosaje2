@@ -1,5 +1,3 @@
-import {UserModel} from "./user.model";
-
 export class PlantModel {
   private _plant_id: number;
   private _plant_type: number;
@@ -73,7 +71,7 @@ export class PlantModel {
   }
 
   static fromJson(json: any): PlantModel {
-    const { plant_id, plant_type, owner, name, image, indoor } = json;
+    const {plant_id, plant_type, owner, name, image, indoor} = json;
     if (!plant_id || !plant_type || !owner || !name || indoor === undefined) {
       throw new Error('Le JSON ne contient pas toutes les propriétés requises.');
     }

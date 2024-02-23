@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Router} from "@angular/router";
 import {ApiService} from "./api.service";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
@@ -8,31 +8,38 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 })
 export class AuthService {
 
-  constructor(private router: Router, private http: HttpClient) { }
+  constructor(private router: Router, private http: HttpClient) {
+  }
+
   isLoggedIn() {
     if (typeof window === 'undefined') {
       return false
     } else {
       const token = localStorage.getItem('token');
-    return !(token === null || token.length === 0);
+      return !(token === null || token.length === 0);
     }
   }
+
   logout() {
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
   }
+
   saveToken(token: string) {
     localStorage.setItem('token', token);
   }
+
   updateToken() {
     const headers = new HttpHeaders({Authorization: `Bearer ${this.getToken()}`})
-    this.http.get(ApiService.apiBaseRoute + '/user/update-token?user=' + this.getUserId(),{headers}).subscribe((response: any) => {
+    this.http.get(ApiService.apiBaseRoute + '/user/update-token?user=' + this.getUserId(), {headers}).subscribe((response: any) => {
       this.saveToken(response.token);
     });
   }
+
   getToken() {
     return localStorage.getItem('token');
   }
+
   getUserId(): number {
     const storedToken = this.getToken();
     if (storedToken) {
@@ -41,6 +48,7 @@ export class AuthService {
     }
     return 0;
   }
+
   getUsername(): string {
     const storedToken = this.getToken();
     if (storedToken) {
@@ -67,6 +75,7 @@ export class AuthService {
     }
     return '';
   }
+
   getAddresses(): [] {
     const storedToken = this.getToken();
     if (storedToken) {

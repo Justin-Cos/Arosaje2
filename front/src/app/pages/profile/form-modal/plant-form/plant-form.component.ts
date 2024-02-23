@@ -36,7 +36,8 @@ export class PlantFormComponent implements OnInit {
   errorMessage!: string;
   errorImage: boolean = false;
 
-  constructor(private plantTypeService: PlantTypeService, private plantService: PlantService, private authService: AuthService) {}
+  constructor(private plantTypeService: PlantTypeService, private plantService: PlantService, private authService: AuthService) {
+  }
 
 
   ngOnInit(): void {
@@ -46,6 +47,7 @@ export class PlantFormComponent implements OnInit {
       },
     );
   }
+
   onSubmit(publicationForm: NgForm) {
     const plantNameRegEx = /^[a-zA-Z0-9_ -]+$/;
     this.errorName = this.name === undefined || !plantNameRegEx.test(this.name)

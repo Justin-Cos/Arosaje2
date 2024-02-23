@@ -2,14 +2,18 @@
   <div class="row">
     <div class="col-12">
       <div class="plant-info">
-        <img [src]="ApiService.baseUrl + '/uploads/plants/' + plant.image" class="img-fluid plant-image" alt="Plant image">
+        <img [src]="ApiService.baseUrl + '/uploads/plants/' + plant.image" class="img-fluid plant-image"
+             alt="Plant image">
         <div class="plant-details">
-          <h2 class="mt-2 plant-name">{{plant.name}}</h2>
-          <p class="plant-date">Du {{careSession.date_start | date:'shortDate'}} au {{careSession.date_end | date:'shortDate'}}</p>
-          <p class="plant-description">{{careSession.details}}</p>
+          <h2 class="mt-2 plant-name">{{ plant.name }}</h2>
+          <p class="plant-date">Du {{ careSession.date_start | date:'shortDate' }}
+            au {{ careSession.date_end | date:'shortDate' }}</p>
+          <p class="plant-description">{{ careSession.details }}</p>
           <div class="caretaker-info" *ngIf="careSession">
-            <p *ngIf="careTaker">{{careTaker.username}} s'occupe de cette plante.</p>
-            <button *ngIf="!careTaker && authService.getRole() !== 'caretaker' && date_end > dateNow" class="add-comment-btn" (click)="becomeCaretaker()">Prendre cette plante en charge</button>
+            <p *ngIf="careTaker">{{ careTaker.username }} s'occupe de cette plante.</p>
+            <button *ngIf="!careTaker && authService.getRole() !== 'caretaker' && date_end > dateNow"
+                    class="add-comment-btn" (click)="becomeCaretaker()">Prendre cette plante en charge
+            </button>
           </div>
         </div>
       </div>
@@ -20,20 +24,26 @@
       <h3>Commentaires</h3>
       <div class="comments">
         <div *ngFor="let comment of comments" class="comment">
-          <h3 *ngIf="comment.comment.title" class="comment-title">{{comment.comment.title}}</h3>
-          <p *ngIf="comment.comment.content" class="comment-content">{{comment.comment.content}}</p>
-          <img *ngIf="comment.comment.image" [src]="ApiService.baseUrl + '/uploads/comments/' + comment.comment.image" alt="{{comment.comment.image}}" class="comment-image">
+          <h3 *ngIf="comment.comment.title" class="comment-title">{{ comment.comment.title }}</h3>
+          <p *ngIf="comment.comment.content" class="comment-content">{{ comment.comment.content }}</p>
+          <img *ngIf="comment.comment.image" [src]="ApiService.baseUrl + '/uploads/comments/' + comment.comment.image"
+               alt="{{comment.comment.image}}" class="comment-image">
           <div class="comment-author">
-            <img [src]="ApiService.baseUrl + '/uploads/profile_pictures/' + comment.author.profile_picture" alt="Author image" class="author-image">
-            <p><small>Par {{comment.author.username}} le {{comment.comment.date | date:'shortDate'}}</small> {{comment.comment.author_role}}</p>
+            <img [src]="ApiService.baseUrl + '/uploads/profile_pictures/' + comment.author.profile_picture"
+                 alt="Author image" class="author-image">
+            <p><small>Par {{ comment.author.username }}
+              le {{ comment.comment.date | date:'shortDate' }}</small> {{ comment.comment.author_role }}</p>
           </div>
         </div>
-        <button *ngIf="this.getRole(this.authService.getUserId()) !== '' || this.authService.getRole() !== ''" (click)="showCommentForm()" class="add-comment-btn">Ajouter un commentaire</button>
+        <button *ngIf="this.getRole(this.authService.getUserId()) !== '' || this.authService.getRole() !== ''"
+                (click)="showCommentForm()" class="add-comment-btn">Ajouter un commentaire
+        </button>
 
 
         <div class="row">
           <div class="col-md-12">
-            <form *ngIf="commentFormOpened" (ngSubmit)="onSubmit(commentForm)" #commentForm="ngForm" enctype="multipart/form-data" method="POST" class="form register">
+            <form *ngIf="commentFormOpened" (ngSubmit)="onSubmit(commentForm)" #commentForm="ngForm"
+                  enctype="multipart/form-data" method="POST" class="form register">
 
 
               <label for="title">Titre :</label>
@@ -50,7 +60,8 @@
                             accept="image/*"
                             [maxFileSize]="10000000">
               </p-fileUpload>
-              <p-message *ngIf="content === '' && fileUpload === undefined" severity="error" text="Formulaire invalide remplissez les champs marqués d'un *"></p-message>
+              <p-message *ngIf="content === '' && fileUpload === undefined" severity="error"
+                         text="Formulaire invalide remplissez les champs marqués d'un *"></p-message>
               <button type="submit">Publier Commentaire</button>
             </form>
           </div>

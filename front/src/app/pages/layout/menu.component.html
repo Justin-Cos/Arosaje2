@@ -7,9 +7,11 @@
     <span class="title_nav">Arosaje</span>
   </div>
 
-  <div *ngIf="authService.isLoggedIn()" routerLink="/profile/{{authService.getUserId()}}"  class="p-toolbar-group-end d-flex align-items-center">
-    <p-avatar image="{{ApiService.baseUrl}}/uploads/profile_pictures/{{authService.getProfilePic()}}" shape="circle" size="xlarge" />
-    <span class="text_nav">{{ authService.getUsername()}}</span>
+  <div *ngIf="authService.isLoggedIn()" routerLink="/profile/{{authService.getUserId()}}"
+       class="p-toolbar-group-end d-flex align-items-center">
+    <p-avatar image="{{ApiService.baseUrl}}/uploads/profile_pictures/{{authService.getProfilePic()}}" shape="circle"
+              size="xlarge"/>
+    <span class="text_nav">{{ authService.getUsername() }}</span>
   </div>
 </p-toolbar>
 
@@ -26,16 +28,25 @@
     <div class="dropdown search-results" *ngIf="dropdownOpen" aria-labelledby="dropdownMenuButton" #dropdown>
       <p Class="dropdown_txt">Listes des utilisateurs</p>
       <div class="dropdown-item-div">
-        <a *ngFor="let user of users.slice(0,6)" class="dropdown-item" routerLink="/profile/{{user.user_id}}">{{user.username}}</a>
+        <a *ngFor="let user of users.slice(0,6)" class="dropdown-item"
+           routerLink="/profile/{{user.user_id}}">{{ user.username }}</a>
       </div>
     </div>
 
-    <li *ngIf="authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/home">Home</a></li>
-    <li *ngIf="!authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/login">Login</a></li>
-    <li *ngIf="!authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/register">Register</a></li>
-    <li *ngIf="authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/profile/{{authService.getUserId()}}">Profile</a></li>
-    <li *ngIf="authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean" routerLink="/map">Map</a></li>
-    <li *ngIf="authService.isLoggedIn()" class="options-menu-lateral li-clean" style="cursor: pointer"><a class="liens-menu-lateral a-clean" (click)="this.authService.logout();">Se déconnecter</a></li>
+    <li *ngIf="authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean"
+                                                                                  routerLink="/home">Home</a></li>
+    <li *ngIf="!authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean"
+                                                                                   routerLink="/login">Login</a></li>
+    <li *ngIf="!authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean"
+                                                                                   routerLink="/register">Register</a>
+    </li>
+    <li *ngIf="authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean"
+                                                                                  routerLink="/profile/{{authService.getUserId()}}">Profile</a>
+    </li>
+    <li *ngIf="authService.isLoggedIn()" class="options-menu-lateral li-clean"><a class="liens-menu-lateral a-clean"
+                                                                                  routerLink="/map">Map</a></li>
+    <li *ngIf="authService.isLoggedIn()" class="options-menu-lateral li-clean" style="cursor: pointer"><a
+      class="liens-menu-lateral a-clean" (click)="this.authService.logout();">Se déconnecter</a></li>
   </ul>
 </div>
 

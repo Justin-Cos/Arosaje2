@@ -1,10 +1,3 @@
-import {PlantModel} from "./plant.model";
-import {PlantService} from "../services/ressources/plant.service";
-import {UserService} from "../services/ressources/user.service";
-import {UserModel} from "./user.model";
-import {AddressModel} from "./address.model";
-import {AddressService} from "../services/ressources/address.service";
-
 export class CareSessionModel {
   private _session_id: number;
   private _plant: number;
@@ -79,17 +72,21 @@ export class CareSessionModel {
   set date_end(value: Date) {
     this._date_end = value;
   }
+
   get details(): string | null {
     return this._details;
   }
+
   set details(value: string | null) {
     this._details = value;
   }
+
   get duration(): number {
     return this._date_end.getTime() - this._date_start.getTime();
   }
+
   static fromJson(json: any): CareSessionModel {
-    const { session_id, plant, caretaker, location, date_start, date_end, details } = json;
+    const {session_id, plant, caretaker, location, date_start, date_end, details} = json;
     if (!session_id || !plant || !location || !date_start || !date_end) {
       throw new Error('Le JSON ne contient pas toutes les propriétés requises.');
     }

@@ -1,37 +1,38 @@
-
 <div class="row">
   <div class="col-md-12">
-      <form (ngSubmit)="onSubmit(publicationForm)" #publicationForm="ngForm" enctype="application/x-www-form-urlencoded" method="POST" class="form register">
+    <form (ngSubmit)="onSubmit(publicationForm)" #publicationForm="ngForm" enctype="application/x-www-form-urlencoded"
+          method="POST" class="form register">
       <h1> Nouvelle annonce </h1>
 
-        <label for="details">Details:</label>
-        <textarea id="details" [(ngModel)]="details" name="details"></textarea>
+      <label for="details">Details:</label>
+      <textarea id="details" [(ngModel)]="details" name="details"></textarea>
 
-        <p-message *ngIf="errorPlant" severity="error" text="Choisissez une plante."></p-message>
-        <label for="plant">Plante: <span class="mandatory">*</span></label>
-        <select id="plant" [(ngModel)]="plant" name="plant">
-          <option value="0">Choisissez une plante</option>
-          <option *ngFor="let plant of plants" value="{{plant.plant_id}}">{{plant.name}}</option>
-        </select>
+      <p-message *ngIf="errorPlant" severity="error" text="Choisissez une plante."></p-message>
+      <label for="plant">Plante: <span class="mandatory">*</span></label>
+      <select id="plant" [(ngModel)]="plant" name="plant">
+        <option value="0">Choisissez une plante</option>
+        <option *ngFor="let plant of plants" value="{{plant.plant_id}}">{{ plant.name }}</option>
+      </select>
 
-        <p-message *ngIf="errorAddress" severity="error" text="Choisissez une addresse."></p-message>
-        <label for="address">Adresse: <span class="mandatory">*</span></label>
-        <select id="address" [(ngModel)]="address" name="address">
-          <option value="0">Choisissez une adresse</option>
-          <option *ngFor="let address of addresses" value="{{address.address_id}}">{{address.address}}</option>
-        </select>
+      <p-message *ngIf="errorAddress" severity="error" text="Choisissez une addresse."></p-message>
+      <label for="address">Adresse: <span class="mandatory">*</span></label>
+      <select id="address" [(ngModel)]="address" name="address">
+        <option value="0">Choisissez une adresse</option>
+        <option *ngFor="let address of addresses" value="{{address.address_id}}">{{ address.address }}</option>
+      </select>
 
-        <p-message *ngIf="errorStartDate" severity="error" text="Choisissez un date de début."></p-message>
-        <label for="start_date">Date de début: <span class="mandatory">*</span></label>
-        <input type="date" [(ngModel)]="startDate" id="start_date" name="start_date">
+      <p-message *ngIf="errorStartDate" severity="error" text="Choisissez un date de début."></p-message>
+      <label for="start_date">Date de début: <span class="mandatory">*</span></label>
+      <input type="date" [(ngModel)]="startDate" id="start_date" name="start_date">
 
-        <p-message *ngIf="errorEndDate" severity="error" text="Choisissez une date de fin."></p-message>
-        <label for="end_date">Date de fin: <span class="mandatory">*</span></label>
-        <input type="date" [(ngModel)]="endDate" id="end_date" name="end_date">
+      <p-message *ngIf="errorEndDate" severity="error" text="Choisissez une date de fin."></p-message>
+      <label for="end_date">Date de fin: <span class="mandatory">*</span></label>
+      <input type="date" [(ngModel)]="endDate" id="end_date" name="end_date">
 
-        <p-message *ngIf="errorEndDate || errorStartDate || errorAddress || errorPlant" severity="error" text="Formulaire invalide remplissez les champs marqués d'un *"></p-message>
-        <p-message *ngIf="errorMessage.length > 0" severity="error" [text]=errorMessage></p-message>
-        <button type="submit">Ajouter annonce</button>
+      <p-message *ngIf="errorEndDate || errorStartDate || errorAddress || errorPlant" severity="error"
+                 text="Formulaire invalide remplissez les champs marqués d'un *"></p-message>
+      <p-message *ngIf="errorMessage.length > 0" severity="error" [text]=errorMessage></p-message>
+      <button type="submit">Ajouter annonce</button>
 
     </form>
   </div>

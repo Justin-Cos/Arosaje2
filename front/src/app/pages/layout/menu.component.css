@@ -31,21 +31,22 @@
   letter-spacing: 0.15em;
   margin: 1.5em 0;
 }
+
 ul li:first-child {
   border-top: 0;
 }
 
-.title_nav{
+.title_nav {
   margin-left: 1.5em;
   font-size: 2.5em;
 }
 
-img_nav{
+img_nav {
   margin-left: 7%;
   font-size: 2.5em;
 }
 
-.icone_nav{
+.icone_nav {
   color: #5DB075;
   margin-left: 0.7em;
   margin-right: 1.5em;
@@ -54,33 +55,35 @@ img_nav{
   background-color: rgba(0, 0, 0, 0);
 }
 
-.text_nav{
+.text_nav {
   font-size: 1.3em;
   color: black;
-  margin-left : 1em;
+  margin-left: 1em;
 }
 
-.search_txt{
+.search_txt {
   width: 40em;
   font-size: 1.2em;
 }
-.search_size{
+
+.search_size {
   font-size: 1.2em;
 }
 
-.search_menu{
+.search_menu {
   margin-top: 4em;
   margin-bottom: 3em;
 }
 
-.fixe{
+.fixe {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 1000;
 }
-.sticky{
+
+.sticky {
   position: sticky;
   top: 0;
   left: 0;
@@ -92,13 +95,13 @@ img_nav{
   width: 50% !important;
 }
 
-.search-container{
+.search-container {
   width: 800px;
   display: block;
   margin: 5em auto;
 }
 
-input#search-bar{
+input#search-bar {
   margin: 0 auto;
   width: 100%;
   height: 45px;
@@ -109,18 +112,22 @@ input#search-bar{
   letter-spacing: 1px;
   border: 1px solid #D0CFCE;
   outline: none;
-  &:focus{
+
+  &:focus {
     border: 1px solid black;
     transition: 0.35s ease;
     color: black;
-    &::-webkit-input-placeholder{
+
+    &::-webkit-input-placeholder {
       transition: opacity 0.45s ease;
       opacity: 0;
     }
+
     &::-moz-placeholder {
       transition: opacity 0.45s ease;
       opacity: 0;
     }
+
     &:-ms-placeholder {
       transition: opacity 0.45s ease;
       opacity: 0;
@@ -138,22 +145,25 @@ input#search-bar{
   transition: opacity 0.45s ease;
   margin: -5em auto 3em;
 }
-.dropdown-item-div{
+
+.dropdown-item-div {
   margin-top: -1em;
   padding-bottom: 1em;
 }
 
-.dropdown-item{
+.dropdown-item {
   padding: 0.5em 1.5em;
   font-size: 1.6em;
   font-weight: 500;
   letter-spacing: 1px;
 }
-.dropdown_txt{
+
+.dropdown_txt {
   padding: 1em;
   font-size: 1.8em;
   font-weight: 500;
 }
+
 .dropdown-item:hover {
   color: #5DB075;
   transition: ease 0.2s;
@@ -163,12 +173,12 @@ input#search-bar{
   -webkit-backdrop-filter: blur(4px);
 }
 
-.search-icon .fa-search{
+.search-icon .fa-search {
   position: relative;
   float: right;
   width: 75px !important;
   top: -39px;
   right: -38px;
   font-size: 30px;
-  color : #374151;
+  color: #374151;
 }

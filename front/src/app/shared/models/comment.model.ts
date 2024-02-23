@@ -9,6 +9,7 @@ export class CommentModel {
   private _title: string | null;
   private _content: string | null;
   private _image: string | null;
+
   constructor(id_comment: number,
               care_session: number,
               author: number,
@@ -50,12 +51,15 @@ export class CommentModel {
   set author(value) {
     this._author = value;
   }
+
   get title() {
     return this._title;
   }
+
   set title(value) {
     this._title = value;
   }
+
   get author_role() {
     return this._author_role;
   }
@@ -89,7 +93,7 @@ export class CommentModel {
   }
 
   static fromJson(json: any) {
-    const { id_comment, care_session, author, author_role, date, title, content, image } = json;
+    const {id_comment, care_session, author, author_role, date, title, content, image} = json;
     if (!id_comment || !care_session || !author || !author_role || !date) {
       throw new Error('Le JSON ne contient pas toutes les propriétés requises.');
     }

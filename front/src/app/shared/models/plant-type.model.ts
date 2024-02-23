@@ -24,7 +24,7 @@ export class PlantTypeModel {
   }
 
   static fromJson(json: any): PlantTypeModel {
-    const { plant_type_id, name } = json;
+    const {plant_type_id, name} = json;
     if (!plant_type_id || !name) {
       throw new Error('Le JSON ne contient pas toutes les propriétés requises.');
     }
