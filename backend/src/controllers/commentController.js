@@ -51,7 +51,6 @@ exports.getCommentsByCareSessionId = async (req, res) => {
 exports.createComment = async (req, res) => {
     const {care_session, author, author_role, date, content} = req.body;
     let image_name;
-    console.log(req.file);
     try {
         image_name = req.file ? convertToSnakeCase(`${care_session}_${author}_${Date.now()}`) + '.jpg' : null;
         const newComment = await Comments.create({

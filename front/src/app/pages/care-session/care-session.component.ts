@@ -65,7 +65,6 @@ export class CareSessionComponent implements OnInit {
       this.address = data.address;
       this.comments = data.comments;
       this.owner = data.plant.owner;
-      console.log(new Date(this.careSession.date_end) > new Date());
     });
   }
 
