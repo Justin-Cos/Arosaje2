@@ -34,11 +34,31 @@
 3. Lancer le serveur frontend :
    ```bash
    ng serve
+
+### Mobile
+
+1. **Naviguer vers le dossier version_moble :**
+   ```bash
+    cd version_mobile
+   
+2. **Récupérer les dépendances :**
+   ```bash
+   npm install
+   
+3. **Build  :**
+   ```bash
+   ionic cap build android
+
+4. **Lancer le serveur mobile  :**
+   ```bash
+   ionic cap run android 
+   
    
 ## Remarques
 
-Assurez-vous d'avoir Docker installé et en cours d'exécution pour le backend.
-Le frontend utilise Angular, assurez-vous d'avoir Angular CLI installé.
+Assurez-vous d'avoir Docker installé et en cours d'exécution pour le backend.  
+Le frontend utilise Angular, assurez-vous d'avoir Angular CLI installé.  
+Le mobile utilise Gradle, assurez-vous d'avoir Gradle d'installé.
 
 ## Préambule
 
