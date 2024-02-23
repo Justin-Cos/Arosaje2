@@ -100,8 +100,8 @@ describe('User routes', () => {
         expect(deletedUser.statusCode).toEqual(404);
     });
 
-    afterAll(done => {
-        seedDown()
+    afterAll(async done => {
+        await seedDown()
         server.close(done);
     });
 });
