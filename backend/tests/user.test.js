@@ -76,7 +76,7 @@ describe('User routes', () => {
         const userToken = res.body.token;
         const resUpdate = await request(app)
             .put('/api/v1/user/' + res.body.user_id)
-            .set('Authorization', `Bearer ${userToken}`)
+            .set('Authorization', `Bearer ${testConfig.adminToken}`)
             .send({
                 username: 'updateduser',
                 email: 'updateduser@test.com',
@@ -92,7 +92,7 @@ describe('User routes', () => {
         expect(updatedUser.body.role).toEqual('botanist');
         const resDelete = await request(app)
             .delete('/api/v1/user/' + res.body.user_id)
-            .set('Authorization', `Bearer ${userToken}`);
+            .set('Authorization', `Bearer ${testConfig.adminToken}`);
         expect(resDelete.statusCode).toEqual(200);
         const deletedUser = await request(app)
             .get('/api/v1/user/' + res.body.user_id)
