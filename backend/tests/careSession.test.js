@@ -130,8 +130,8 @@ describe('CareSession routes', () => {
             expect(res.body[i].caretaker).toEqual(careTakerId);
         }
     });
-    afterAll(done => {
-        seedDown()
+    afterAll(async done => {
+        await seedDown()
         server.close(done);
     });
 });

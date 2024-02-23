@@ -134,8 +134,8 @@ describe('Plant routes', () => {
             expect(res.statusCode).toEqual(403);
         });
     });
-    afterAll(done => {
-        seedDown()
+    afterAll(async done => {
+        await seedDown()
         server.close(done);
     });
 });
