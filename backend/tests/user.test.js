@@ -3,6 +3,7 @@ const app = require('../src/index');
 const server = require('../src/index');
 const path = require('path');
 const testConfig = require('../config/testConfig.json');
+const {close} = require("../src/sequelize");
 const token = testConfig.token;
 const seedUp = require('../src/seeders/20240129170544-seed').up;
 const seedDown = require('../src/seeders/20240129170544-seed').down;
@@ -19,12 +20,12 @@ describe('User routes', () => {
 
         expect(res.statusCode).toEqual(200);
     });
-    it('try accessing ressources with bad authent', () => {
+    it('try accessing ressources with bad authent', async () => {
 
-        request(app)
+        const res = await request(app)
             .get('/api/v1/user')
             .set('Authorization', `Bearer ${testConfig.wrongSignatureToken}`)
-            .expect(403);
+        expect(res.statusCode).toEqual(403);
         return request(app)
             .get('/api/v1/user')
             .expect(401);
@@ -100,8 +101,16 @@ describe('User routes', () => {
         expect(deletedUser.statusCode).toEqual(404);
     });
 
-    afterAll(async done => {
-        await seedDown()
-        server.close(done);
+afterAll(async () => {
+    await seedDown();
+    await new Promise((resolve, reject) => {
+        server.close((err) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve();
+        });
     });
+});
 });

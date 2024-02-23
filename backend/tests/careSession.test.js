@@ -3,6 +3,7 @@ const app = require('../src/index');
 const server = require('../src/index');
 const testConfig = require('../config/testConfig.json');
 const {calculateDist} = require("../src/utils");
+const {close} = require("../src/sequelize");
 const token = testConfig.token;
 const seedUp = require('../src/seeders/20240129170544-seed').up;
 const seedDown = require('../src/seeders/20240129170544-seed').down;
@@ -130,8 +131,16 @@ describe('CareSession routes', () => {
             expect(res.body[i].caretaker).toEqual(careTakerId);
         }
     });
-    afterAll(async done => {
-        await seedDown()
-        server.close(done);
+afterAll(async () => {
+    await seedDown();
+    await new Promise((resolve, reject) => {
+        server.close((err) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve();
+        });
     });
+});
 });

@@ -3,6 +3,7 @@ const app = require('../src/index');
 const server = require('../src/index');
 const testConfig = require('../config/testConfig.json');
 const path = require('path');
+const {close} = require("../src/sequelize");
 const token = testConfig.token;
 const seedUp = require('../src/seeders/20240129170544-seed').up;
 const seedDown = require('../src/seeders/20240129170544-seed').down;
@@ -78,7 +79,15 @@ describe('Comment routes', () => {
         expect(fetchDeletedRes.statusCode).toEqual(404);
     });
     afterAll(async () => {
-        await seedDown()
-        server.close()
-    })
+        await seedDown();
+        await new Promise((resolve, reject) => {
+            server.close((err) => {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+                resolve();
+            });
+        });
+    });
 });

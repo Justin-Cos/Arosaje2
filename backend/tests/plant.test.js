@@ -3,6 +3,7 @@ const app = require('../src/index');
 const server = require('../src/index');
 const path = require('path');
 const testConfig = require('../config/testConfig.json');
+const {close} = require("../src/sequelize");
 const token = testConfig.token;
 const seedUp = require('../src/seeders/20240129170544-seed').up;
 const seedDown = require('../src/seeders/20240129170544-seed').down;
@@ -134,8 +135,16 @@ describe('Plant routes', () => {
             expect(res.statusCode).toEqual(403);
         });
     });
-    afterAll(async done => {
-        await seedDown()
-        server.close(done);
+afterAll(async () => {
+    await seedDown();
+    await new Promise((resolve, reject) => {
+        server.close((err) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve();
+        });
     });
+});
 });
