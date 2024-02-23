@@ -4,7 +4,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "nodemon src/index",
-    "test": "jest"
+    "test": "jest --detectOpenHandles"
   },
   "keywords": [],
   "author": "",
