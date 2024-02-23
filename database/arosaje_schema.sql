@@ -1,5 +1,4 @@
 CREATE TABLE `Users` (`user_id` INTEGER PRIMARY KEY AUTOINCREMENT, `username` VARCHAR(255) NOT NULL UNIQUE, `email` VARCHAR(255) NOT NULL UNIQUE, `password` TEXT NOT NULL, `profile_picture` TEXT NOT NULL, `bio` TEXT, `role` TEXT);
-CREATE TABLE sqlite_sequence(name,seq);
 CREATE TABLE `PlantsTypes` (`plant_type_id` INTEGER PRIMARY KEY AUTOINCREMENT, `name` TEXT NOT NULL);
 CREATE TABLE `Plants` (`plant_id` INTEGER PRIMARY KEY AUTOINCREMENT, `plant_type` INTEGER NOT NULL REFERENCES `PlantsTypes` (`plant_type_id`) ON DELETE NO ACTION ON UPDATE CASCADE, `owner` INTEGER NOT NULL REFERENCES `Users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE, `name` TEXT NOT NULL, `image` TEXT, `indoor` TINYINT(1) NOT NULL);
 CREATE TABLE `Addresses` (`address_id` INTEGER PRIMARY KEY AUTOINCREMENT, `owner` INTEGER NOT NULL REFERENCES `Users` (`user_id`), `longitude` DECIMAL NOT NULL, `latitude` DECIMAL NOT NULL, `country` TEXT NOT NULL, `city` TEXT NOT NULL, `address` TEXT NOT NULL, `zip_code` INTEGER NOT NULL);
