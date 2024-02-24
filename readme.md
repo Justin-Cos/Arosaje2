@@ -22,29 +22,38 @@
    ```bash
    docker-compose --build --force-recreate
 
-### Frontend
+## Remarques
 
-1. **Naviguer vers le dossier front :**
+Assurez-vous d'avoir Docker installé et en cours d'exécution pour le backend.
+Assurez vous d'avoir Node.js installé en version 20.11.
+
+### Frontend web
+
+1. **Naviguer vers le dossier frontend :**
    ```bash
-   cd front
+   cd frontend
 
 2. **Récupérer les dépendances :**
    ```bash
    npm install
 3. Lancer le serveur frontend :
    ```bash
-   ng serve
+   ionic serve
+   
+## Remarques
+
+Le frontend utilise Angular, assurez-vous d'avoir Angular CLI installé.
 
 ### Mobile
 
-1. **Naviguer vers le dossier version_moble :**
+1. **Naviguer vers le dossier frontend :**
    ```bash
-    cd version_mobile
+    cd frontend
    
 2. **Récupérer les dépendances :**
    ```bash
    npm install
-   
+
 3. **Build  :**
    ```bash
    ionic cap build android
@@ -56,10 +65,8 @@
    
 ## Remarques
 
-Assurez-vous d'avoir Docker installé et en cours d'exécution pour le backend.  
-Le frontend utilise Angular, assurez-vous d'avoir Angular CLI installé.  
+Le mobile utilise Angular, assurez-vous d'avoir Angular CLI installé.  
 Le mobile utilise Gradle, assurez-vous d'avoir Gradle d'installé.
-
-## Préambule
-
-L'entreprise "A'rosa-je," fondée en 1984, offre des services aux propriétaires de plantes, incluant la garde des plantes en l'absence des propriétaires et des conseils d'entretien. Dans le cadre d'une nouvelle offre, notre équipe a été sélectionnée pour développer une application et un site web permettant aux utilisateurs de faire garder leurs plantes, avec un partage de photos et de conseils. 
+Assurez-vous d'avoir Ionic cli installé en version 7.2.
+   ```bash
+   npm i -g @ionic/cli@7.2.0
