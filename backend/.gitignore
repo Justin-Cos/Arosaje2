@@ -2,9 +2,9 @@
 node_modules/
 coverage/
 #uploads
-src/assets/uploads/plants/*
+src/assets/uploads/plants/
 !src/assets/uploads/plants/demo_data/
-src/assets/uploads/profile_pictures/*
+src/assets/uploads/profile_pictures/
 !src/assets/uploads/profile_pictures/demo_data/
-src/assets/uploads/comments/*
+src/assets/uploads/comments/
 !src/assets/uploads/comments/demo_data/
