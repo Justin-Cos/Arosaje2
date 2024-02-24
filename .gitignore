@@ -39,9 +39,9 @@ package-lock.json
 backend/node_modules/
 backend/coverage/
 #uploads
-backend/src/assets/uploads/plants/
-!backend/src/assets/uploads/plants/demo_data/
-backend/src/assets/uploads/profile_pictures/
-!backend/src/assets/uploads/profile_pictures/demo_data/
-backend/src/assets/uploads/comments/
-!backend/src/assets/uploads/comments/demo_data/
+backend/src/uploads/plants/
+!backend/src/uploads/plants/demo_data/
+backend/src/uploads/profile_pictures/
+!backend/src/uploads/profile_pictures/demo_data/
+backend/src/uploads/comments/
+!backend/src/uploads/comments/demo_data/
