@@ -12,11 +12,8 @@ services:
       context: ./backend
       dockerfile: Dockerfile
   angular-app:
-    image: nginx:alpine
     ports:
-      - "4200:80"
-    volumes:
-      - ./dist:/usr/share/nginx/html
+      - "4200:4200"
     build:
       context: ./frontend
       dockerfile: Dockerfile

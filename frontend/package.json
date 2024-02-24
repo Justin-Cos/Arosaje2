@@ -5,7 +5,7 @@
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
-    "start": "nx serve",
+    "start": "nx serve --host 0.0.0.0",
     "build": "nx build",
     "watch": "nx build --watch --configuration development",
     "test": "nx test",
