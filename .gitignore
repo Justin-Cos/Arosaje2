@@ -33,3 +33,15 @@ package-lock.json
 /*.iml
 /*.log
 /*.log.*
+
+#gitignore du backend
+# Ignore node_modules directory
+backend/node_modules/
+backend/coverage/
+#uploads
+backend/src/assets/uploads/plants/
+!backend/src/assets/uploads/plants/demo_data/
+backend/src/assets/uploads/profile_pictures/
+!backend/src/assets/uploads/profile_pictures/demo_data/
+backend/src/assets/uploads/comments/
+!backend/src/assets/uploads/comments/demo_data/
