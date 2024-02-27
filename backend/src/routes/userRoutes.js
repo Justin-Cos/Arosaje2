@@ -20,6 +20,6 @@ router.get('/update-token', middleware.authenticateToken, userController.updateT
 
 router.get('/:id', middleware.authenticateToken, userController.getUserById);
 router.put('/:id', middleware.authenticateTokenAdminOnly, userController.updateUserById);
-router.delete('/:id', middleware.authenticateTokenAdminOnly, userController.deleteUserById);
+router.delete('/:id', middleware.authenticateTokenAdminOrSelf, userController.deleteUserById);
 
 module.exports = router;

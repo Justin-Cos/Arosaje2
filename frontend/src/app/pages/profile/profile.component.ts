@@ -19,6 +19,8 @@ import {AddressModel} from "../../shared/models/address.model";
 import {AddressService} from "../../shared/services/ressources/address.service";
 import {AddressFormComponent} from "./form-modal/address-form/address-form.component";
 import {PublicationFormComponent} from "./form-modal/publication-form/publication-form.component";
+import {ConfirmationService} from "primeng/api";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
 
 
 @Component({
@@ -33,7 +35,8 @@ import {PublicationFormComponent} from "./form-modal/publication-form/publicatio
     PlantFormComponent,
     AddressFormComponent,
     PublicationFormComponent,
-    RouterLink
+    RouterLink,
+    ConfirmDialogModule
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
@@ -51,7 +54,7 @@ export class ProfileComponent implements OnInit {
   addresses: AddressModel[] = [];
   displayAddressForm: boolean = false;
   displayCareSessionForm: boolean = false;
-
+  displayDeleteUserDialog: boolean = false;
   constructor(private route: ActivatedRoute, public authService: AuthService, private router: Router, private userService: UserService, private addressService: AddressService, private plantService: PlantService, private careSessionService: CareSessionService) {
   }
   ngOnInit() {
@@ -111,5 +114,20 @@ export class ProfileComponent implements OnInit {
   closeCareSessionPublicationForm() {
     this.displayCareSessionForm = false;
     this.ngOnInit();
+  }
+  deleteUser() {
+    this.displayDeleteUserDialog = true;
+  }
+
+  confirmDeleteUser() {
+    this.userService.deleteUser(this.user.user_id).subscribe(() => {
+      this.authService.logout();
+      this.router.navigate(['/']);
+    });
+    this.displayDeleteUserDialog = false;
+  }
+
+  cancelDeleteUser() {
+    this.displayDeleteUserDialog = false;
   }
 }

@@ -38,4 +38,7 @@ export class UserService {
       map((json: any) => UserModel.fromJson(json))
     );
   }
+  deleteUser(id: number): Observable<any> {
+    return this.apiService.delete(`${this.endpoint}/${id}`);
+  }
 }
