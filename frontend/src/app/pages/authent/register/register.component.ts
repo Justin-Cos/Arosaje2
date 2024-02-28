@@ -69,8 +69,12 @@ export class RegisterComponent {
           this.authService.saveToken(res.token);
           this.router.navigate(['/home']);
         },
-        (error) => {
-          this.errorMessage = error.error.message;
+        (error: any) => {
+          if (error.status === 401) {
+            this.errorMessage = "Mot de passe ou nom d'utilisateur incorrecte";
+          } else {
+            this.errorMessage = 'Erreur inconnue, veuillez réessayer plus tard.'
+          }
         }
       );
     }

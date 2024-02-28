@@ -37,7 +37,11 @@ export class LoginComponent {
           this.router.navigate(['/home']);
         },
         (error: any) => {
-          this.errorMessage = error.message;
+          if (error.status === 401) {
+            this.errorMessage = "Mot de passe ou nom d'utilisateur incorrecte";
+          } else {
+            this.errorMessage = 'Erreur inconnue, veuillez réessayer plus tard.'
+          }
         }
       );
     }
