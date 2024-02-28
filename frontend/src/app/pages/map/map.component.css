@@ -14,7 +14,7 @@ code {
 .map-wrap {
   position: relative;
   width: 100%;
-  height: calc(90vh); /* calculate height of the screen minus the heading */
+  height: calc(90vh);
 }
 
 .map {
@@ -36,5 +36,24 @@ code {
    left: 0;
    will-change: transform;
  }
+.item {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+}
+
+.item-desc {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  font-size: 16px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
 
 
