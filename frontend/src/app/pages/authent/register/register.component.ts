@@ -7,6 +7,7 @@ import {ToastModule} from "primeng/toast";
 import {NgIf} from "@angular/common";
 import {MessageModule} from "primeng/message";
 import {AuthService} from "../../../shared/services/auth.service";
+import {ConfigServiceService} from "../../../shared/services/config-service.service";
 
 @Component({
   selector: 'app-register',
@@ -36,7 +37,9 @@ export class RegisterComponent {
   error_file: boolean = false;
   errorMessage: string = "";
 
-  constructor(private userService: UserService, private authService: AuthService, private router: Router) {
+  getWidthLogin = this.configService.getWidthLogin();
+
+  constructor(private userService: UserService, private authService: AuthService, private router: Router, private configService: ConfigServiceService) {
   }
 
   onSubmit(registerForm: NgForm) {

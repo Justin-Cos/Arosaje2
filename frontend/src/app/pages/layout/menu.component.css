@@ -40,6 +40,18 @@ ul li:first-child {
   font-size: 2.5em;
 }
 
+@media only screen and (max-width: 768px) {
+  .title_nav {
+    display: none;
+  }
+  .mobile_picture{
+    display:none;
+  }
+  .icone_nav{
+    margin-left: 0.1em ;
+  }
+}
+
 img_nav{
   margin-left: 7%;
   font-size: 2.5em;

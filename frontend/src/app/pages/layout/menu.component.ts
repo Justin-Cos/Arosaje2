@@ -12,6 +12,7 @@ import {CommonModule} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {ButtonModule} from "primeng/button";
 import {InputTextModule} from "primeng/inputtext";
+import {PlatformService} from "../../shared/services/platform.service";
 
 @Component({
   selector: 'app-menu',
@@ -47,7 +48,7 @@ export class MenuComponent {
     const body = document.getElementById('content')!;
 
     navbar.classList.remove('w-0');
-    navbar.classList.add('w-60');
+    navbar.classList.add( new PlatformService().isMobile() ? 'w-100' : 'w-60');
     body.classList.add('brightness-60');
     header.classList.add('brightness-60');
 
@@ -59,7 +60,7 @@ export class MenuComponent {
     const header = document.getElementById('header')!;
     const body = document.getElementById('content')!;
     navbar.classList.add('w-0');
-    navbar.classList.remove('w-60');
+    navbar.classList.remove( new PlatformService().isMobile() ? 'w-100' : "w-60")
     body.classList.remove('brightness-60');
     header.classList.remove('brightness-60');
   }
@@ -72,6 +73,7 @@ export class MenuComponent {
   onSearchSubmit() {
     this.searchValue = this.searchForm.value.search ?? '';
     this.fetchUsers(this.searchValue);
+    this.fermerMenu();
   }
   @ViewChild('dropdown') dropdown: ElementRef | undefined;
   @HostListener('document:click', ['$event'])
