@@ -1,6 +1,6 @@
 <div class="flex-row">
   <div class="w-40 image-illustration" style="background-image: url('assets/images/plant.jpg')"></div>
-  <div class="w-65 color-sec h-100 align">
+  <div [class]="getWidthLogin + ' color-sec h-100 align'">
     <div class="grid">
 
       <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm" method="POST" class="form login">

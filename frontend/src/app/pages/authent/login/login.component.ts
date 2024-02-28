@@ -6,6 +6,7 @@ import {MessageModule} from "primeng/message";
 import {NgIf} from "@angular/common";
 import { Router } from '@angular/router';
 import {AuthService} from "../../../shared/services/auth.service";
+import {ConfigServiceService} from "../../../shared/services/config-service.service";
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,8 @@ export class LoginComponent {
   errorMessage: string = ""
   username: any;
   password: string | undefined;
-  constructor(private userService: UserService, private router: Router, private authService: AuthService) {
+  getWidthLogin = this.configService.getWidthLogin();
+  constructor(private userService: UserService, private router: Router, private authService: AuthService, private configService: ConfigServiceService) {
   }
 
 
@@ -35,7 +37,11 @@ export class LoginComponent {
           this.router.navigate(['/home']);
         },
         (error: any) => {
-          this.errorMessage = error.message;
+          if (error.status === 401) {
+            this.errorMessage = "Mot de passe ou nom d'utilisateur incorrecte";
+          } else {
+            this.errorMessage = 'Erreur inconnue, veuillez réessayer plus tard.'
+          }
         }
       );
     }

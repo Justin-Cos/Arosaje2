@@ -11,7 +11,7 @@ export class ApiService {
 
   constructor(private http: HttpClient, private authService: AuthService, private platformService: PlatformService) {}
 
-  static readonly baseUrl =  new PlatformService().isMobile() ? 'http://192.168.0.1:3000' : 'http://localhost:3000';
+  static readonly baseUrl =  new PlatformService().isMobile() ? 'http://192.168.56.1:3000' : 'http://localhost:3000';
   static readonly apiBaseRoute = `${ApiService.baseUrl}/api/v1`;
 
   get<T>(endpoint: string): Observable<T> {

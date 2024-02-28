@@ -21,6 +21,7 @@ import {AddressFormComponent} from "./form-modal/address-form/address-form.compo
 import {PublicationFormComponent} from "./form-modal/publication-form/publication-form.component";
 import {ConfirmationService} from "primeng/api";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
+import {ConfigServiceService} from "../../shared/services/config-service.service";
 
 
 @Component({
@@ -55,7 +56,8 @@ export class ProfileComponent implements OnInit {
   displayAddressForm: boolean = false;
   displayCareSessionForm: boolean = false;
   displayDeleteUserDialog: boolean = false;
-  constructor(private route: ActivatedRoute, public authService: AuthService, private router: Router, private userService: UserService, private addressService: AddressService, private plantService: PlantService, private careSessionService: CareSessionService) {
+  getWidthProfil = this.configService.getWidthProfil();
+  constructor(private route: ActivatedRoute, public authService: AuthService, private router: Router, private userService: UserService, private addressService: AddressService, private plantService: PlantService, private careSessionService: CareSessionService,  private configService: ConfigServiceService) {
   }
   ngOnInit() {
     this.route.params
