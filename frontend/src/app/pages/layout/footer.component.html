@@ -2,6 +2,7 @@
 
 <footer>
     <div class="footer">
+
         <div class="row">
             <ul>
                 <li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -13,9 +14,9 @@
 
         <div class="row">
             <ul>
-                <li><a href="#">Déconnexion</a></li>
-                <li><a href="#">Carte</a></li>
-                <li><a href="#">Profil</a></li>
+                <li><a (click)="onLogoutClick()">Déconnexion</a></li>
+                <li><a [routerLink]="['/map']">Carte</a></li>
+                <li><a [routerLink]="['/profile', authService.getUserId()]">Profil</a></li>
                 <li><a href="#">Termes & conditions</a></li>
             </ul>
         </div>
@@ -25,5 +26,6 @@
                 <li>© 2024 Arosaje - Tous droits réservés.</li>
             </ul>
         </div>
+
     </div>
 </footer>
