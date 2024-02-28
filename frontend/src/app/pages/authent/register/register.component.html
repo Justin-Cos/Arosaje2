@@ -46,7 +46,6 @@
         </div>
       </form>
       <p-message *ngIf="registerForm.invalid && tried_once" severity="error" text="Formulaire invalide remplissez les champs pseudo, email, mot de passe et un avatar"></p-message>
-      <p-message *ngIf="errorMessage.length > 0" severity="error" [text]=errorMessage></p-message>
 
       <p class="text--center">Déjà un compte? <a routerLink="/login">Se connecter</a> <svg class="icon">
         <use xlink:href="#icon-arrow-right"></use>

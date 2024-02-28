@@ -29,7 +29,7 @@ a:hover {
   outline: none;
 }
 a:hover {
-  color: #e73700;
+  color: #5DB075;
 }
 h2 {
   margin-bottom: 0.5em;
@@ -62,14 +62,17 @@ button {
   background: #343434 no-repeat center center / cover;
   border-radius: 15px;
   overflow: hidden;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
   position: relative;
   transition: all 0.4s ease-in-out;
   -webkit-transition: all 0.4s ease-in-out;
   cursor: pointer;
+  margin-top:1em;
 }
 .carousel-section .item.active {
   box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.2);
+  transform: scale(1.02);
 }
 
 .carousel-section .item:after {
@@ -124,5 +127,105 @@ button {
   border-radius: 25px ;
   margin-bottom:1.5em;
   margin-top: 0.5em;
+}
 
+.cta-div{
+  padding: 60px 50px;
+}
+
+.line-title{
+  font-size:2em;
+}
+
+.center_solo{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.card-cta{
+  width: 55%;
+  height: 535px;
+  padding: 25px;
+  background: #ecf0f1;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  transition: all 0.8s cubic-bezier(0.15, 0.83, 0.66, 1);
+  margin-top:1em;
+}
+.card-cta:hover {
+  transform: scale(1.02);
+  box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.2);
+}
+.card-header-cda-title {
+  font-weight: 600;
+  font-size: 2.6em;
+  color: rgba(0, 0, 0, 0.90);
+  margin-top: 0.5em;
+  margin-bottom: 1.5em;
+  text-align: center;
+}
+
+.card-header-cda-txt {
+  font-weight: 500;
+  font-size: 1.5em;
+  color: rgba(0, 0, 0, 0.70);
+  line-height: 1.5;
+  padding: 0 15px;
+}
+.card-footer-cda{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2.5em;
+}
+.card-footer-cont-cda {
+  background: rgba(0, 0, 0, 0.25);
+  color: rgba(0, 0, 0, 0.01);
+  border-radius: 9px;
+  width: 50%;
+  text-align:center;
+  padding: 1.5em 0;
+  transition: all 0.2s cubic-bezier(0.15, 0.83, 0.66, 1);
+  cursor:pointer;
+}
+.card-footer-cont-cda:hover {
+  background: #5DB075;
+}
+.card-footer-cont-cda span {
+  font-weight: 500;
+  font-size: 1.6em;
+  color: rgba(0, 0, 0, 0.70);
+  text-align: center;
+}
+.map-home{
+  padding: 60px 50px;
+  background: #5DB075;
+  margin-top:-22em;
+}
+.line-title-grey{
+  font-size:2em;
+  margin-top: 10em;
+}
+.divider-grey{
+  color: #2c3e50;
+  border-width: 4px;
+  border-radius: 25px ;
+  margin-bottom:1.5em;
+  margin-top: 0.5em;
+}
+.card-map{
+  width: 75%;
+  height: 635px;
+  padding: 25px;
+  background: #ecf0f1;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  transition: all 0.8s cubic-bezier(0.15, 0.83, 0.66, 1);
+  margin-top:1em;
+
+}
+.card-map:hover {
+  transform: scale(1.02);
+  box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.2);
 }
