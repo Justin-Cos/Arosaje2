@@ -6,11 +6,11 @@ import {MenuComponent} from "./pages/layout/menu.component";
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, MenuComponent],
+  imports: [CommonModule, RouterOutlet, MenuComponent,],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'front';
+  title = 'Arosaje';
 }
 
