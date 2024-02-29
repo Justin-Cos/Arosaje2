@@ -1,0 +1,59 @@
+.center_solo {
+    margin: 2em auto;
+    width: 85% ;
+    padding: 25px;
+    background: #ecf0f1;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    transition: all 0.8s cubic-bezier(0.15, 0.83, 0.66, 1);
+    display: flex;
+}
+
+.text-left {
+    margin: 0 4em;
+}
+
+.divider {
+    color: #5DB075;
+    border-width: 4px;
+    border-radius: 25px;
+    margin-bottom: 1.5em;
+    margin-top: 0.5em;
+}
+
+.line-title {
+    font-size: 2.5em;
+    text-align:center;
+}
+
+h2 {
+    margin-bottom: 0.5em;
+    font-size: 2.2em;
+    line-height: 28px;
+    font-weight: 500;
+    position: relative;
+}
+
+.text-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.article-txt {
+    font-size: 2em!important;
+    font-weight: 500;
+    color: #5DB075;
+    margin:1.5em 1em;
+}
+.text-left p{
+    font-size: 1.3em!important;
+    font-weight: 400;
+}
+.text-left li{
+    font-size: 1.3em!important;
+    font-weight: 400;
+    margin-bottom: 0.50em;
+}
+.text-left .pream{
+    font-size: 1.45em!important;
+}
