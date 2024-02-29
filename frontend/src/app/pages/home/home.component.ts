@@ -4,11 +4,12 @@ import { ProfilesCarouselComponent } from "./carousel/profiles-carousel/profiles
 import { NextCareSessionsCarouselComponent } from "./carousel/next-care-sessions-carousel/next-care-sessions-carousel.component";
 import { ButtonModule } from "primeng/button";
 import { FooterComponent } from '../layout/footer.component';
+import {MapComponent} from "../map/map.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CarouselComponent, NextCareSessionsCarouselComponent, ProfilesCarouselComponent, ButtonModule, FooterComponent],
+  imports: [CarouselComponent, NextCareSessionsCarouselComponent, ProfilesCarouselComponent, ButtonModule, FooterComponent, MapComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./carousel/carousel.component.css']
 })
