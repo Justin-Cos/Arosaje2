@@ -17,7 +17,7 @@
                 <li><a (click)="onLogoutClick()">Déconnexion</a></li>
                 <li><a [routerLink]="['/map']">Carte</a></li>
                 <li><a [routerLink]="['/profile', authService.getUserId()]">Profil</a></li>
-                <li><a href="#">Termes & conditions</a></li>
+                <li><a [routerLink]="['/rgpd']">Termes & conditions</a></li>
             </ul>
         </div>
 
