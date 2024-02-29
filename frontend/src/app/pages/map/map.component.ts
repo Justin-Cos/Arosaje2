@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { Map, NavigationControl, Marker, Popup } from 'maplibre-gl';
 import {CareSessionService} from "../../shared/services/ressources/care-session.service";
-import {AddressService} from "../../shared/services/ressources/address.service";
 import {AddressModel} from "../../shared/models/address.model";
 import {AuthService} from "../../shared/services/auth.service";
-import {CareSessionModel} from "../../shared/models/care-session.model";
 import {ApiService} from "../../shared/services/api.service";
+
 
 
 @Component({
@@ -22,7 +21,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   private userAdressLat: number = 0;
   private userAdressLong: number = 0;
 
-  constructor(private careSessionService: CareSessionService, private addressService: AddressService, private authService: AuthService) { }
+  constructor(private careSessionService: CareSessionService, private authService: AuthService) { }
 
   ngOnInit(): void {
   }
@@ -44,19 +43,21 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       this.careSessionService.getNearbyCareSessions(userAdress.address_id.toString(), "350").subscribe((careSessions) => {
         careSessions.forEach((careSession: any) => {
           const location = careSession.address;
-          console.log(careSession.plant)
+
           new Marker({color: "#2df600"})
             .setLngLat([location.longitude, location.latitude])
             .setPopup(new Popup().setHTML(`
-             <div  routerLink="/care-session/${careSession.careSession.session_id}"
-              style="background-image:url('${ApiService.baseUrl}/uploads/plants/${careSession.plant.image}'); position: relative;width: 200px;height: 200px;background-size: cover;background-position: center;overflow: hidden;">
-              <div style=" position: absolute;top: 0;left: 0;width: 100%;height: 100%;display: flex;flex-direction: column;justify-content: center;align-items: center;transition: opacity 0.5s ease-in-out;color: white;text-align: center;font-size: 16px;padding: 10px;background-color: rgba(0, 0, 0, 0.5);text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">
-                <h3> ${careSession.plant.name}</h3>
-                <p>
-                  ${careSession.careSession.date_start} - ${careSession.careSession.date_end}
-                </p>
+             <a href="/care-session/${careSession.careSession.session_id}">
+                <div
+                style="background-image:url('${ApiService.baseUrl}/uploads/plants/${careSession.plant.image}'); position: relative;width: 200px;height: 200px;background-size: cover;background-position: center;overflow: hidden;">
+                <div style=" position: absolute;top: 0;left: 0;width: 100%;height: 100%;display: flex;flex-direction: column;justify-content: center;align-items: center;transition: opacity 0.5s ease-in-out;color: white;text-align: center;font-size: 16px;padding: 10px;background-color: rgba(0, 0, 0, 0.5);text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">
+                  <h3> ${careSession.plant.name}</h3>
+                  <p>
+                    Du ${new Date(careSession.careSession.date_start).toLocaleDateString()} au ${new Date(careSession.careSession.date_end).toLocaleDateString()}
+                   </p>
+                </div>
               </div>
-            </div>
+            </a>
 
             `))
             .addTo(<Map>this.map);
