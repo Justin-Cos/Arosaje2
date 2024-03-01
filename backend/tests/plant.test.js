@@ -97,7 +97,6 @@ describe('Plant routes', () => {
             });
 
         expect(res.statusCode).toEqual(200);
-        console.log(res.body);
         expect(res.body.plant.name).toEqual('UpdatedPlant');
     });
 

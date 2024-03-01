@@ -35,7 +35,7 @@ exports.authenticateTokenAdminOrSelf = (req, res, next) => {
         return res.status(401).json({error: 'Access denied'});
     }
     verify(token, process.env.JWT_SECRET, (err, user) => {
-        if (err || (user.role !== 'admin' && user.id !== req.params.id)) {
+        if (err || (user.role !== 'admin' && user.user_id.toString() !== req.params.id)) {
             return res.status(403).json({error: 'Invalid token'});
         }
         next();
