@@ -39,16 +39,21 @@
 }
 
 @media (max-width:720px){
-    .footer{
-        text-align:left;
-        padding:5%;
-    }
-    .footer .row ul li{
-        display:block;
-        margin:10px 0;
-        text-align:left;
-    }
-    .footer .row a i{
-        margin:0 3%;
-    }
+  .footer .row a i {
+    font-size: 150%;
+    margin: 0 3%;
+  }
+  .margin{
+    margin-top:10px;
+  }
+  .footer[_ngcontent-ng-c1613421829] .row[_ngcontent-ng-c1613421829] a[_ngcontent-ng-c1613421829] i[_ngcontent-ng-c1613421829]{
+    font-size: 1.5em;
+  }
 }
+/**
+@media only screen and (max-width: 768px) {
+  .footer {
+    display: none;
+  }
+}
+**/

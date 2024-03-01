@@ -131,7 +131,42 @@ button {
 
 .cta-div{
   padding: 60px 50px;
+  text-align: center;
 }
+
+@media only screen and (max-width: 768px) {
+  .cta-div {
+    padding: 30px 20px;
+  }
+
+  .card-cta[_ngcontent-ng-c3835273483]{
+    width: 100%;
+  }
+  .card-cta[_ngcontent-ng-c1241046666]{
+    width:100%;
+  }
+  .card-header-cda-title[_ngcontent-ng-c1241046666]{
+    font-size:1.5em;
+  }
+
+  .card-header-cda-title[_ngcontent-ng-c3835273483]{
+    font-size:1.5em;
+  }
+  .card-cta {
+    width: 100%;
+    margin: 0 auto;
+    height: auto;
+  }
+
+  .card-header-cda-txt {
+    font-size: 1em;
+    overflow: auto;
+    max-height: 200px;
+  }
+}
+
+
+
 
 .line-title{
   font-size:2em;
@@ -225,6 +260,16 @@ button {
   margin-top:1em;
 
 }
+
+
+@media only screen and (max-width: 768px) {
+  .card-map {
+    height: 400px;
+    width: 100%;
+  }
+}
+
+
 .card-map:hover {
   transform: scale(1.02);
   box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.2);

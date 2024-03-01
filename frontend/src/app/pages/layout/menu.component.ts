@@ -73,7 +73,6 @@ export class MenuComponent {
   onSearchSubmit() {
     this.searchValue = this.searchForm.value.search ?? '';
     this.fetchUsers(this.searchValue);
-    this.fermerMenu();
   }
   @ViewChild('dropdown') dropdown: ElementRef | undefined;
   @HostListener('document:click', ['$event'])
