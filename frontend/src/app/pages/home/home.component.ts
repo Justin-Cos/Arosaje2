@@ -5,11 +5,12 @@ import { NextCareSessionsCarouselComponent } from "./carousel/next-care-sessions
 import { ButtonModule } from "primeng/button";
 import { FooterComponent } from '../layout/footer.component';
 import {MapComponent} from "../map/map.component";
+import {NgcCookieConsentModule } from 'ngx-cookieconsent';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CarouselComponent, NextCareSessionsCarouselComponent, ProfilesCarouselComponent, ButtonModule, FooterComponent, MapComponent],
+  imports: [CarouselComponent, NextCareSessionsCarouselComponent, ProfilesCarouselComponent, ButtonModule, FooterComponent, MapComponent,NgcCookieConsentModule],
   templateUrl: './home.component.html',
   styleUrls: ['./carousel/carousel.component.css']
 })
