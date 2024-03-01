@@ -25,7 +25,7 @@
     <div class="dropdown search-results" *ngIf="dropdownOpen" aria-labelledby="dropdownMenuButton" #dropdown>
       <p Class="dropdown_txt">Listes des utilisateurs</p>
       <div class="dropdown-item-div">
-        <a *ngFor="let user of users.slice(0,6)" class="dropdown-item" routerLink="/profile/{{user.user_id}}">{{user.username}}</a>
+        <a *ngFor="let user of users.slice(0,6)" class="dropdown-item" (click)="fermerMenu()" routerLink="/profile/{{user.user_id}}">{{user.username}}</a>
       </div>
     </div>
 
