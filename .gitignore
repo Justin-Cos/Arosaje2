@@ -35,6 +35,8 @@ package-lock.json
 /*.log.*
 
 #gitignore du backend
+# Ignore .env file
+backend/.env
 # Ignore node_modules directory
 backend/node_modules/
 backend/coverage/
