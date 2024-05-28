@@ -17,3 +17,13 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+  db:
+    container_name: database
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: aroshash
+    ports:
+      - "5432:5432"

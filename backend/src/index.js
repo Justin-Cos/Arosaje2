@@ -12,7 +12,7 @@ const seedDown = require('./seeders/20240129170544-seed').down;
 const seedUp = require('./seeders/20240129170544-seed').up;
 
 // Synchronize Sequelize models with the database and add seed data if necessary
-const dbPromise = sequelize.sync().then(async () => {
+const dbPromise = sequelize.sync({ force: true }).then(async () => {
     console.log('Sequelize models synchronized with the database');
     // Connexion à la base de données SQLite
     let usersCount = await models.User.count();
