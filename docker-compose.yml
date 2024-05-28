@@ -11,12 +11,16 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
+    depends_on:
+      - db
   angular-app:
     ports:
       - "4200:4200"
     build:
       context: ./frontend
       dockerfile: Dockerfile
+    depends_on:
+      - api-back
   db:
     container_name: database
     image: postgres
