@@ -5,6 +5,7 @@ const path = require('path');
 const testConfig = require('../config/testConfig.json');
 const {close} = require("../src/sequelize");
 const token = testConfig.token;
+const adminToken = testConfig.adminToken;
 const seedUp = require('../src/seeders/20240129170544-seed').up;
 const seedDown = require('../src/seeders/20240129170544-seed').down;
 describe('User routes', () => {
@@ -77,7 +78,7 @@ describe('User routes', () => {
         const userToken = res.body.token;
         const resUpdate = await request(app)
             .put('/api/v1/user/' + res.body.user_id)
-            .set('Authorization', `Bearer ${testConfig.adminToken}`)
+            .set('Authorization', `Bearer ${userToken}`)
             .send({
                 username: 'updateduser',
                 email: 'updateduser@test.com',
@@ -93,15 +94,49 @@ describe('User routes', () => {
         expect(updatedUser.body.role).toEqual('botanist');
         const resDelete = await request(app)
             .delete('/api/v1/user/' + res.body.user_id)
-            .set('Authorization', `Bearer ${testConfig.adminToken}`);
+            .set('Authorization', `Bearer ${userToken}`);
         expect(resDelete.statusCode).toEqual(200);
         const deletedUser = await request(app)
             .get('/api/v1/user/' + res.body.user_id)
             .set('Authorization', `Bearer ${token}`);
         expect(deletedUser.statusCode).toEqual(404);
     });
+    it('should not update/delete user without permission', async () => {
+        const Users = await request(app)
+            .get('/api/v1/user')
+            .set('Authorization', `Bearer ${token}`);
+        expect(Users.statusCode).toEqual(200);
+        const updateUser = await request(app)
+            .put('/api/v1/user/' + Users.body[0].user_id)
+            .set('Authorization', `Bearer ${token}`)
+            .send({
+                username: 'updateduser',
+            });
+        expect(updateUser.statusCode).toEqual(403);
+        const deleteUser = await request(app)
+            .delete('/api/v1/user/' + Users.body[0].user_id)
+            .set('Authorization', `Bearer ${token}`);
+        expect(deleteUser.statusCode).toEqual(403);
+    });
+    it ('should update/delete user with admin permission', async () => {
+        const Users = await request(app)
+            .get('/api/v1/user')
+            .set('Authorization', `Bearer ${adminToken}`);
+        expect(Users.statusCode).toEqual(200);
+        const updateUser = await request(app)
+            .put('/api/v1/user/' + Users.body[0].user_id)
+            .set('Authorization', `Bearer ${adminToken}`)
+            .send({
+                username: 'updateduser',
+            });
+        expect(updateUser.statusCode).toEqual(200);
+        const deleteUser = await request(app)
+            .delete('/api/v1/user/' + Users.body[0].user_id)
+            .set('Authorization', `Bearer ${adminToken}`);
+        expect(deleteUser.statusCode).toEqual(200);
+    });
 
-afterAll(async () => {
+    afterAll(async () => {
     await seedDown();
     await new Promise((resolve, reject) => {
         server.close((err) => {

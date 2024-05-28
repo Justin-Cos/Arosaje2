@@ -42,6 +42,7 @@
     "ionicons": "^7.2.1",
     "jquery": "^3.7.1",
     "maplibre-gl": "^4.0.0",
+    "ngx-cookieconsent": "^6.0.0",
     "ngx-owl-carousel-o": "^17.0.0",
     "ngx-slick-carousel": "^17.0.0",
     "owl.carousel": "^2.3.4",

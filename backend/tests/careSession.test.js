@@ -63,7 +63,6 @@ describe('CareSession routes', () => {
         const findDeletedCareSessionRes = await request(app)
             .get(`/api/v1/care-session/${careSessionId}`)
             .set('Authorization', `Bearer ${token}`);
-        console.log(findDeletedCareSessionRes.body);
         expect(findDeletedCareSessionRes.statusCode).toEqual(404);
     });
 

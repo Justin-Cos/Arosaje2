@@ -182,10 +182,10 @@ exports.updateUserById = async (req, res) => {
         if (!userToUpdate) {
             return res.status(404).json({error: 'User not found'});
         }
-        userToUpdate.username = username;
-        userToUpdate.email = email;
-        userToUpdate.password = password;
-        userToUpdate.role = role;
+        userToUpdate.username = username ?? userToUpdate.username;
+        userToUpdate.email = email ?? userToUpdate.email;
+        //userToUpdate.password = hashPassword(password) ?? userToUpdate.password;
+        userToUpdate.role = role ?? userToUpdate.role;
         await userToUpdate.save();
         res.json({message: 'User updated successfully', user: userToUpdate});
     } catch (error) {

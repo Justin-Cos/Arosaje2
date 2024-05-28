@@ -19,7 +19,7 @@ router.post('/login', userController.loginUser);
 router.get('/update-token', middleware.authenticateToken, userController.updateToken);
 
 router.get('/:id', middleware.authenticateToken, userController.getUserById);
-router.put('/:id', middleware.authenticateTokenAdminOnly, userController.updateUserById);
+router.put('/:id', middleware.authenticateTokenAdminOrSelf, userController.updateUserById);
 router.delete('/:id', middleware.authenticateTokenAdminOrSelf, userController.deleteUserById);
 
 module.exports = router;

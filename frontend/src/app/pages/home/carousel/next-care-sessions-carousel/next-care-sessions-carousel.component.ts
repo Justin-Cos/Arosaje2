@@ -30,7 +30,7 @@ export class NextCareSessionsCarouselComponent implements OnInit {
           link: `/care-session/${nextCareSessions.careSession.session_id}`,
           img: `${ApiService.baseUrl}/uploads/plants/${nextCareSessions.plant.image}`,
           nom: nextCareSessions.plant.name,
-          bio: `${nextCareSessions.careSession.date_start} - ${nextCareSessions.careSession.date_end}`,
+          bio: `Du ${new Date(nextCareSessions.careSession.date_start).toLocaleDateString()} au ${new Date(nextCareSessions.careSession.date_end).toLocaleDateString()}`,
         };
       });
     });
