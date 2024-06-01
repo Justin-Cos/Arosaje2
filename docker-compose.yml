@@ -11,6 +11,10 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
+    environment:
+      - JWT_SECRET
+      - REFRESH_SECRET
+      - SALT
     depends_on:
       - db
   angular-app:
@@ -26,6 +30,6 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: aroshash
+      POSTGRES_DB: arosaje
     ports:
       - "5432:5432"

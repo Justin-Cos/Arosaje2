@@ -1,18 +1,20 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
+    "username": "postgres",
+    "password": "postgres",
     "database": "arosaje",
     "host": "127.0.0.1",
-    "dialect": "sqlite",
+    "port": "5432",
+    "dialect": "postgres",
     "storage": "../../database/arosaje.db"
   },
   "container": {
-    "username": "root",
-    "password": null,
+    "username": "postgres",
+    "password": "postgres",
     "database": "arosaje",
-    "host": "127.0.0.1",
-    "dialect": "sqlite",
+    "host": "host.docker.internal",
+    "port": "5432",
+    "dialect": "postgres",
     "storage": "../database/arosaje.db"
   }
 }
