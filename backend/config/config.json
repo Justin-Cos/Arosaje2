@@ -1,5 +1,5 @@
 {
-  "development": {
+  "local": {
     "username": "postgres",
     "password": "postgres",
     "database": "arosaje",
