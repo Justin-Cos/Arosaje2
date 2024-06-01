@@ -1,14 +1,10 @@
 const request = require('supertest');
-const app = require('../src/index');
-const server = require('../src/index');
-const testConfig = require('../config/testConfig.json');
-const {valueOf} = require("jest");
-const {calculateDist} = require("../src/utils");
-const {close} = require("../src/sequelize");
+const app = require('../../src');
+const server = require('../../src');
+const testConfig = require('../mock_data/config/testConfig.json');
 const token = testConfig.token;
-const seedUp = require('../src/seeders/20240129170544-seed').up;
-const seedDown = require('../src/seeders/20240129170544-seed').down;
-
+const seedUp = require('../../src/seeders/20240129170544-seed').up;
+const seedDown = require('../../src/seeders/20240129170544-seed').down;
 describe('Addresses routes', () => {
     beforeAll(async () => {
         await seedDown()

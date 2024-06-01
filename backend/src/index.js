@@ -10,16 +10,15 @@ const commentRoutes = require("./routes/commentRoutes");
 const plantTypeRoutes = require("./routes/plantTypeRoutes");
 const seedDown = require('./seeders/20240129170544-seed').down;
 const seedUp = require('./seeders/20240129170544-seed').up;
-
+const config = require('../config/conf.json')[process.env.ENVIRONMENT];
 // Synchronize Sequelize models with the database and add seed data if necessary
-const dbPromise = sequelize.sync({ force: true }).then(async () => {
-    console.log('Sequelize models synchronized with the database');
-    // Connexion à la base de données SQLite
-    let usersCount = await models.User.count();
-    if (usersCount === 0) {
+const dbPromise = sequelize.sync({ force: config.resetDatabase}).then(async () => {
+    if (process.env.ENVIRONMENT !== "development" || process.env.ENVIRONMENT !== "test") {
         await seedDown(sequelize.getQueryInterface())
         await seedUp(sequelize.getQueryInterface());
     }
+
+    console.log('Sequelize models synchronized with the database');
 }).catch((error) => {
     console.error('Error synchronizing Sequelize models:', error);
 });
