@@ -1,17 +1,17 @@
 const request = require('supertest');
-const app = require('../src/index');
-const server = require('../src/index');
-const path = require('path');
-const testConfig = require('../config/testConfig.json');
-const {close} = require("../src/sequelize");
+const app = require('../../src');
+const server = require('../../src');
+const testConfig = require('../mock_data/config/testConfig.json');
 const token = testConfig.token;
-const seedUp = require('../src/seeders/20240129170544-seed').up;
-const seedDown = require('../src/seeders/20240129170544-seed').down;
+const seedUp = require('../../src/seeders/20240129170544-seed').up;
+const seedDown = require('../../src/seeders/20240129170544-seed').down;
 
 describe('Plant routes', () => {
     beforeAll(async () => {
         await seedDown()
         await seedUp()
+
+
     });
 
     it('should get all plants', async () => {

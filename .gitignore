@@ -36,6 +36,10 @@ package-lock.json
 # Ignore .env file
 .env
 #gitignore du backend
+
+
+backend/config/configNodeEnv.json
+
 # Ignore node_modules directory
 backend/node_modules/
 backend/coverage/

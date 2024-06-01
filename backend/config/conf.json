@@ -1,0 +1,11 @@
+{
+  "development": {
+    "resetDatabase": true
+  },
+  "test": {
+  "resetDatabase": true
+  },
+  "production": {
+    "resetDatabase": false
+  }
+}

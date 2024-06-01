@@ -1,13 +1,11 @@
-const request = require('supertest');
-const app = require('../src/index');
-const server = require('../src/index');
-const testConfig = require('../config/testConfig.json');
-const {calculateDist} = require("../src/utils");
-const {close} = require("../src/sequelize");
+const request = require('supertest');require('dotenv').config({ path: '../../../.env' });
+const app = require('../../src');
+const server = require('../../src');
+const testConfig = require('../mock_data/config/testConfig.json');
+const {calculateDist} = require("../../src/utils");
 const token = testConfig.token;
-const seedUp = require('../src/seeders/20240129170544-seed').up;
-const seedDown = require('../src/seeders/20240129170544-seed').down;
-
+const seedUp = require('../../src/seeders/20240129170544-seed').up;
+const seedDown = require('../../src/seeders/20240129170544-seed').down;
 describe('CareSession routes', () => {
     beforeAll(async () => {
         await seedDown()
