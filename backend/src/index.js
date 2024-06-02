@@ -1,3 +1,4 @@
+require('dotenv').config({ path: '.env' });
 const express = require("express");
 const path = require("path");
 const models = require('./models/index.js');
@@ -10,10 +11,10 @@ const commentRoutes = require("./routes/commentRoutes");
 const plantTypeRoutes = require("./routes/plantTypeRoutes");
 const seedDown = require('./seeders/20240129170544-seed').down;
 const seedUp = require('./seeders/20240129170544-seed').up;
-const config = require('../config/conf.json')[process.env.ENVIRONMENT];
+const config = require('../config/conf.json')[process.env.DATABASE];
 // Synchronize Sequelize models with the database and add seed data if necessary
 const dbPromise = sequelize.sync({ force: config.resetDatabase}).then(async () => {
-    if (process.env.ENVIRONMENT !== "development" || process.env.ENVIRONMENT !== "test") {
+    if (config.resetData) {
         await seedDown(sequelize.getQueryInterface())
         await seedUp(sequelize.getQueryInterface());
     }

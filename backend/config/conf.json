@@ -1,11 +1,14 @@
 {
-  "development": {
-    "resetDatabase": true
+  "reset": {
+    "resetDatabase": true,
+    "resetData": true
   },
-  "test": {
-  "resetDatabase": true
+  "refresh_data": {
+    "resetDatabase": false,
+    "resetData": true
   },
-  "production": {
-    "resetDatabase": false
+  "keep": {
+    "resetDatabase": false,
+    "resetData": false
   }
 }

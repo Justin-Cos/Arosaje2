@@ -4,6 +4,7 @@ const PlantsModel = require('./Plant');
 const AddressModel = require('./Address');
 const CommentModel = require('./Comment');
 const CareSessionModel = require('./CareSession');
+const MessageModel = require('./Message');
 const sequelize = require('../sequelize.js');
 
 UserModel.hasMany(PlantsModel, {
@@ -41,6 +42,16 @@ AddressModel.hasMany(CareSessionModel, {
     onDelete: 'CASCADE',
 });
 CareSessionModel.belongsTo(AddressModel, {foreignKey: 'location'});
+UserModel.hasMany(MessageModel, {
+    foreignKey: 'sender_id',
+    onDelete: 'CASCADE',
+});
+MessageModel.belongsTo(UserModel, {foreignKey: 'sender_id'});
+UserModel.hasMany(MessageModel, {
+    foreignKey: 'recipient_id',
+    onDelete: 'CASCADE',
+});
+MessageModel.belongsTo(UserModel, {foreignKey: 'recipient_id'});
 module.exports = {
     User: UserModel,
     Plant: PlantsModel,

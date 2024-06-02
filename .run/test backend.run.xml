@@ -6,9 +6,7 @@
       <script value="test" />
     </scripts>
     <node-interpreter value="project" />
-    <envs>
-      <env name="SALT" value="'$2b$10$9qmjCDU3.FxJyG3WmCk8Fu'" />
-    </envs>
+    <envs />
     <method v="2" />
   </configuration>
 </component>

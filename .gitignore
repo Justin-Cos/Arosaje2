@@ -3,24 +3,25 @@ database/*
 node_modules/*
 
 # Dossiers et fichiers générés par Cordova
-/node_modules
-/platforms
-/plugins
-/www
+frontend//node_modules
+frontend//platforms
+frontend//plugins
+frontend//www
 
 # Fichiers de configuration de Cordova
-config.xml
-cordova_plugins.js
-package-lock.json
+frontend/config.xml
+frontend/cordova_plugins.js
+frontend/package-lock.json
 
 # Dossiers et fichiers spécifiques à Ionic
-/www/build
-/www/cordova
-/www/capacitor
-/platforms/android
-/platforms/ios
-/plugins/ios.json
-/plugins/android.json
+frontend/www/build
+frontend/www/cordova
+frontend/www/capacitor
+frontend/www/browser
+frontend/platforms/android
+frontend/platforms/ios
+frontend/plugins/ios.json
+frontend/plugins/android.json
 /.idea
 
 # Dossiers et fichiers spécifiques à Capacitor
@@ -35,10 +36,11 @@ package-lock.json
 /*.log.*
 # Ignore .env file
 .env
+backend/.env
+backend/tests/mock_data/.env.test
 #gitignore du backend
 
 
-backend/config/configNodeEnv.json
 
 # Ignore node_modules directory
 backend/node_modules/

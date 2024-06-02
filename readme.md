@@ -9,6 +9,10 @@
    git clone https://github.com/Justin-Cos/Arosaje2.git
 
 ### Backend - Frontend
+1. *Remplacer les fichiers .env.example par .env dans les dossiers backend et frontend :*
+   ```bash
+   mv backend/.env.example backend/.env
+   mv backend/tests/mock_data/config/.env.test.example backend/tests/mock_data/config/.env.test
 1. **Lancer le serveur backend et angular frontend avec Docker :** 
    ```bash
    docker-compose --build --force-recreate
