@@ -8,7 +8,7 @@ RUN npm install
 
 COPY . .
 
-ENV HOST=host.docker.internal
+ENV DB_HOST=host.docker.internal
 
 EXPOSE 3000
 
