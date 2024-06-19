@@ -152,11 +152,7 @@ button {
   .card-header-cda-title[_ngcontent-ng-c3835273483]{
     font-size:1.5em;
   }
-  .card-cta {
-    width: 100%;
-    margin: 0 auto;
-    height: auto;
-  }
+
 
   .card-header-cda-txt {
     font-size: 1em;
@@ -177,21 +173,26 @@ button {
   align-items:center;
   justify-content:center;
 }
-
-.card-cta{
+.card-cta {
   width: 55%;
-  height: 535px;
+  max-width: 100%; /* Ensure it doesn't overflow the container */
+  height: auto;
+  max-height: 735px;
   padding: 25px;
   background: #ecf0f1;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   transition: all 0.8s cubic-bezier(0.15, 0.83, 0.66, 1);
-  margin-top:1em;
+  margin-top: 1em;
+  overflow: hidden; /* Hide any overflow */
+  box-sizing: border-box;
 }
+
 .card-cta:hover {
   transform: scale(1.02);
   box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.2);
 }
+
 .card-header-cda-title {
   font-weight: 600;
   font-size: 2.6em;
@@ -207,32 +208,39 @@ button {
   color: rgba(0, 0, 0, 0.70);
   line-height: 1.5;
   padding: 0 15px;
+  overflow-y: auto; /* Allow vertical scroll if content overflows */
+  max-height: calc(100% - 4em); /* Adjust based on available space */
 }
-.card-footer-cda{
-  display:flex;
+
+.card-footer-cda {
+  display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 2.5em;
 }
+
 .card-footer-cont-cda {
   background: rgba(0, 0, 0, 0.25);
   color: rgba(0, 0, 0, 0.01);
   border-radius: 9px;
-  width: 50%;
-  text-align:center;
-  padding: 1.5em 0;
+  max-width: 50%;
+  text-align: center;
+  padding: 1.5em 1.2em;
   transition: all 0.2s cubic-bezier(0.15, 0.83, 0.66, 1);
-  cursor:pointer;
+  cursor: pointer;
 }
+
 .card-footer-cont-cda:hover {
   background: #5DB075;
 }
+
 .card-footer-cont-cda span {
   font-weight: 500;
-  font-size: 1.6em;
+  font-size: 1.4em;
   color: rgba(0, 0, 0, 0.70);
   text-align: center;
 }
+
 .map-home{
   padding: 60px 50px;
   background: #5DB075;
