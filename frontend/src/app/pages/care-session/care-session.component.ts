@@ -66,9 +66,9 @@ export class CareSessionComponent implements OnInit {
   }
   getRole(user_id: number): string {
     if (this.careTaker?.user_id === user_id) {
-      return 'Gardien';
+      return 'caretaker';
     } else if (this.owner.user_id === user_id) {
-      return 'Propriétaire';
+      return 'owner';
     } else {
       return '';
     }

@@ -13,7 +13,7 @@ router.get('/nearby', middleware.authenticateToken, careSessionController.getNea
 router.get('/', middleware.authenticateToken, careSessionController.getAllCareSessions);
 router.get('/:id', middleware.authenticateToken, careSessionController.getCareSessionById);
 router.post('/', middleware.authenticateToken, careSessionController.createCareSession);
-router.put('/:id', middleware.authenticateTokenAdminOnly, careSessionController.updateCareSessionById);
+router.put('/:id', careSessionController.updateCareSessionById);
 router.delete('/:id', middleware.authenticateTokenAdminOnly, careSessionController.deleteCareSessionById);
 
 module.exports = router;
